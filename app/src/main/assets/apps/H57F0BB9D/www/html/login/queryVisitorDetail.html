@@ -1,0 +1,404 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<style>
+			[v-cloak] {
+				visibility: hidden;
+				display:none !important;
+			}
+			html,
+			body {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-bar~.mui-content {
+				top: 44px;
+				height: calc(100vh - 55px );
+				background-color: #FFFFFF;
+				padding:15px 0 0 15px;
+			}
+			
+			/* 局部样式修改 */
+			a:hover {
+			    color: #FAFAFA;
+			}
+			.mui-h4, h4 {
+			    font-size: 20px;
+				color: #c3865c;
+			}
+			h1, h2, h3, h4, h5, h6 {
+			    line-height: 1;
+			    margin-top: 5px;
+			    margin-bottom: 5px;
+			}
+			
+			/* 自定义按钮样式 */
+			.mui-btn-sys{
+				border: 1px solid 3893D9;
+				background-color: #3893D9;
+				color: #FAFAFA;
+			}
+			.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+				padding: 6px 8px 4px;
+			}
+			.mui-btn-outlined-lg{
+				width: 140px;
+				margin: 0 10px;
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 2;
+			}
+			/* 分割线 */
+			.line{
+				background-color: #3893D9;
+				margin-bottom: 0.3125rem;
+				height: 0.125rem;
+			}
+			
+			/* 身份证照片框样式 */
+			.card-img{
+				border: 1px solid rgba(210,207,200,.9);
+				width:171px;
+				height: 240px;
+			}
+			.card-text{
+				display: block;
+				margin: 63% 27% 0;
+				width: 80px;
+				font-size: 15px;
+				color: grey;
+			}
+			
+			/* 输入框样式和间距修改 */
+			.mui-input-row label{
+				font-size: 16px;
+				width: 38%;
+				font-weight: 600;
+				text-align: left;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 62%;
+				float: left;
+				
+			}
+			/* 输入框样式和间距修改 被访人/登记人 信息栏*/
+			.mui-input-row-right label{
+				width: 30%;
+				font-weight: 600;
+				text-align: left;
+			}
+			.mui-input-row-right label~input, .mui-input-row-right label~select, .mui-input-row-right label~textarea{
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 70%;
+				float: left;
+			}
+			/* 输入框样式和间距修改 访客信息栏*/
+			.mui-input-row-bottom-4 label{
+				width: 45%;
+				font-weight: 600;
+				text-align: left;
+			}
+			.mui-input-row-bottom-4 label~input, .mui-input-row-bottom-4 label~select, .mui-input-row-bottom-4 label~textarea{
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 55%;
+				float: left;
+			}
+			.mui-input-row-bottom-5 label{
+				width: 30%;
+				font-weight: 600;
+				text-align: left;
+			}
+			.mui-input-row-bottom-5 label~input, .mui-input-row-bottom-5 label~select, .mui-input-row-bottom-5 label~textarea{
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 70%;
+				float: left;
+			}
+			.mui-input-row-bottom-8 label{
+				width: 23%;
+				font-weight: 600;
+				text-align: left;
+			}
+			.mui-input-row-bottom-8 label~input, .mui-input-row-bottom-8 label~select, .mui-input-row-bottom-8 label~textarea{
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 76%;
+				float: left;
+				margin-left: -2px;
+			}
+			.mui-input-row-bottom-12 label{
+				width: 15%;
+				font-weight: 600;
+				text-align: left;
+			}
+			.mui-input-row-bottom-12 label~input, .mui-input-row-bottom-12 label~select, .mui-input-row-bottom-12 label~textarea{
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 85%;
+				float: left;
+			}
+			
+			/* 表单间距 */
+			.mui-input-row{
+				margin-top: 8px;
+			}
+			
+			/* 弹出层 卡片样式修改 */
+			.mui-card-header.mui-h4{
+				border-top: 1px solid rgba(218,218,221,.9);
+			}
+			.mui-card-content-inner {
+			    padding: 10px;
+			}
+			.layui-layer-btn.layui-layer-btn-c{
+				background-color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="tempVue">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 v-cloak class="mui-title">{{titleName}}</h1>
+		</header>
+		<div id="datasource" class="mui-content mui-fullscreen">
+			<div class="mui-row">
+				<div class="mui-col-sm-8">
+					<div class="mui-card">
+						<div class="mui-card-header mui-h4">访客信息</div>
+						<div class="mui-card-content" style="padding: 10px;">
+							 <div class="mui-row">
+							 	<div class="mui-col-sm-2">
+							 		<img v-if="IDCardImg" class="card-img" src="../../img/home/idcard.jpg">
+							 		<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
+							 	</div>
+							 	<div class="mui-col-sm-10">
+							 		<div class="mui-row" style="margin-left:2rem;">
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>姓名：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>访客单号：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>性别：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>访问事由：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>出生日期：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>手机：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>证件类型：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>随行人数：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>证件号码：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>随身物品：</label>
+												<input  type="text" placeholder="暂无信息"  disabled="true">
+											</div>
+										</div>
+							 		</div>
+							 	</div>
+							 </div>
+							 <div class="mui-row">
+								 <div class="mui-col-sm-8">
+								 	<div class="mui-input-row mui-input-row-bottom-8">
+								 		<label>来访单位：</label>
+								 		<input value="山东金视野教育科技股份有限公司开发部" type="text" placeholder="暂无信息"  disabled="true">
+								 	</div>
+								 </div>
+								 <div class="mui-col-sm-4">
+								 	<div class="mui-input-row mui-input-row-bottom-4">
+								 		<label>车牌号：</label>
+								 		<input  type="text" placeholder="暂无信息"  disabled="true">
+								 	</div>
+								 </div>
+							 	<div class="mui-col-sm-12">
+							 		<div class="mui-input-row mui-input-row-bottom-12">
+							 			<label>地址：</label>
+							 			<input value="山东省济南市天桥区铜元局前街1号金冠商务中心309室"  type="text" placeholder="暂无信息"  disabled="true">
+							 		</div>
+							 	</div>
+							 	<div class="mui-col-sm-4">
+							 		<div class="mui-input-row mui-input-row-bottom-4">
+							 			<label>进入时间：</label>
+							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 		</div>
+							 	</div>
+							 	<div class="mui-col-sm-4">
+							 		<div class="mui-input-row mui-input-row-bottom-4">
+							 			<label>是否离开：</label>
+							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 		</div>
+							 	</div>
+							 	<div class="mui-col-sm-4">
+							 		<div class="mui-input-row mui-input-row-bottom-4">
+							 			<label>离开时间：</label>
+							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 		</div>
+							 	</div>
+							 	<div class="mui-col-sm-12">
+							 		<div class="mui-input-row mui-input-row-bottom-12">
+							 			<label>备注：</label>
+							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 		</div>
+							 	</div>
+							 </div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-4">
+					<div class="mui-card">
+						<div class="mui-card-header mui-h4">被访人信息</div>
+						<div class="mui-card-content" style="padding: 10px">
+							<div class="mui-row">
+								<div class="mui-col-sm-12">
+									<div class="mui-input-row mui-input-row-right">
+										<label>年级：</label>
+										<input  type="text" placeholder="暂无信息" disabled="true">
+									</div>
+								</div>
+								<div class="mui-col-sm-12">
+									<div class="mui-input-row mui-input-row-right">
+										<label>班级：</label>
+										<input  type="text" placeholder="暂无信息" disabled="true">
+									</div>
+								</div>
+								<div class="mui-col-sm-12">
+									<div class="mui-input-row mui-input-row-right">
+										<label>姓名：</label>
+										<input  type="text" placeholder="暂无信息" disabled="true">
+									</div>
+								</div>
+								<div class="mui-col-sm-12">
+									<div class="mui-input-row mui-input-row-right">
+										<label>班主任：</label>
+										<input  type="text" placeholder="暂无信息" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="margin-top: 1rem;"></div>
+					<div class="mui-card">
+						<div class="mui-card-header mui-h4">登记人信息</div>
+						<div class="mui-card-content" style="padding: 10px ;">
+							<div class="mui-row">
+								<div class="mui-col-sm-12">
+									<div class="mui-input-row mui-input-row-right">
+										<label>姓名：</label>
+										<input  type="text" placeholder="暂无信息"  disabled="true">
+									</div>
+								</div>
+								<div class="mui-col-sm-12">
+									<div class="mui-input-row mui-input-row-right">
+										<label>登记时间：</label>
+										<input  type="text" placeholder="暂无信息"  disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-row" style="margin-top: 2rem;text-align: center;">
+				<button type="button" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">
+					打印
+				</button>
+				<button type="button" @tap="back()" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
+					取消
+				</button>
+			</div>
+		</div>
+		<script src="../../js/utils/mui.min.js"></script>
+		<script src="../../js/utils/storageKeyName.js"></script>
+		<script src="../../js/utils/vconsole.min.js"></script>
+		<script src="../../js/utils/vue.js"></script>
+		<script src="../../js/utils/publicProtocol.js"></script>
+		<script src="../../js/utils/store.js"></script>
+		<script src="../../js/utils/utils.js"></script>
+		<script src="../../js/utils/events.js"></script>
+		<!--加密-->
+		<script src="../../js/libs/RSA/Barrett.js"></script>
+		<script src="../../js/libs/RSA/BigInt.js"></script>
+		<script src="../../js/libs/RSA/RSA.js"></script>
+		<script src="../../js/libs/encryption/RSAEncrypt.js"></script>
+		<script src='../../js/libs/crypto-js/require.js'></script>
+		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
+		<script src='../../js/libs/jquery.js'></script>
+		<script src='../../js/libs/encryption/sortSign.js'></script>
+		<script type="text/javascript">
+			var $M = mui.init();
+			//获取个人信息
+			var personal = store.get(window.storageKeyName.PERSONALINFO);
+			console.log('personal:' + JSON.stringify(personal));
+			var curPage = {};
+			var tempVue = new Vue({
+				el: "#tempVue",
+				data: {
+					titleName: ''
+				},
+			});
+			var datasource = new Vue({
+				el: "#datasource",
+				data: {
+					IDCardImg:'1',//身份证照片
+				},
+				methods:{
+					back:function(){
+						mui.back();
+					}
+				}
+			});
+
+			mui.plusReady(function() {
+				curPage = utils.getDataFromUrl(window.location.href);
+				console.log(JSON.stringify(curPage));
+				tempVue.titleName = '访客信息详情';
+				datasource.formData=curPage;
+			});
+			
+		</script>
+	</body>
+
+</html>

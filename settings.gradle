@@ -1,0 +1,4 @@
+include ':silicompressor'
+include ':jcvideoplayer-lib'
+include ':app'
+rootProject.name = "android-plugins-4-H5"

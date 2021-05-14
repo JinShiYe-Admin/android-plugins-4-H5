@@ -1,0 +1,97 @@
+plugins {
+    id 'com.android.application'
+//    华为
+    id 'com.huawei.agconnect'
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('G:\\back\\jsy2020.jks')
+            storePassword 'jsy2020'
+            keyAlias 'jsy'
+            keyPassword 'jsy2020'
+        }
+        debug {
+            storeFile file('G:\\back\\jsy2020.jks')
+            storePassword 'jsy2020'
+            keyPassword 'jsy2020'
+            keyAlias 'jsy'
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "plus.H50C56911"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "2.1.5"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi','x86','armeabi-v7a'
+        }
+        signingConfig signingConfigs.release
+
+        manifestPlaceholders = [
+                "plus.unipush.appid" : "sG75NY5eXM6PRDwo2lk84A",
+                "plus.unipush.appkey" : "GkTIKdcBky6O5dtAiITKI9",
+                "plus.unipush.appsecret": "rkFQjtGIUv6WMxl7NYgaW",
+                "apk.applicationId":"plus.H50C56911",
+                "XIAOMI_APP_ID":"2882303761518343904",
+                "XIAOMI_APP_KEY":"5741834336904",
+                "HUAWEI_APP_ID":"101900549",
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
+
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+    implementation "com.android.support:support-v4:29.0.0"
+    implementation "com.android.support:appcompat-v7:29.0.0"
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+    implementation "com.facebook.fresco:animated-gif:1.13.0"
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.alibaba:fastjson:1.1.46.android'
+
+    //okhttp
+    implementation 'com.lzy.net:okgo:2.1.4'
+    //universalimageloader
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    //播放器
+    implementation project(path: ':jcvideoplayer-lib')
+    //华为推送
+    implementation 'com.huawei.hms:push:5.0.2.300'
+}

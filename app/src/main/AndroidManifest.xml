@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="plus.H50C56911">
+
+    <application
+        android:name=".utils.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Androidplugins4H5"
+        tools:replace="android:name">
+        <activity
+            android:name="io.dcloud.PandoraEntry"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="user"
+            android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.dcloud.PandoraEntryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
+            android:screenOrientation="user"
+            android:theme="@style/DCloudTheme"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="h56131bcf" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="dcloud_appkey"
+            android:value="8eb9cf09d4ba5104e3db2270382d2c4e" /> <!-- 离线打包App Key 教宝校园 -->
+        <!-- <meta-data -->
+        <!-- android:name="dcloud_appkey" -->
+        <!-- android:value="7b02926b769688f72314cb31da64cf68" /> -->
+        <!-- 离线打包App Key 访客系统 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="KL26g3s3V8zUMawkq4v0QZ4sVXOkpZ8l" /> <!-- 百度地图配置 -->
+        <meta-data
+            android:name="MIPUSH_APPID"
+            android:value="XM_2882303761518343904" />
+
+        <meta-data
+            android:name="MIPUSH_APPKEY"
+            android:value="XM_5741834336904" /> <!-- 小米厂商配置——开始 -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="101900549" />
+        <provider
+            android:name="io.dcloud.common.util.DCloud_FileProvider"
+            android:authorities="plus.H50C56911.dc.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/dcloud_file_provider" />
+        </provider> <!-- 华为厂商配置——开始 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+    </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+</manifest>

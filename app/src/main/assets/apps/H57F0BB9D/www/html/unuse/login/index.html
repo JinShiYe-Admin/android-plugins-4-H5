@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont2.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/system/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<style>
+			[v-cloak] {
+				visibility: hidden;
+				display:none !important;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #00CFBD;
+			}
+		</style>
+	</head>
+
+
+	<body>
+		<nav v-show="showArray.length>1" v-cloak class="mui-bar mui-bar-tab" id="indexPage">
+			<template v-cloak v-for="(model,index) in showArray">
+				<a v-cloak :id=model.tempID :class='index==0?"mui-tab-item mui-active":"mui-tab-item"' :href=model.href>
+					<span v-cloak :class=model.cls><span class="mui-badge" v-if="model.NoReadCnt>0">{{model.NoReadCnt}}</span></span>
+					<span v-cloak class="mui-tab-label">{{model.name}}</span>
+				</a>
+			</template>
+		</nav>
+		<script src="../../js/utils/storageKeyName.js"></script>
+		<script src="../../js/utils/mui.min.js"></script>
+		<script src="../../js/utils/vue.js"></script>
+		<script src="../../js/utils/store.js"></script>
+		<script src="../../js/utils/vconsole.min.js"></script>
+		<script src="../../js/utils/utils.js"></script>
+		<script src="../../js/libs/jquery.js"></script>
+		<script src="../../js/utils/igexinTool.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var personal = store.get(window.storageKeyName.PERSONALINFO);
+			var subpage_style = {
+				top: '0px',
+				bottom: '51px',
+				statusbar:{
+					background: "#00CFBD"
+				}
+			};
+
+			window.addEventListener('home_refresh', function(data) {
+				location.reload();
+			});
+			
+			//获取未读数
+			window.addEventListener('showNoReadCnt', function(data) {
+				//获取未读数
+				console.log('showNoReadCnt.data:'+JSON.stringify(data.detail));
+				for (var i = 0; i < indexPage.showArray.length; i++) {
+					var tempM = indexPage.showArray[i];
+					if(tempM.url == data.detail.url){
+						tempM.NoReadCnt = data.detail.showNoReadCnt;
+					}
+				}
+			});
+
+			var indexPage = new Vue({
+				el: "#indexPage",
+				data: {
+					showArray: [],
+					pageArray: [{
+						name: "kaoqin",//学生考勤，教师端
+						href: "../../html/schapp_work/index.html",
+						tempID: 'defaultTab',
+						cls: 'mui-icon iconfont icon-xueshengkaoqin',
+						img_href: "../../img/schapp_work/kaoqin_tab.png",
+						url: 'schapp_Work',
+						childList: [
+								{
+									name:'请假记录',
+									icon:'../../img/schapp_work/qingjiajilu.png',
+									href: "../../html/schapp_work/qingjiaIndex.html",
+									url:'schapp_Work_leave'
+								},{
+									name:'课堂考勤',
+									icon:'../../img/schapp_work/ketangkaoqin.png',
+									href: "../../html/schapp_work/ketangIndex.html",
+									url:'schapp_Work_classroom'
+								},{
+									name:'课外考勤',
+									icon:'../../img/schapp_work/kewaikaoqin.png',
+									href: "../../html/schapp_work/kewaiIndex.html",
+									url:'schapp_Work_extracurricular'
+								},{
+									name:'出入校报表',
+									icon:'../../img/schapp_work/churuxiaokaoqin.png',
+									href: "../../html/schapp_work/jinchuxiaoForm.html",
+									url:'schapp_Work_inoutschool_form'
+								},{
+									name:'课堂报表',
+									icon:'../../img/schapp_work/ketangbaobiao.png',
+									href: "../../html/schapp_work/ketangForm.html",
+									url:'schapp_Work_classroom_form'
+								},{
+									name:'课外报表',
+									icon:'../../img/schapp_work/kewaibaobiao.png',
+									href: "../../html/schapp_work/kewaiForm.html",
+									url:'schapp_Work_extracurricular_form'
+								},{
+									name:'班级报表',
+									icon:'../../img/schapp_work/banjibaobiao.png',
+									href: "../../html/schapp_work/banjiForm.html",
+									url:'schapp_Work_class_form'
+								},{
+									name:'学生报表',
+									icon:'../../img/schapp_work/xueshengbaobiao.png',
+									href: "../../html/schapp_work/xueshengForm.html",
+									url:'schapp_Work_students_form'
+								},
+							]
+					}, {
+						name: "oa",//oa
+						href: "../../html/oa/index.html",
+						img_href: "../../img/oa/oa_tab.png",
+						tempID: 'oa',
+						cls: 'mui-icon iconfont icon-OAxitong',
+						url: 'schapp_OA',
+						NoReadCnt:0,
+						childList: [
+								{
+									name:'公告',
+									NoReadCnt:0,
+									icon:'../../img/oa/gonggao.png',
+									href: "../../html/oa/gonggaoIndex.html",
+									type : 1,
+									url:'schapp_OA_Notify'
+								},{
+									name:'通知',
+									NoReadCnt:0,
+									icon:'../../img/oa/tongzhi.png',
+									href: "../../html/oa/noticeIndex.html",
+									url:'schapp_OA_Notice'
+								},{
+									name:'事务',
+									NoReadCnt:0,
+									icon:'../../img/oa/shiwu.png',
+									href: "../../html/oa/shiwuIndex.html",
+									url:'schapp_OA_CooperateNotice'
+								},{
+									name:'工作流',
+									NoReadCnt:0,
+									icon:'../../img/oa/gongzuoliu.png',
+									href: "../../html/oa/workflowIndex.html",
+									url:'schapp_OA_Approve'
+								},{
+									name:'资料收集',
+									NoReadCnt:0,
+									icon:'../../img/oa/ziliaoshouji.png',
+									href: "../../html/oa/collectionDataIndex.html",
+									url:'schapp_OA_DataCollection'
+								},{
+									name:'校历',
+									NoReadCnt:0,
+									icon:'../../img/oa/xiaoli.png',
+									type : 3,
+									href: "../../html/oa/gonggaoIndex.html",
+									url:'schapp_OA_Xiaoli'
+								},{
+									name:'周程',
+									NoReadCnt:0,
+									type : 2,
+									icon:'../../img/oa/zhoucheng.png',
+									href: "../../html/oa/gonggaoIndex.html",
+									url:'schapp_OA_Zhoucheng'
+								},{
+									name:'工资条',
+									NoReadCnt:0,
+									icon:'../../img/oa/gongzitiao.png',
+									href: "../../html/oa/gongziIndex.html",
+									url:'schapp_OA_Payment'
+								},
+							]
+					}, {
+						name: "comment",//评语
+						href: "../../html/stu_comment/index.html",
+						img_href: "../../img/stu_comment/pingyu_tab.png",
+						tempID: 'xueshengpingyu',
+						cls: 'mui-icon iconfont icon-xueshengpingyu',
+						url: 'schapp_Comment',
+						childList: []
+					}, {
+						name: "page5",//资源管理，暂无
+						href: "../../html/page5/index.html",
+						img_href: "../../img/ziyuanguanli/ziyuanguanli_tab.png",
+						tempID: 'ziyuanguanli',
+						cls: 'mui-icon iconfont icon-ziyuanguanli',
+						url: 'schapp_Resource',
+						childList: []
+					}, {
+						name: "page6",//量化考评，暂无
+						href: "../../html/page6/index.html",
+						img_href: "../../img/xuesheng_lianghuakaoping/lianghuakaoping_tab.png",
+						tempID: 'xueshenglianghuakaoping',
+						cls: 'mui-icon iconfont icon-xueshenglianghuakaoping',
+						url: 'schapp_Evaluation',
+						childList: []
+					}
+					, {
+						name: "kaowu",//考务
+						href: "../../html/schapp_examination/index.html",
+						img_href: "../../img/schapp_examination/kaowu_tab.png",
+						tempID: 'kaowu',
+						cls: 'mui-icon iconfont icon-kaowuxitong',
+						url: 'schapp_Examination',
+						childList: []
+					},
+					{
+						name: "wupinguanli",//物品管理，教师
+						href: "../../html/schapp_item/index.html",
+						img_href: "../../img/schapp_item/wupin_tab.png",
+						tempID: 'wupinguanli',
+						cls: 'mui-icon iconfont icon-wupinguanlixitong',
+						url: 'schapp_Item',
+						childList: [
+							{
+								name:'物品入库',
+								icon:'../../img/schapp_item/wupinruku.png',
+								href: "../../html/schapp_item/item_in_index.html",
+								url:'schapp_Item_warehouse'
+							},{
+								name:'物品出库',
+								icon:'../../img/schapp_item/wupinchuku.png',
+								href: "../../html/schapp_item/item_out_index.html",
+								url:'schapp_Item_outbound'
+							},{
+								name:'库存查询',
+								icon:'../../img/schapp_item/kucunchaxun.png',
+								href: "../../html/schapp_item/item_select_index.html",
+								url:'schapp_Item_stock'
+							},
+						]
+					},
+					{
+						name: "teacherkaoqin",//教师考勤
+						href: "../../html/teachercAttendance/index.html",
+						img_href: "../../img/teachercAttendance/attendance_tab.png",
+						tempID: 'teacherkaoqin',
+						cls: 'mui-icon iconfont icon-jiaoshikaoqin',
+						url: 'schapp_Attendance',
+						childList: [
+							{
+								name:'我的考勤',
+								icon:'../../img/teachercAttendance/my_attendance.png',
+								href: "../../html/teachercAttendance/myAttendance.html",
+								url:'schapp_Attendance_My'
+							},{
+								name:'考勤查询',
+								icon:'../../img/teachercAttendance/attendance_search.png',
+								href: "../../html/teachercAttendance/attendanceSearch.html",
+								url:'schapp_Attendance_Search'
+							},{
+								name:'考勤报表',
+								icon:'../../img/teachercAttendance/attendance_form.png',
+								href: "../../html/teachercAttendance/attendanceForm.html",
+								url:'schapp_Attendance_Form'
+							},
+						]
+					},{
+						name: "richeng",//日程
+						href: "../../html/programme/index.html",
+						img_href: "../../img/programme/programme_tab.png",
+						tempID: 'richeng',
+						cls: 'mui-icon iconfont icon-richeng',
+						url: 'schapp_Programme',
+						childList: [
+							{
+								name:'我的日程',
+								icon:'../../img/programme/programme_my.png',
+								href: "../../html/programme/myProgramme.html",
+								url:'schapp_Programme_My'
+							},{
+								name:'部门日程',
+								icon:'../../img/programme/programme_dpt.png',
+								href: "../../html/programme/dptProgramme.html",
+								url:'schapp_Programme_Dpt'
+							},
+						]
+					},
+					{
+						name: "stu_behavior",//学生行为，教师
+						href: "../../html/stu_behavior/index.html",
+						img_href: "../../img/stu_behavior/behavior_tab.png",
+						tempID: 'behavior',
+						cls: 'mui-icon iconfont icon-xueshengxingwei',
+						url: 'schapp_Behavior',
+						childList: [
+							{
+								name:'课堂行为', 
+								icon:'../../img/stu_behavior/class_behavior.png',
+								href: "../../html/stu_behavior/class_behavior_index.html",
+								url:'schapp_Behavior_classroom'
+							},{
+								name:'课外行为',
+								icon:'../../img/stu_behavior/extra_behavior.png',
+								href: "../../html/stu_behavior/extra_behavior_index.html",
+								url:'schapp_Behavior_extracurricula'
+							},
+							{
+								name:'学生谈话',
+								icon:'../../img/stu_behavior/stu_talk.png',
+								href: "../../html/stu_behavior/stu_talk_index.html",
+								url:'schapp_Behaviorn_conversation'
+							},
+						]
+					},
+					{
+						name: "stu_dorm",//学生宿舍，学生
+						href: "../../html/stu_dorm/index.html",
+						img_href: "../../img/stu_dorm/stu_dorm_tab.png",
+						tempID: 'stu_dorm',
+						cls: 'mui-icon iconfont icon-xueshengsushe',
+						url: 'schapp_Dorm',
+						childList: [
+							{
+								name:'基本信息', 
+								icon:'../../img/stu_dorm/info_dorm.png',
+								href: "../../html/stu_dorm/base_info_index.html",
+								url:'schapp_Dorm_Info'
+							},
+							{
+								name:'班级宿舍',
+								icon:'../../img/stu_dorm/classes_dorm.png',
+								href: "../../html/stu_dorm/classes_dorm_index.html",
+								url:'schapp_Dorm_Classes'
+							},
+							{
+								name:'宿舍查询',
+								icon:'../../img/stu_dorm/select_dorm.png',
+								href: "../../html/stu_dorm/select_dorm_index.html",
+								url:'schapp_Dorm_Select'
+							},
+							{
+								name:'空床查询', 
+								icon:'../../img/stu_dorm/emptybed_dorm.png',
+								href: "../../html/stu_dorm/emptybed_dorm_index.html",
+								url:'schapp_Dorm_EmptyBed'
+							},
+							{
+								name:'空房查询',
+								icon:'../../img/stu_dorm/vacantroom_dorm.png',
+								href: "../../html/stu_dorm/vacantroom_dorm_index.html",
+								url:'schapp_Dorm_EmptyRoom'
+							},
+							{
+								name:'访客登记',
+								icon:'../../img/stu_dorm/calle_dorm.png',
+								href: "../../html/stu_dorm/calle_dorm_index.html",
+								url:'schapp_Dorm_Calle'
+							},
+							{
+								name:'宿舍考勤', 
+								icon:'../../img/stu_dorm/attendance_dorm.png',
+								href: "../../html/stu_dorm/attendance_dorm_index.html",
+								url:'schapp_Dorm_Attendance'
+							},
+							{
+								name:'宿舍行为',
+								icon:'../../img/stu_dorm/action_dorm.png',
+								href: "../../html/stu_dorm/action_dorm_index.html",
+								url:'schapp_Dorm_Action'
+							},
+							{
+								name:'宿舍卫生',
+								icon:'../../img/stu_dorm/health_dorm.png',
+								href: "../../html/stu_dorm/health_dorm_index.html",
+								url:'schapp_Dorm_Health'
+							},
+							{
+								name:'宿舍考评',
+								icon:'../../img/stu_dorm/evaluation_dorm.png',
+								href: "../../html/stu_dorm/evaluation_dorm_index.html",
+								url:'schapp_Dorm_Evaluation'
+							},
+						]
+					},
+					{
+						name: "student_performance",//学生成绩
+						href: "../../html/student_performance/index.html",
+						img_href: "../../img/student_performance/xueshengchengji_tab.png",
+						tempID: 'student_performance',
+						cls: 'mui-icon iconfont icon-xueshengchengji',
+						url: 'schapp_StuScore',//stuapp_StuScore
+						childList: [
+						]
+					},
+					{
+						name: "parents_attendance",//学生考勤
+						href: "../../html/parents_attendance/index.html",
+						img_href: "../../img/parents_attendance/xueshengkaoqin_tab.png",
+						tempID: 'parents_attendance',
+						cls: 'mui-icon iconfont icon-xueshengkaoqin',
+						url: 'schapp_ParentAttence',//
+						childList: [
+						]
+					},
+					{
+						name: "kouYuCePing",//口语测评
+						href: "../../html/kouYuCePing/index.html",
+						img_href: "../../img/kouYuCePing/kouyuceping_tab.png",
+						tempID: 'parents_kouYuCePing',
+						cls: 'mui-icon iconfont icon-kouyuceping',
+						url: 'schapp_kouYuCePing',//
+						childList: [
+						]
+					},
+					{
+						name: "stu_actionComment",//行为与评语，学生家长
+						href: "../../html/stu_actionComment/index.html",
+						img_href: "../../img/stu_actionComment/xingweiyupingyu_tab.png",
+						tempID: 'stu_actionComment',
+						cls: 'mui-icon iconfont icon-xingweiyupingyu',
+						url: 'schapp_actionComment',//
+						childList: [
+						]
+					},
+					{
+						name: "parents_zhixueKeTang",//智学课堂
+						href: "../../html/zhiXueKeTang/index.html",
+						img_href: "../../img/zhiXueKeTang/zhixueketang_tab.png",
+						tempID: 'stu_zhixueKeTang',
+						cls: 'mui-icon iconfont icon-zhixueketang',
+						url: 'schapp_zhixueKeTang',//
+						childList: [
+							{
+								name:'智学资源', 
+								icon:'../../img/zhiXueKeTang/zhixueziyuan.png',
+								href: "../../html/zhiXueKeTang/zhixuezy_index.html",
+								url:'schapp_zhixueKeTang_zxzy'
+							},
+							{
+								name:'组卷测试',
+								icon:'../../img/zhiXueKeTang/zujuanceshi.png',
+								href: "../../html/zhiXueKeTang/zujuancs_index.html",
+								url:'schapp_zhixueKeTang_zjcs'
+							},
+							{
+								name:'历史测试',
+								icon:'../../img/zhiXueKeTang/lishiceshi.png',
+								href: "../../html/zhiXueKeTang/lishics_index.html",
+								url:'schapp_zhixueKeTang_lscs'
+							},
+							{
+								name:'错题本',
+								icon:'../../img/zhiXueKeTang/cuotiben.png',
+								href: "../../html/zhiXueKeTang/cuotiben_index.html",
+								url:'schapp_zhixueKeTang_ctb'
+							},
+							{
+								name:'学情分析',
+								icon:'../../img/zhiXueKeTang/xueqingfenxi.png',
+								href: "../../html/zhiXueKeTang/xueqingfx_index.html",
+								url:'schapp_zhixueKeTang_xqfx'
+							},
+						]
+					},
+					{
+						name: "schhome",//家校互动教师端
+						href: "../../html/schhome/index.html",
+						img_href: "../../img/schhome/interaction_tab.png",
+						tempID: 'schhome',
+						cls: 'mui-icon iconfont icon-jiaxiaohudong',
+						url: 'schapp_SchHome',
+						childList: [
+							{
+								name:'学校通知', 
+								icon:'../../img/schhome/school_notice.png',
+								href: "../../html/schhome/school_notice_index.html",
+								url:'schapp_SchHome_SchSms'
+							},
+							{
+								name:'年级通知',
+								icon:'../../img/schhome/grade_notice.png',
+								href: "../../html/schhome/grade_notice_index.html",
+								url:'schapp_SchHome_Grade'
+							},
+							{
+								name:'班级通知',
+								icon:'../../img/schhome/class_notice.png',
+								href: "../../html/schhome/classes_notice_index.html",
+								url:'schapp_SchHome_ClsSms'
+							},
+							{
+								name:'班级作业',
+								icon:'../../img/schhome/class_homework.png',
+								href: "../../html/schhome/classes_homework_index.html",
+								url:'schapp_SchHome_ClsWorkSms'
+							},
+							{
+								name:'在校表现',
+								icon:'../../img/schhome/school_programme.png',
+								href: "../../html/schhome/performance_index.html",
+								url:'schapp_SchHome_StuPerson'
+							},
+						]
+					},
+					{
+						name: "schhome_stu",//家校互动学生端
+						href: "../../html/schhome_stu/index.html",
+						img_href: "../../img/schhome/stu/interaction_tab.png",
+						tempID: 'schhome_stu',
+						cls: 'mui-icon iconfont icon-jiaxiaohudong',
+						url: 'schapp_SchHomeStu',//
+						childList: [
+						]
+					},
+					]
+				}
+			});
+
+			//创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				var tempMenu = store.get(window.storageKeyName.MENULIST);
+				console.log('tempMenu:' + JSON.stringify(tempMenu));
+				var tempA = []; 
+				for (var i = 0; i < tempMenu.list[0].childList.length; i++) {//一级菜单循环
+					var web_first_item = tempMenu.list[0].childList[i];
+					for (var a = 0; a < indexPage.pageArray.length; a++) {
+						var local_first_item = indexPage.pageArray[a];
+						if (local_first_item.url == web_first_item.url) {
+							local_first_item.name = web_first_item.name;
+							local_first_item.access=web_first_item.access;
+							var childList=[]
+							for (var b = 0; b < web_first_item.childList.length; b++) {//二级菜单循环
+								var web_second_item = web_first_item.childList[b];
+								for (var c = 0; c < local_first_item.childList.length; c++) {
+									var local_second_item = local_first_item.childList[c];
+									if (local_second_item.url == web_second_item.url) {
+										local_second_item.access = web_second_item.access;
+										local_second_item.redspot_url = web_second_item.redspot_url;
+										local_second_item.childList = web_second_item.childList;
+										local_second_item.name = web_second_item.name;
+										childList.push(local_second_item)
+									}
+								}
+							}
+							local_first_item.childList=childList
+							tempA.push(local_first_item);
+						} 
+					}
+				}
+				for (var i = 0; i < tempA.length; i++) {
+					var tempP = tempA[i];
+					tempP.index = i;
+				}
+				if (tempA.length > 5) {
+					var tempArrayM = tempA.slice(4);
+					store.set(window.storageKeyName.MOREMENU, tempArrayM);
+					tempA = tempA.slice(0, 4);
+					tempA.push({
+						name: "更多",
+						href: "../../html/more/index.html",
+						tempID: 'kejiao4',
+						cls: 'mui-icon iconfont icon-gengduo',
+						url: 'more',
+					});
+				}
+				indexPage.showArray = [].concat(tempA);
+				var info = plus.push.getClientInfo();
+				var cid = info.clientid;
+				var tool = new igexinTool();
+				var personal = store.get(window.storageKeyName.PERSONALINFO);
+				tool.bindAlias(personal.user_code);
+				if(mui.os.android) {// android  部分代码逻辑------通知
+					//检查是否有通知权限
+					function checkNoticePermission(){ //return true : allowed notice  false: not allowed notice 
+						var main = plus.android.runtimeMainActivity();
+						var NotificationManagerCompat = plus.android.importClass("android.support.v4.app.NotificationManagerCompat");  
+						var packageNames = NotificationManagerCompat.from(main);  
+						console.log(JSON.stringify(packageNames)); 
+						return packageNames.areNotificationsEnabled();
+					}
+					
+					//弹出框，打开设置界面
+					function show_NOTIFICATION_SETTINGS(){
+						var btnArray = ['立即开启', '以后再说'];
+						mui.confirm('开启后可第一时间收到消息通知', '提示', btnArray, function(e) {
+							if (e.index == 0) {
+								var main = plus.android.runtimeMainActivity();
+								var pkName = main.getPackageName();  
+								var uid = main.getApplicationInfo().plusGetAttribute("uid");
+								var Intent = plus.android.importClass('android.content.Intent');
+								var Build = plus.android.importClass("android.os.Build");
+								if (Build.VERSION.SDK_INT >= 26) {
+									var  intent = new Intent('android.settings.APP_NOTIFICATION_SETTINGS');
+								　　intent.putExtra('android.provider.extra.APP_PACKAGE', pkName);
+									main.startActivity(intent);  
+								} else if (Build.VERSION.SDK_INT >= 21) { //android 5.0-7.0  
+								　　var  intent = new Intent('android.settings.APP_NOTIFICATION_SETTINGS');
+								　　intent.putExtra("app_package", pkName);
+								　　intent.putExtra("app_uid", uid);
+									main.startActivity(intent);  
+								// } else { //(<21)其他--跳转到该应用管理的详情页
+								// 　　let  Settings = plus.android.importClass("android.provider.Settings");
+								// 　　let  Uri = plus.android.importClass("android.net.Uri");
+								// 　　let  intent = new Intent();
+								// 　　intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+								// 　　let  uri = Uri.fromParts("package", main.getPackageName(), null);
+								// 　　intent.setData(uri);
+								// 	main.startActivity(intent);  
+								}
+							}
+						}) 
+					}
+					
+					var firstLogin = store.get(window.storageKeyName.ISFIRST);
+					console.log('firstLogin==========================' + firstLogin)
+					if(firstLogin == null && !checkNoticePermission()) {//首次登陆，检测是否有通知权限，如果没有，弹出提示框
+						store.set(window.storageKeyName.ISFIRST, 'unFirstLogin');
+						show_NOTIFICATION_SETTINGS();
+					}else if(firstLogin == 'unFirstLogin' && !checkNoticePermission()) {//之后的登录（如果手动从设置页关闭了通知权限），检测是否有通知权限，只提示一次
+						store.set(window.storageKeyName.ISFIRST, 'noAllowedNotice');
+						show_NOTIFICATION_SETTINGS();
+					}else {//首次登录已默认开启通知权限
+						store.set(window.storageKeyName.ISFIRST, 'unFirstLogin');
+					}
+					
+					//当设备收到服务器发送的透传消息时，不会触发页面监听的receive事件。当用户点击消息中心消息时会触发监听页面的“click”事件。如果用户点击多个消息时，会多次触发“click”事件。
+					//不符指定合格式的透传消息不会进入系统的消息中心，会在监听“receive”事件的页面触发事件回调。
+					//{title:"通知标题",content:"通知内容",payload:"通知去干嘛这里可以自定义"} 标准格式
+					//{"title":"接收到一条待办","body":"{\"title\":\"通知标题\",\"content\":\"通知内容\",\"payload\":\"通知去干嘛这里可以自定义\"}"}  由于使用标准格式，不会触发receice监听，所以封装了下
+					var info = plus.push.getClientInfo();
+					var cid = info.clientid; 
+					// plus.push.setAutoNotification( true );
+					plus.push.addEventListener("receive", function(msg) {
+						console.log("接收到了通知推送"+ JSON.stringify(msg))
+						var obj =plus.webview.getWebviewById("../../html/oa/index.html");
+						obj&&obj.evalJS('getNoReadCnt()')   
+						plus.device.vibrate(500);
+						// console.log('msg.title========' + JSON.stringify(msg))
+						// //设置通知栏消息
+						// var options = {
+						// 	cover: false,
+						// 	sound: 'system'
+						// };
+						// try {
+						// 	if(JSON.parse(msg.content).body == undefined) {
+						// 		plus.push.createMessage(msg.content, msg.content, options);
+						// 	} else {
+						// 		plus.push.createMessage(msg.title, JSON.parse(msg.content).body, options);
+						// 	}
+						// } catch(err) {
+						// 	plus.push.createMessage("有一条新的通知", "有一条新的通知", options);
+						// }
+				
+					}, true);
+					plus.push.addEventListener("click", function(msg) {
+						console.log("点击了通知栏消息")
+						var obj =plus.webview.getWebviewById("../../html/oa/index.html");
+						obj&&obj.evalJS('getNoReadCnt()')   
+						plus.push.clear();
+					}, false);
+					
+					//监听收到通知后，没通过标题栏而是点击app图标进入app的事件，官方用语叫：应用切换到前台运行事件
+					document.addEventListener("plusready", onPlusReady, false);
+					function onPlusReady() {
+						document.addEventListener("resume", onAppReume, false);
+					}
+					function onAppReume() {
+							plus.push.clear();
+					}
+					
+				} else {// IOS  部分代码逻辑------通知
+					document.addEventListener("plusready", function() {
+						message = document.getElementById("message");
+						// 监听点击消息事件
+						plus.push.addEventListener("click", function(msg) {
+							console.log("点击了通知栏消息")
+							//获取未读数
+							var obj =plus.webview.getWebviewById("../../html/oa/index.html");
+							obj&&obj.evalJS('getNoReadCnt()')   
+							plus.device.vibrate(500);
+						}, false);
+						// 监听在线消息事件
+						plus.push.addEventListener("receive", function(msg) {
+							console.log("接收到了通知推送")
+							//获取未读数
+							var obj =plus.webview.getWebviewById("../../html/oa/index.html");
+							obj&&obj.evalJS('getNoReadCnt()')   
+							plus.device.vibrate(500);
+						}, false);
+					}, false);
+				}
+
+				//安卓的连续点击两次退出程序
+				var backButtonPress = 0;
+				//重写返回键
+				mui.back = function(event) {
+					backButtonPress++;
+					if (backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
+				if (indexPage.showArray.length == 0) {
+					mui.toast('暂无可用菜单');
+					setTimeout(function() {
+						store.remove(window.storageKeyName.PERSONALINFO);
+						plus.webview.open('../../html/login/loginIndex.html','../../html/login/loginIndex.html',{statusbar:{background: "#00CFBD"}});
+						var curr = plus.webview.currentWebview();
+						var wvs = plus.webview.all();
+						for (var i = 0, len = wvs.length; i < len; i++) {
+							//关闭除login页面外的其他页面
+							if (wvs[i].getURL().indexOf('loginIndex.html') != -1) {
+								continue;
+							}
+							plus.webview.close(wvs[i]);
+						}
+						curr.close();
+					}, 1000);
+				}
+				if (indexPage.showArray.length == 1) {
+					subpage_style.bottom = '0px';
+				}
+				var defaultUrl = indexPage.showArray[0].href;
+				var self = plus.webview.currentWebview();
+				var tempM = indexPage.showArray[0];
+				var sub = plus.webview.create(defaultUrl, defaultUrl, subpage_style, {
+					preload: tempM
+				});
+				self.append(sub);
+				//当前激活选项
+				activeTab = defaultUrl;
+				var title = document.getElementById("title");
+				console.log('11111111');
+				//选项卡点击事件
+				mui('.mui-bar-tab').on('tap', 'a', function(e) {
+					var targetTab = this.getAttribute('href');
+					console.log('11111111222:' + targetTab);
+					if (targetTab == activeTab) {
+						return;
+					} else {
+						var viewIsExists = plus.webview.getWebviewById(targetTab);
+						if (viewIsExists == null || viewIsExists == '' || viewIsExists == undefined) {
+							for (var i = 0; i < indexPage.showArray.length; i++) {
+								var tempM = indexPage.showArray[i];
+								if (targetTab == tempM.href) {
+									var pageIndex = plus.webview.getWebviewById(targetTab);
+									var newSub = plus.webview.create(targetTab, targetTab, subpage_style, {
+										preload: tempM
+									});
+									newSub.hide();
+									self.append(newSub);
+								}
+							}
+
+						}
+					}
+					//更换标题
+					//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+					plus.webview.show(targetTab, "fade-in", 00);
+					//隐藏当前;
+					plus.webview.hide(activeTab);
+					//更改当前活跃的选项卡 
+					activeTab = targetTab;
+				});
+				setTimeout(function() {
+					var defaultTab = document.getElementById(indexPage.showArray[0].tempID);
+					console.log('11111111defaultTab:' + defaultTab);
+					//模拟首页点击
+					mui.trigger(defaultTab, 'tap');
+					//切换选项卡高亮
+					var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+					if (defaultTab !== current) {
+						current.classList.remove('mui-active');
+						defaultTab.classList.add('mui-active');
+					}
+				}, 1000);
+
+			});
+		</script>
+	</body>
+
+</html>

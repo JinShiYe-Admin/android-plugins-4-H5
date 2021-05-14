@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/icons-extra.css">
+		<style>
+			body,
+			.mui-content {
+				background: #fff;
+				color: #fff;
+			}
+			
+			header.mui-bar {
+				display: none;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding: 0;
+			}
+			
+			.title {
+				margin: 35px 15px 10px;
+			}
+			
+			.title+.content {
+				margin: 10px 15px 35px;
+				color: #bbb;
+				text-indent: 1em;
+				font-size: 14px;
+				line-height: 24px;
+			}
+			
+			.head-portrait {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				margin-bottom: 10px;
+			}
+			
+			.user-info {
+				padding: 30px 0 10px 0;
+				text-align: center;
+				background: #fff;
+			}
+			
+			.btns {
+				background: #fff;
+				height: 100%;
+			}
+			
+			.user-text {
+				font-size: 16px;
+				color: #333333;
+			}
+			
+			.mui-table-view-cell {
+				color: #333333;
+			}
+			
+			.mui-icon,
+			.mui-icon-extra {
+				color: #00A5E0;
+			}
+			
+			.out-btn {
+				position: fixed;
+				bottom: 0px;
+				height: 60px;
+				width: 100%;
+				padding:10px 10% ;
+				background: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="mine">
+			<div class="mui-row" style="margin-top: 44px;">
+				<div class="user-info">
+					<img v-on:click="clickHeadImg()" class="head-portrait" :src=userImg />
+					<p class="user-text">{{userName}}</p>
+					<p style="text-align: center;">{{userMsg}}</p>
+				</div>
+			</div>
+			<div class="mui-row" style="background: #EEEEEE;height: 20px;"></div>
+			<div class="mui-row btns">
+				<ul class="mui-table-view" style="margin-bottom: 61px;">
+					<template v-for="setting in settings">
+						<li class="mui-table-view-cell" v-on:click="jumpToDetail(setting)">
+							<a class="mui-navigate-right">
+								<span :class="setting.cls" :style="setting.name=='关联学生'||setting.name=='学生账号'?'font-size: 24px;margin:0 -2px 0 -3px;':'font-size: 20px'"></span>
+								<span style="font-size: 14px;">{{setting.name}}</span>
+							</a>
+						</li>
+					</template>
+				</ul>
+				<div class="out-btn">
+					<button id="close-btn" type="button" class="mui-btn mui-btn-danger " style="width: 100%;height:40px;">退出登录</button>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/utils/storageKeyName.js"></script>
+		<script src="../../js/utils/mui.min.js"></script>
+		<script src="../../js/utils/vue.js"></script>
+		<script src="../../js/utils/vconsole.min.js"></script>
+		<script src="../../js/utils/utils.js"></script>
+		<script src="../../js/utils/store.js"></script>
+		<script src="../../js/utils/utils.js"></script>
+		<script src="../../js/utils/publicProtocol.js"></script>
+		<script src="../../js/utils/events.js"></script>
+		<script src="../../js/libs/jquery.js"></script>
+		<script src="../../js/utils/igexinTool.js"></script>
+		<!--加密-->
+		<script src="../../js/libs/RSA/Barrett.js"></script>
+		<script src="../../js/libs/RSA/BigInt.js"></script>
+		<script src="../../js/libs/RSA/RSA.js"></script>
+		<script src="../../js/libs/encryption/RSAEncrypt.js"></script>
+		<script src='../../js/libs/crypto-js/require.js'></script>
+		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
+		<script src='../../js/libs/jquery.js'></script>
+		<script src='../../js/libs/encryption/sortSign.js'></script>
+		<script type="text/javascript" charset="utf-8">
+			//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				}
+			});
+			// var personal = store.get(window.storageKeyName.PERSONALINFO);
+			// console.log('personal:' + JSON.stringify(personal));
+			var main = null;
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview().opener();
+
+				window.addEventListener('mine_setHeadImg', function(data) {
+					mine.userImg = data.detail.img_url;
+					mui.fire(plus.webview.currentWebview().opener(), 'home_setHeadImg', {
+						img_url: data.detail.img_url
+					});
+				});
+
+
+				window.addEventListener('refush_count', function() {
+					console.log('refush_count001');
+					mui.fire(plus.webview.currentWebview().opener(), 'refush_count1', {});
+				});
+
+				var mine = new Vue({
+					el: "#mine",
+					data: {
+						userModel:store.get(window.storageKeyName.PERSONALINFO),
+						userName: '',
+						userMsg:'',
+						userImg: setImg(store.get(window.storageKeyName.PERSONALINFO).img_url, 9),
+						settings: [{
+								name: "密码修改",
+								icon: "",
+								href: "",
+								tempID: 0,
+								cls: 'mui-icon mui-icon-locked',
+								qx: "0,1,2"
+							},{
+								name: "注销账号",
+								icon: "",
+								href: "",
+								tempID: 1,
+								cls: 'mui-icon mui-icon-locked',
+								qx: "0,1,2"
+							},{
+								name: "用户隐私政策",
+								icon: "",
+								href: "",
+								tempID: 3,
+								cls: 'mui-icon mui-icon-locked',
+								qx: "0,1,2"
+							},{
+								name: "关于教宝校园",
+								icon: "",
+								href: "",
+								tempID: 2,
+								cls: 'mui-icon mui-icon-info',
+								qx: "0,1,2"
+							},
+						],
+						isMineShow: false, //屏蔽或显示我的界面
+					},
+					methods: {
+						jumpToDetail: function(setting) {
+							hideMenu();
+							this.isMineShow = false;
+							if (setting.tempID == 0) { //密码修改
+								var tempModel = {
+									flag: 0 //0是主动修改密码，1是判断是默认密码，自动让修改
+								}
+								utils.mOpenWithData("../../html/mine/modifyPassword.html", tempModel);
+							} else if (setting.tempID == 2) { //关于教宝校园
+								utils.mOpenWithData("../../html/mine/about.html", setting);
+							}else if (setting.tempID == 1) { //注销账号
+								mui.confirm("注销后账号将不可使用，与账号相关的数据也会一并删除，确定注销吗？", '确定注销？', ['确定', '取消'], function(e) {
+										if (e.index == 0) {
+											var personal = store.get(window.storageKeyName.PERSONALINFO);
+											var enData0 = {};
+											//不需要加密的数据
+											var comData0 = {
+												platform_code: personal.platform_code, //平台代码
+												app_code: personal.app_code, //应用系统代码
+												unit_code: personal.unit_code, //单位代码，如应用系统需限制本单位用户才允许登录，则传入单位代码，否则传“-1”
+												index_code:'index',
+												op_user_code:personal.user_code,
+												access_token: personal.access_token
+											};
+											events.showWaiting();
+											//发送网络请求，data为网络返回值
+											postDataEncry(window.storageKeyName.INTERFACE_HR_SKIN + 'unregister', enData0, comData0, 0, function(data) {
+												events.closeWaiting();
+												if(data.code == 0) {
+													mui.toast(data.msg);
+													quitLogin();
+												} else {
+													mui.toast(data.msg);
+												}
+											});
+										}
+									});
+							}else if (setting.tempID == 3) { //隐私协议
+								utils.mOpenWithData("../../html/login/privace.html", setting);
+							}
+						},
+						clickHeadImg: function() {
+							this.isMineShow = false;
+							hideMenu();
+							utils.mOpenWithData("../../html/mine/headImg.html", {});
+						}
+					}
+				});
+				var personal = store.get(window.storageKeyName.PERSONALINFO);
+				mine.userName = personal.user_name;
+				if(personal.type_code == 'YHLX0003'){
+					mine.userMsg = personal.sch_name+' '+personal.dpt_name;
+				}else{
+					mine.userMsg = personal.sch_name+' '+personal.grd_name+' '+personal.cls_name;
+					if(personal.type_code == 'YHLX0004'){
+						mine.userMsg = mine.userMsg +' '+ personal.stu_name +"(家长)";
+					}
+				}
+
+				function quitLogin() {
+					closeMenu();
+					hideMenu();
+				}
+
+				function hideMenu() {
+					console.log('侧滑执行方法执行了吗')
+					mui.fire(plus.webview.currentWebview().opener(), 'hideMenu', {
+						hide: true
+					});
+				}
+
+				function closeMenu() {
+					//设置app角标,flag=0直接设置角标数字，flag=1角标减1,falg=2角标加1
+					utils.setBadgeNumber(0, 0);
+					store.set(window.storageKeyName.BADGENUMBER, 0);
+					//解绑个推
+					var tool = new igexinTool();
+					var personal = store.get(window.storageKeyName.PERSONALINFO);
+					tool.unbindAlias(personal.user_code);
+
+					store.remove(window.storageKeyName.PERSONALINFO);
+
+					//获取所有已打开的webview 实例————重新打开login.html————循环关闭页面
+					plus.webview.open('../../html/login/loginIndex.html', '../../html/login/loginIndex.html', {
+						statusbar: {
+							background: "#3893D9"
+						}
+					});
+					// utils.mOpenWithData("../../html/login/loginIndex.html", {});
+						var curr = plus.webview.currentWebview();
+						var wvs = plus.webview.all();
+						try{
+							if(wvs){
+								for (var i = 0, len = wvs.length; i < len; i++) {
+									//关闭除login 页面外的其他页面
+									if (wvs[i].getURL()!=null && wvs[i].getURL()!=undefined){
+										if(wvs[i].getURL().indexOf('loginIndex.html')!=-1) {
+											continue;
+										}else{
+											plus.webview.close(wvs[i]);
+										}
+									}
+								}
+							}
+						}catch(e){
+							console.log("这有一个退出异常！！！！！！！！！！: " + JSON.stringify(e));
+						}
+						//关闭mine页面
+						curr.close();
+				}
+
+				//左滑显示出来的菜单，只需监听右滑，然后将菜单关闭即可；在该菜单上左滑，不做任何操作；
+				//			window.addEventListener("swiperight", hideMenu);
+				document.getElementById("close-btn").addEventListener('tap', function() {
+						var personal = store.get(window.storageKeyName.PERSONALINFO);
+						if(personal){//多次点击按钮，personal为null
+							console.log("personal: " + JSON.stringify(personal));
+							var enData0 = {};
+							//不需要加密的数据
+							var comData0 = {
+								platform_code: personal.platform_code, //平台代码
+								app_code: personal.app_code, //应用系统代码
+								unit_code: personal.unit_code, //单位代码，如应用系统需限制本单位用户才允许登录，则传入单位代码，否则传“-1”
+								index_code:'index',
+								access_token: personal.access_token
+							};
+							events.showWaiting();
+							//发送网络请求，data为网络返回值
+							postDataEncry(window.storageKeyName.INTERFACE_SSO_SKIN + 'session/removeSession', enData0, comData0, 0, function(data) {
+								events.closeWaiting();
+								quitLogin();
+							});
+						}
+				});
+			});
+		</script>
+	</body>
+
+</html>

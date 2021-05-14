@@ -1,0 +1,616 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../../js/utils/mui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../js/loginIndex/bootstrap-4.2.1.css">
+		<link rel="stylesheet" href="../../js/loginIndex/style.default.css" id="theme-stylesheet">
+		<style type="text/css">
+			.regisgerColo {
+				border-color: #3893D9;
+				color: #3893D9;
+				border-radius: 20px;
+			}
+			.yonghuxieyi{
+				margin-top: 10px;
+				font-size: 14px;
+				color: gray;
+				text-align: left;
+				text-indent: 1.5em;
+			}
+			.mui-popup-inner,.mui-popup-button{
+				background:rgba(244, 244, 244, 0.9)  !important;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content" style="background-color: white;">
+			<div class="page login-page">
+			  <div class="container d-flex align-items-center">
+			    <div class="form-holder has-shadow">
+			      <div class="row">
+			        <!-- Logo & Information Panel-->
+			        <div class="col-lg-5">
+			          <div class="info d-flex align-items-center">
+			            <div class="content">
+			              <div class="logo">
+			                <h1>访客系统</h1>
+			              </div>
+			              <p>欢迎登录</p>
+			            </div>
+			          </div>
+			        </div>
+			        <!-- Form Panel    -->
+			        <div class="col-lg-7 bg-white">
+			          <div class="form d-flex align-items-center">
+			            <div class="content">
+			                <div class="form-group">
+			                  <input id='account' type="text" name="userName" required="" data-msg="请输入用户名" placeholder="用户名" class="input-material">
+			                </div>
+			                <div class="form-group">
+			                  <input id='password' type="password" name="passWord" required="" data-msg="请输入密码" placeholder="密码" class="input-material">
+			                </div>
+			                <button id='login' type="submit" class="btn btn-primary" style="font-size: 1rem;">登&ensp;录</button>
+			                </div>
+			              <br>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+		</div>
+	</body>
+	<script src="../../js/utils/vue.js"></script>
+	<script src="../../js/utils/storageKeyName.js"></script>
+	<script src="../../js/utils/app-update.js"></script>
+	<script src="../../js/utils/vconsole.min.js"></script>
+	<!--加密-->
+	<script src="../../js/libs/RSA/Barrett.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/libs/RSA/BigInt.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/libs/RSA/RSA.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/libs/encryption/RSAEncrypt.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/libs/crypto-js/require.js"></script>
+	<script src="../../js/libs/encryption/signHmacSHA1.js"></script>
+	<script src="../../js/libs/jquery.js"></script>
+	<script src="../../js/libs/encryption/sortSign.js"></script>
+	<script src="../../js/utils/pushPermission.js"></script>
+	<script src="../../js/loginIndex/bootstrap-3.3.4.js"></script>
+	<!---->
+
+	<script src="../../js/utils/publicProtocol.js"></script>
+	<script src="../../js/utils/store.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/utils/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/utils/events.js"></script>
+	<script src="../../js/utils/md5.js"></script>
+	
+
+	<script type="text/javascript">
+		var backButtonPress = 0;
+		var tempModel = {};
+		var loginFlag = 0; //0自动登录，1不自动登录
+		mui.init({
+			//重写物理/虚拟返回按钮，防止与弹出层冲突
+			statusBarBackground: '#3893D9',
+			beforeback: function(){  
+				backButtonPress++;
+				if (backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;  
+			}
+		});
+		mui.plusReady(function() {
+			
+			//判断是否是第一次使用APP start
+			var firstOpen = store.get(window.storageKeyName.FIRSTOPEN);
+			if(firstOpen == null){
+				mui.confirm("<div class='yonghuxieyi'>依据最新的法律要求，我们更新了《<a id='yonghuAA' style='text-decoration: underline;'>用户隐私政策</a>》，请您务必审慎阅读，充分理解相关条款内容，特别是字体加粗标识的重要条款</div><div class='yonghuxieyi'>点击同意即代表您已阅读并同意《用户隐私政策》，如果您不同意用户协议和隐私政策的内容，我们暂时无法为您提供服务</div><div class='yonghuxieyi'>我们会尽力保护您的个人信息安全</div>", '用户须知', ['同意', '不同意'], function(e) {
+					if (e.index == 0) {
+						store.set(window.storageKeyName.FIRSTOPEN,'1');
+						//检查APP更新
+						checkUpdate();
+					}else{
+						mui.alert("<div class='yonghuxieyi'>由于您不同意教宝校园《用户隐私政策》的相关内容，我们暂时无法为您提供服务。请谅解！</div>",'','返回',function (e) {
+						},'div')
+						return false;
+					}
+				},'div');
+				// document.getElementById('yonghuA').addEventListener('tap',function () {
+				// 	utils.mOpenWithData("../../html/login/privace.html", {});
+				// })
+				document.getElementById('yonghuAA').addEventListener('tap',function () {
+					utils.mOpenWithData("../../html/login/privace.html", {});
+				})
+			}else{
+				//检查APP更新
+				checkUpdate();
+			}
+			//判断是否是第一次使用APP end
+			
+			plus.navigator.setStatusBarBackground("#3893D9"); 
+			tempModel = {
+				uuid: '',
+				appid: ''
+			}
+		});
+		
+		
+		function checkUpdate(){
+			getInfo()
+			//检查更新 start
+			// var CHECKUPDATE = store.get(window.storageKeyName.CHECKUPDATE);
+			// if('CHECK'==CHECKUPDATE || null==CHECKUPDATE){
+				// events.showWaiting(" ");
+				// appUpdate.updateApp(function(type){
+				// 	//wgt安装成功 回调
+				// 	events.closeWaiting();
+				// 	//登录
+				// 	getInfo()
+				// },function(){ 
+				// 	//取消更新/取消安装/wgt安装失败 回调
+				// 	// store.set(window.storageKeyName.CHECKUPDATE,'UNCHECK');
+				// 	events.closeWaiting();
+				// 	//登录
+				// 	getInfo()
+				// });
+			// }else if('UNCHECK'==CHECKUPDATE){
+			// 	getInfo()
+			// }
+			//检查更新 end 
+		}
+		
+		function getInfo() {
+			plus.device.getInfo({
+				success: function(info) {
+					console.log('getDeviceInfo success: '+JSON.stringify(info));
+					var id = ''
+					if (info.uuid) {
+						id = info.uuid.split(",")[0]
+					}
+					if (id) {
+						tempModel.uuid = id
+						tempModel.appid = id
+					}
+					tempModel.webid = plus.os.name + plus.os.version;
+					store.set(window.storageKeyName.PUBLICPARAMETER, tempModel);
+					var backButtonPress = 0;
+					setUUID();
+				},
+				fail:function(info){
+					console.log('getDeviceInfo failed: '+JSON.stringify(info));
+					var id = ''
+					if (info.uuid) {
+						id = info.uuid.split(",")[0]
+					}
+					if (id) {
+						tempModel.uuid = id
+						tempModel.appid = id
+					}
+					tempModel.webid = plus.os.name + plus.os.version;
+					store.set(window.storageKeyName.PUBLICPARAMETER, tempModel);
+					var backButtonPress = 0;
+					setUUID();
+				}
+			});
+		}
+		var login=true;
+		document.getElementById("login").addEventListener('tap', function(event) {
+			if(login){
+				login=false;
+				console.log("登录");
+				var tempName = document.getElementById("account").value;
+				var tempPW = document.getElementById("password").value;
+				console.log('tempName111:' + tempName + ',tempPW' + tempPW);
+				//判断输入是否符合要求
+				if (checkInput(tempName)) {
+					if (checkInput(tempPW)) {
+						getEncryptKeyLogin(tempName, tempPW);
+					} else {
+						login=true;
+					}
+				} else {
+					login=true;
+				}
+			}
+		});
+
+		window.addEventListener('quit', function(data) {
+			console.log("data" + JSON.stringify(data.detail));
+			var tempData = data.detail;
+			loginFlag = 1;
+		});
+
+		/**
+		 * 获取本地推送标识信息
+		 */
+		// function getPushInfo() {
+		// 	var info = plus.push.getClientInfo();
+		// 	outSet("获取客户端推送标识信息：");
+		// 	outLine("id: " + info.id);
+		// 	outLine("token: " + info.token);
+		// 	outLine("clientid: " + info.clientid);
+		// 	outLine("appid: " + info.appid);
+		// 	outLine("appkey: " + info.appkey);
+		// }
+
+		//获取秘钥
+		var getEncryptKeyLogin = function(tempName, tempPW) {
+			console.log('tempName:' + tempName + ',tempPW:' + tempPW);
+			var publicPar = store.get(window.storageKeyName.PUBLICPARAMETER);
+			console.log("publicPar: " + JSON.stringify(publicPar));
+			//握手
+			var enData0 = {};
+			//不需要加密的数据
+			var comData0 = {
+				platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+				app_code: window.storageKeyName.APPCODE, //应用系统代码
+				unit_code: '-1', //单位代码，如应用系统需限制本单位用户才允许登录，则传入单位代码，否则传“-1”
+				uuid: publicPar.uuid, //设备唯一识别码,防同一应用在不同机器上登录互串,验证码校检用
+				webid: publicPar.webid, //浏览器识别码,防不同浏览器登录同一应用互串,验证码校检用（web用浏览器类型加版本，app用操作系统+版本））
+				shaketype: '1', //
+			};
+			events.showWaiting();
+			//发送网络请求，data为网络返回值
+			postDataEncry(window.storageKeyName.INTERFACE_SSO_SKIN + 'login/getEncryptKey', enData0, comData0, 0, function(data) {
+				events.closeWaiting();
+				if (data.code == '0000') {
+					store.set(window.storageKeyName.SHAKEHAND, data.data);
+					loginPro(tempName, tempPW, data.data);
+				} else {
+					login=true;
+					if (plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
+						mui.toast('网络异常，请检查网络设置！');
+					} else {
+						mui.toast(data.msg);
+					}
+				}
+			});
+		}
+
+		//login登录
+		var loginPro = function(tempName, tempPW, key) {
+			var publicPar = store.get(window.storageKeyName.PUBLICPARAMETER);
+			var enData1 = {};
+			//不需要加密的数据
+			var comData1 = {
+				uuid: publicPar.uuid, //设备唯一识别码,防同一应用在不同机器上登录互串,验证码校检用
+				webid: publicPar.webid, //浏览器识别码,防不同浏览器登录同一应用互串,验证码校检用（web用浏览器类型加版本，app用操作系统+版本））
+				shaketype: '1', //
+				login_name: RSAEncrypt.enctype(tempName), //登录名
+				password: RSAEncrypt.enctype(tempPW), //
+				device_type: '1', //登录设备类型，0：WEB、1：APP、2：客户端
+				platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+				app_code: window.storageKeyName.APPCODE, //应用系统代码
+				unit_code: '-1', //单位代码，如应用系统需限制本单位用户才允许登录，则传入单位代码，否则传“-1”
+				verify_code: ''
+			};
+			events.showWaiting();
+			//登录
+			postDataEncry(window.storageKeyName.INTERFACE_SSO_SKIN + 'login', enData1, comData1, 0, function(data1) {
+				events.closeWaiting();
+				if (data1.code == 0) {
+					store.set(window.storageKeyName.BADGENUMBER, 0);
+					loginFlag = 1;
+					data1.data.userName0 = tempName;
+					data1.data.passWord0 = tempPW;
+					store.set(window.storageKeyName.PERSONALINFO, data1.data);
+					var tempFlag = 0;
+					//登录用户岗位信息
+					//不需要加密的数据
+					var comData3 = {
+						platform_code: data1.data.user.platform_code, //平台代码
+						app_code: data1.data.user.app_code, //应用系统代码
+						index_code: 'index', //页面权限符,必传,从登录皮肤处获得
+						unit_code: data1.data.user.unit_code, //学校代码,必传
+						user_code: data1.data.user.user_code, //用户代码,必传
+						access_token: data1.data.access_token //用户令牌
+					};
+					events.showWaiting();
+					//登录用户岗位信息
+					postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'user/getUserImg', {}, comData3, 0, function(data3) {
+						events.closeWaiting();
+						if (data3.code == 0) {
+							var tempPerInfo = store.get(window.storageKeyName.PERSONALINFO);
+							tempPerInfo.hrImg_url = data3.data.user_img;
+							store.set(window.storageKeyName.PERSONALINFO, tempPerInfo);
+							tempFlag++;
+							console.log('tempFlag01:' + tempFlag);
+							if (tempFlag == 3) {
+								//跳转界面
+								// gotoPage(tempPW);
+							}
+						} else {
+							mui.toast(data3.msg);
+						}
+					});
+
+					//1.4获取菜单
+					//不需要加密的数据
+					var comData4 = {
+						platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+						app_code: window.storageKeyName.APPCODE, //应用系统代码
+						unit_code: data1.data.user.unit_code,
+						index_code:'index',
+						access_token: data1.data.access_token //用户令牌
+					};
+					events.showWaiting();
+					//登录用户岗位信息
+					postDataEncry(window.storageKeyName.INTERFACE_SSO_SKIN + 'acl/menu', {}, comData4, 0, function(data4) {
+						events.closeWaiting();
+						if (data4.code == '0000') {
+							if (data4.data.list.length > 0) {
+								store.set(window.storageKeyName.MENULIST, data4.data);
+								tempFlag++;
+								console.log('tempFlag02:' + tempFlag);
+								if (tempFlag == 3) {
+									//跳转界面
+									gotoPage(tempPW);
+								}
+							} else {
+								mui.toast('应用系统无权限，请联系管理员');
+							}
+						} else {
+							mui.toast(data4.msg);
+						}
+					});
+					
+					//1.42.根据用户类型及代码查询教师/学生信息
+					var comData5 = {
+						platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+						app_code: window.storageKeyName.APPCODE, //应用系统代码
+						unit_code: data1.data.user.unit_code,
+						user_type_code:data1.data.user.type_code,
+						user_code:data1.data.user.user_code,
+						index_code:'index',
+						access_token: data1.data.access_token //用户令牌
+					};
+					events.showWaiting();
+					//1.42.根据用户类型及代码查询教师/学生信息
+					postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'user/getUserInfoByTypeAndCode', {}, comData5, 0, function(data5) {
+						events.closeWaiting();
+						if (data5.code == '0000') {
+							if (data5.data) {
+								var tempPerInfo = store.get(window.storageKeyName.PERSONALINFO);
+								if (data1.data.user.type_code == 'YHLX0003') {
+									tempPerInfo.tec_name = data5.data.tec_name;
+									tempPerInfo.sch_name = data5.data.sch_name;
+									tempPerInfo.sch_code = data5.data.sch_code;
+									tempPerInfo.tec_code = data5.data.tec_code;
+									tempPerInfo.dpt_name = data5.data.dpt_name;
+									tempPerInfo.dpt_code = data5.data.dpt_code;
+								} else{
+									tempPerInfo.cls_name = data5.data.cls_name;
+									tempPerInfo.sch_name = data5.data.sch_name;
+									tempPerInfo.sch_code = data5.data.sch_code;
+									tempPerInfo.cls_code = data5.data.cls_code;
+									tempPerInfo.grd_name = data5.data.grd_name;
+									tempPerInfo.grd_code = data5.data.grd_code;
+									tempPerInfo.stu_name = data5.data.stu_name;
+									tempPerInfo.stu_code = data5.data.stu_code;
+								}
+								store.set(window.storageKeyName.PERSONALINFO, tempPerInfo);
+								tempFlag++;
+								console.log('tempFlag02:' + tempFlag);
+								if (tempFlag == 3) {
+									//跳转界面
+									gotoPage(tempPW);
+								}
+							} else {
+								mui.toast('应用系统无权限，请联系管理员');
+							}
+						} else {
+							mui.toast(data5.msg);
+						}
+					});
+				} else {
+					login=true;
+					mui.toast(data1.msg);
+				}
+			});
+		}
+
+		//对象数组按指定字段进行排序
+		function compare(property) {
+			return function(obj1, obj2) {
+				var value1 = obj1[property];
+				var value2 = obj2[property];
+				return value1 - value2; // 升序
+			}
+		}
+
+		//给数组去重
+		Array.prototype.unique = function(key) {
+			var arr = this;
+			var n = [arr[0]];
+			for (var i = 1; i < arr.length; i++) {
+				if (key === undefined) {
+					if (n.indexOf(arr[i]) == -1) n.push(arr[i]);
+				} else {
+					inner: {
+						var has = false;
+						for (var j = 0; j < n.length; j++) {
+							if (arr[i][key] == n[j][key]) {
+								has = true;
+								break inner;
+							}
+						}
+					}
+					if (!has) {
+						n.push(arr[i]);
+					}
+				}
+			}
+			return n;
+		}
+
+		var gotoPage = function(tempPW) {
+			var tempData = store.get(window.storageKeyName.PERSONALINFO);
+			//将personal 中的key更改为指定的值
+			tempData.user_name = tempData.user.user_name;
+			tempData.sex = tempData.user.sex;
+			tempData.pid = tempData.user.pid;
+			tempData.unit_name = tempData.user.unit_name;
+			tempData.login_name = tempData.user.login_name;
+			tempData.platform_code = tempData.user.platform_code;
+			tempData.user_code = tempData.user.user_code;
+			tempData.img_url = tempData.user.img_url;
+			tempData.platform_name = tempData.user.platform_name;
+			tempData.unit_code = tempData.user.unit_code;
+			tempData.id = tempData.user.id;
+			tempData.type_code = tempData.user.type_code;
+			tempData.app_code = tempData.user.app_code;
+			delete tempData['user'];
+			console.log('new tempData:' + JSON.stringify(tempData));
+			store.set(window.storageKeyName.PERSONALINFO, tempData);
+			if (tempPW == '123456***') {
+				var tempModel = {
+					flag: 1 //0是主动修改密码，1是判断是默认密码，自动让修改
+				}
+				utils.mOpenWithData("../../html/mine/modifyPassword.html", tempModel);
+			} else {
+				if (tempData.user_code == '0') { //无权限
+					// utils.hrefSessionStorage('../../html/login/index.html', {});
+					mui.toast('应用系统无权限，请联系管理员');
+				} else {
+					utils.hrefSessionStorage('../../html/login/homepage.html', {});
+				}
+			}
+		}
+
+		//数组去重
+		function arrayUnique2(arr, name) {
+			var hash = {};
+			return arr.reduce(function(item, next) {
+				hash[next[name]] ? '' : hash[next[name]] = true && item.push(next);
+				return item;
+			}, []);
+		}
+
+		// var gotoIndex = function() {
+		// 	var tempData = store.get(window.storageKeyName.PERSONALINFO);
+		// 	//将personal 中的key更改为指定的值
+		// 	tempData.unit_code = tempData.user.unit_code;
+		// 	tempData.unit_name = tempData.user.unit_name;
+		// 	tempData.img_url = tempData.user.img_url;
+		// 	tempData.user_name = tempData.user.user_name;
+		// 	tempData.user_code = tempData.user.id;
+		// 	tempData.login_name = tempData.user.login_name;
+		// 	tempData.app_code = tempData.user.app_code;
+		// 	if (tempData.masterclss == null) {
+		// 		tempData.masterclss = [];
+		// 	}
+		// 	if (tempData.dpts == null) {
+		// 		tempData.dpts = [];
+		// 	}
+		// 	if (tempData.subs == null) {
+		// 		tempData.subs = [];
+		// 	}
+		// 	if (tempData.clss == null) {
+		// 		tempData.clss = [];
+		// 	}
+		// 	if (tempData.grds == null) {
+		// 		tempData.grds = [];
+		// 	}
+		// 	delete tempData['user'];
+		// 	console.log('new tempData:' + JSON.stringify(tempData));
+		// 	store.set(window.storageKeyName.PERSONALINFO, tempData);
+		// 	if (tempPW == '123456***') {
+		// 		var tempModel = {
+		// 			flag: 1 //0是主动修改密码，1是判断是默认密码，自动让修改
+		// 		}
+		// 		utils.mOpenWithData("../../html/mine/modifyPassword.html", tempModel);
+		// 	} else {
+		// 		plus.webview.open('../../html/login/homepage.html', {
+		// 			statusbar: {
+		// 				background: "#3893D9"
+		// 			}
+		// 		});
+		// 		var wvs = plus.webview.all();
+		// 		for (var i = 0, len = wvs.length; i < len; i++) {
+		// 			plus.webview.close(wvs[i]);
+		// 		}
+		// 		var curr = plus.webview.currentWebview();
+		// 		curr.close();
+		// 	}
+		// }
+
+		//更换personal 对象的key 值
+		var repalceKey = function(obj, oldKey, newKey) {
+			if (obj instanceof Array) {
+				for (var i in obj) {
+					obj[i][newKey] = obj[i][oldKey];
+					delete obj[i][oldKey];
+				}
+			} else {
+				obj[newKey] = obj[oldKey];
+				delete obj[oldKey];
+			}
+		}
+
+		//从ios原生得到信息
+		var setUUID = function(tempStr) {
+			events.showWaiting();
+			if (loginFlag == 0) {
+				//判断上次是否登录过，自动登录
+				var personal = store.get(window.storageKeyName.PERSONALINFO);
+				console.log('personal:' + JSON.stringify(personal));
+				if (personal) {
+					if (personal.unit_code == 'undefined' || personal.unit_code == null || personal.userName0 == null) {
+						appUpdate.updateApp(function(type){events.closeWaiting();},function(){events.closeWaiting();});
+					} else {
+						document.getElementById("account").value = personal.userName0;
+						document.getElementById("password").value = personal.passWord0;
+						appUpdate.updateApp(function(type){//wgt安装成功 回调
+							events.closeWaiting();
+							//login登录
+							getEncryptKeyLogin(personal.userName0, personal.passWord0);
+						},function(){ //取消更新/取消安装/wgt安装失败 回调
+							//login登录
+							events.closeWaiting();
+							getEncryptKeyLogin(personal.userName0, personal.passWord0);
+						});
+					}
+				} else {
+					appUpdate.updateApp(function(type){events.closeWaiting();},function(){events.closeWaiting();});
+				}
+			} else {
+				appUpdate.updateApp(function(type){events.closeWaiting();},function(){events.closeWaiting();});
+			}
+		}
+
+		//判断是否输入了值
+		var checkInput = function(text) {
+			if (text.trim().length == 0) {
+				mui.toast('请输入账号密码');
+				return false;
+			}
+			if (isNull(text)) {
+				mui.toast('请输入账号密码');
+				return false;
+			}
+			return true;
+		}
+
+		//判断输入字符串是否为空或者全部都是空格
+		function isNull(str) {
+			if (str == "") return true;
+			var regu = "^[ ]+$";
+			var re = new RegExp(regu);
+			return re.test(str);
+		}
+	</script>
+
+</html>

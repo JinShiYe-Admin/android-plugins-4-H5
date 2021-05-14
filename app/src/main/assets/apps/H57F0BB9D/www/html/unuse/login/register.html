@@ -1,0 +1,443 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../fonts/iconfont1.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+
+		<style type="text/css">
+			[v-cloak] {
+				visibility: hidden;
+				display: none !important;
+			}
+
+			.mui-table-view-cell>a:not(.mui-btn) {
+				position: relative;
+				display: block;
+				overflow: hidden;
+				margin: -11px -15px;
+				padding: inherit;
+				white-space: normal;
+				text-overflow: ellipsis;
+				color: inherit;
+			}
+
+			body {
+				background: #F2F2F2;
+			}
+
+			.mui-popover {
+				width: 100%;
+				height: 0px;
+				border-radius: initial;
+				background-color: transparent;
+				border: none;
+				box-shadow: none;
+			}
+
+			.aCss {
+				font-size: 15px;
+				color: #333;
+				width: 110px;
+			}
+
+			.icon-right {
+				position: fixed;
+				float: right;
+				font-size: 14px;
+				margin-top: 11px;
+				right: 10px;
+			}
+
+			.code-btn {
+				background: #63BBFF !important;
+				border: none;
+				border-radius: 25px;
+				height: 25px;
+				width: 90px;
+				font-size: 10px;
+				padding: 4px 15px;
+				margin-top: -33px;
+				right: 5%;
+				float: right;
+			}
+
+			.rCss {
+				font-size: 13px;
+				color: #666666;
+				float: left;
+				margin: 0px 27px 0 16px;
+			}
+
+			.mui-table-view-cell {
+				min-height: 44px;
+			}
+
+			.mui-checkbox input[type=checkbox]:checked:before {
+				color: #3893D9;
+			}
+
+			.mui-input-row label~input,
+			input::-webkit-input-placeholder {
+				color: #999;
+				/* placeholder字体大小  */
+				font-size: 14px;
+			}
+
+			.mui-navigate-right.rCss.no-icon:after {
+				content: ' ';
+			}
+
+			.mui-popover-arrow {
+				display: none;
+			}
+
+			.mui-table-view-cell>a:not(.mui-btn).mui-active {
+				background-color: #fff;
+			}
+
+			.mui-table-view:after {
+				height: 0px;
+			}
+
+			.mui-input-row:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #e4e4e4;
+			}
+
+			.mui-input-row.permission:after {
+				height: 0px;
+			}
+
+			.mui-input-row.permission label {
+				line-height: 0.9;
+			}
+
+			.mui-checkbox.mui-left label,
+			.mui-radio.mui-left label {
+				padding-right: 15px;
+				padding-left: 58px;
+			}
+			.mui-table-view:before {
+			height: 0px;
+			}
+			/* .mui-table-view-cell:after {  
+			      position: absolute;  
+			      right: 0;  
+			      bottom: 0;  
+			      left: 15px;  
+			      height: 0px;  
+			      content: '';  
+			      -webkit-transform: scaleY(.5);  
+			      transform: scaleY(.5);  
+			      background-color: #c8c7cc;  
+			} */
+		</style>
+	</head>
+
+	<body style="background: white;">
+		<header class="mui-bar mui-bar-nav">
+			<a onclick="mui.back()" class="mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" style="color: white;">查询资料</h1>
+		</header>
+		<div id="register-body" class="mui-content" style="background: white;">
+			<div style="background-color: #F2F2F2;height: 10px;"></div>
+			<div v-if="appFlag==0" class="mui-input-row" :disabled="disabledFlag==0?false:true">
+				<label class="aCss" @tap="selectUType()">用户类型</label>
+				<input type="text" @tap="selectUType()" placeholder="请选择" v-model="utype" readonly>
+				<span class="mui-icon mui-icon-arrowdown icon-right"></span>
+			</div>
+			<div class="mui-input-row">
+				<label class="aCss">用户姓名</label>
+				<input :disabled="disabledFlag==0?false:true" type="text" placeholder="请输入姓名" v-model="uname" style="color: #000000;">
+			</div>
+			<div class="mui-input-row">
+				<label class="aCss">用户电话</label>
+				<input :disabled="disabledFlag==0?false:true" type="number" maxlength="11" placeholder="请输入电话" onkeyup="clearNoNum(this)"
+				 v-model="uphone" style="color: #000000;">
+			</div>
+			<div class="mui-input-row">
+				<label class="aCss">短信验证码</label>
+				<input :disabled="disabledFlag==2?true:false"  type="number" maxlength="6" placeholder="请输入验证码" v-model="yanzm" style="color: #000000;float: left;width: 100px;">
+				<button v-if="yanZMTime==60" @tap='sendYanzm()' :disabled="yanZMTime<60||disabledFlag==2?true:false" type="button" class="mui-btn" style="background-color: #3893D9;color: white;border-color: white;margin-right: 10px;width: 100px;margin-top: 1px;">获取验证码</button>
+				<button v-if="yanZMTime<60" :disabled="yanZMTime<60||disabledFlag==2?true:false" type="button" class="mui-btn" style="background-color: #3893D9;color: white;border-color: white;margin-right: 10px;width: 130px;margin-top: 1px;">{{yanZMTime}}秒后重新获取</button>
+			</div>
+			<div style="text-align: center;margin-top: 10px;">
+				<button @tap='searchList()' :disabled="disabledFlag==1?false:true" class="mui-btn" style="background-color: #3893D9;color: white;border-color: white;margin-left: 10px;">查询</button>
+				<button @tap='clearData()' class="mui-btn" style="background-color: #3893D9;color: white;border-color: white;margin-left: 10px;">清空</button>
+			</div>
+			<ul class="mui-table-view" style="margin-top: 20px;">
+			    <li class="mui-table-view-cell mui-media" v-for="item in userList">
+			        <a href="javascript:;">
+						<button v-if="item.status==0" class="mui-pull-right" @tap='tapItem(item)' style="background-color: #3893D9;margin-top: 5px;color: white;border-color: white;">注册</button>
+						<button v-if="item.status==1" class="mui-pull-right" @tap='tapItem(item)' style="background-color: #3893D9;margin-top: 5px;color: white;border-color: white;;">找回密码</button>
+						<p v-if="item.status==2" class="mui-pull-right" style="color: red;margin-top: 5px;">账号已停用</p>
+						<p v-if="item.status==3" class="mui-pull-right" style="color: red;margin-top: 5px;">账号已屏蔽</p>
+			            <div class="mui-media-body" style="color: dimgrey;font-size: 15px;padding-right: 10px;margin-top: 0px;">
+			                {{item.user_info}}
+			            </div>
+			        </a>
+			    </li>
+			</ul>
+		</div>
+		<script src="../../js/utils/mui.min.js"></script>
+		<script src="../../js/utils/events.js"></script>
+		<script src="../../js/utils/storageKeyName.js"></script>
+		<script src="../../js/utils/vue.js"></script>
+		<script src="../../js/utils/publicProtocol.js"></script>
+		<script src="../../js/utils/store.js"></script>
+		<script src="../../js/utils/mui.picker.js"></script>
+		<script src="../../js/utils/mui.poppicker.js"></script>
+		<!--加密-->
+		<script src="../../js/libs/RSA/Barrett.js"></script>
+		<script src="../../js/libs/RSA/BigInt.js"></script>
+		<script src="../../js/libs/RSA/RSA.js"></script>
+		<script src="../../js/libs/encryption/RSAEncrypt.js"></script>
+		<script src='../../js/libs/crypto-js/require.js'></script>
+		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
+		<script src='../../js/libs/jquery.js'></script>
+		<script src='../../js/libs/encryption/sortSign.js'></script>
+		<script src='../../js/utils/md5.js'></script>
+		<script src="../../js/utils/utils.js"></script>
+		<script type="text/javascript">
+			var $M = mui.init();
+			var userTypePicker = new $M.PopPicker();
+			var schoolPicker = new $M.PopPicker();
+			var tempType = '';
+			var tempName = '';
+			var tempPhone = '';
+			mui.plusReady(function() {
+				if(window.storageKeyName.APPFLAG == 1){
+					register.appFlag = 1;
+				}else{
+					//用户注册获取可选用户类型列表
+					getUserType();
+				}
+			});
+			//14.用户注册获取可选用户类型列表
+			var getUserType = function() {
+				//握手
+				var enData0 = {};
+				//不需要加密的数据
+				var comData0 = {
+					platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+					app_code: window.storageKeyName.APPCODE, //应用系统代码
+					unit_code: '-1'
+				};
+				events.showWaiting();
+				//发送网络请求，data为网络返回值
+				postDataEncry(window.storageKeyName.INTERFACE_SUP_HR + 'login/getPlatformUserTypeList', {}, comData0, 0, function(
+					data) {
+					events.closeWaiting();
+					console.log('getPlatformUserTypeList:' + JSON.stringify(data));
+					if (data.code == 0) {
+						var tempA = [];
+						for (var i = 0; i < data.data.length; i++) {
+							var tempM = data.data[i];
+							var tempM1 = {
+								text: tempM.type_name,
+								value: tempM.type_code,
+								id: tempM.id
+							}
+							if (i == 0) {
+								register.utype = tempM.type_name;
+								register.utype_value = tempM.type_code;
+							}
+							tempA.push(tempM1);
+						}
+						userTypePicker.setData(tempA);
+						setTimeout(function() {
+							userTypePicker.pickers[0].setSelectedValue(register.utype_value);
+						}, 100);
+					} else {
+						mui.toast(data.msg);
+					}
+				});
+			}
+			window.addEventListener('refreshRegister', function(data) {
+				register.clearData();
+			});
+
+			var register = new Vue({
+				el: '#register-body',
+				data: {
+					appFlag:0,//0是普通平台，1是大学平台（大学平台注册没有用户类型)
+					// privaceFlag: 0,
+					utype: '请选择', //用户类型
+					utype_value: '', //用户类型 选择值
+					uname: '', //用户姓名
+					uphone: '', //用户电话
+					disabledFlag: 0, //
+					yanzm: '', //
+					yanZMTime: 60, //
+					msg_token: '',
+					clearFlag: 0,
+					userList:[],
+					yanzmStart:'',
+				},
+				methods: {
+					clickPrivace: function() {
+						console.log('clickPrivace')
+						utils.mOpenWithData("../../html/login/privace.html", {});
+					},
+					selectUType: function() { //选择身份
+						document.activeElement.blur();
+						userTypePicker.show(function(items) {
+							register.utype = items[0].text;
+							register.utype_value = items[0].value;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					},
+					countDown: function() {
+						if (register.clearFlag == 0) {
+							if (register.yanZMTime <= 1) {
+								register.yanZMTime = 60;
+							} else {
+								register.yanZMTime = register.yanZMTime - 1;
+								setTimeout(function() {
+									register.countDown()
+								}, 1000);
+							}
+						}
+					},
+					clearData:function(){
+						register.utype= '请选择'; //用户类型
+						register.utype_value= ''; //用户类型 选择值
+						register.uname= ''; //用户姓名
+						register.uphone= ''; //用户电话
+						register.disabledFlag= 0; //
+						register.yanzm= ''; //
+						register.yanZMTime= 60; //
+						register.msg_token= '';
+						register.clearFlag= 1;
+						register.userList = [];
+						register.yanzmStart='';
+						//用户注册获取可选用户类型列表
+						getUserType();
+					},
+					searchList: function() {
+						if (register.yanzm.length!=6) {
+							mui.toast('请输入正确的验证码');
+						} else{
+							var enData0 = {};
+							//不需要加密的数据
+							var comData0 = {
+								platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+								app_code: window.storageKeyName.APPCODE, //应用系统代码
+								// user_type: register.utype_value, //用户类型
+								user_name: register.uname, //姓名，注册老师的时候输入老师的姓名，注册学生和家长时输入学生姓名
+								phone: register.uphone ,//电话，注册老师的时候输入老师的姓名，注册学生和家长时输入家长电话
+								msg_token: register.msg_token, //短信验证授权码
+								msg: register.yanzm, //短信验证码
+							};
+							if(window.storageKeyName.APPFLAG == 0){
+								comData0.user_type = register.utype_value;
+							}
+							events.showWaiting();
+							//发送网络请求，data为网络返回值
+							postDataEncry(window.storageKeyName.INTERFACE_HR_SKIN + 'register/userInfo', {}, comData0, 0, function(data) {
+								console.log('register/userInfo:' + JSON.stringify(data));
+								events.closeWaiting();
+								if (data.code == 0) {
+									register.yanZMTime = 60;
+									register.disabledFlag = 2;
+									register.clearFlag = 1;
+									register.userList = data.data.list;
+								} else {
+									register.disabledFlag = 1;
+									mui.toast(data.msg);
+								}
+							});
+						}
+					},
+					tapItem:function(item){
+						console.log('item:'+JSON.stringify(item));
+						item.msg = register.yanzm;
+						item.msg_token = register.msg_token;
+						item.yanzmStart = register.yanzmStart;
+						utils.mOpenWithData("../../html/login/register1.html", item);
+					},
+					sendYanzm: function() {
+						if (register.uname == '') {
+							mui.toast('请输入用户姓名');
+						} else if (register.uphone == '') {
+							mui.toast('请输入用户电话');
+						} else if (!isPhone(register.uphone)) {
+							mui.toast('请输入正确的用户电话');
+						} else {
+							var enData0 = {};
+							//不需要加密的数据
+							var comData0 = {
+								platform_code: window.storageKeyName.PLATFORMCODE, //平台代码
+								app_code: window.storageKeyName.APPCODE, //应用系统代码
+								// user_type: register.utype_value, //用户类型
+								user_name: register.uname, //姓名，注册老师的时候输入老师的姓名，注册学生和家长时输入学生姓名
+								phone: register.uphone //电话，注册老师的时候输入老师的姓名，注册学生和家长时输入家长电话
+							};
+							if(window.storageKeyName.APPFLAG == 0){
+								comData0.user_type = register.utype_value;
+							}
+							events.showWaiting();
+							//发送网络请求，data为网络返回值
+							postDataEncry(window.storageKeyName.INTERFACE_HR_SKIN + 'register/sendMsg', {}, comData0, 0, function(data) {
+								console.log('register/sendMsg:' + JSON.stringify(data));
+								events.closeWaiting();
+								if (data.code == 0) {
+									register.msg_token = data.data.msg_token;
+									register.disabledFlag = 1;
+									register.clearFlag = 0;
+									register.yanzmStart = Date.parse(new Date());
+									register.countDown()
+								} else {
+									register.disabledFlag = 0;
+									mui.toast(data.msg);
+								}
+							});
+							// }
+						}
+					}
+				}
+			});
+
+			// 判断是否为手机号  
+			function isPhone(phone) {
+				var phoneReg = /^1[3|4|5|6|7|8|9]\d{9}$/;
+				if (phoneReg.test(phone)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			//判断字符串是否为数字和字母组合
+			function checkPass(password) {
+				var re = /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/g;
+				if (!re.test(password)) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			//只保留小数点后一位
+			function clearNoNum(obj) {
+				obj.value = obj.value.replace(/[^\d]/g, ""); //清除“数字”和“.”以外的字符  
+			}
+		</script>
+	</body>
+
+</html>

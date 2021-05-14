@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont2.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/system/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
+		<style>
+			[v-cloak] {
+				visibility: hidden;
+				display:none !important;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #3893D9;
+			}
+			a:hover {
+			    color: #FAFAFA;
+			}
+			.mui-h4, h4 {
+			    font-size: 18px;
+				color: #c3865c;
+			}
+			h1, h2, h3, h4, h5, h6 {
+			    line-height: 1;
+			    margin-top: 5px;
+			    margin-bottom: 5px;
+			}
+			/* 左侧按钮 */
+			.tab-btn-left{
+				font-size: 20px;
+				font-weight: 600;
+				padding: 30px 0 15px;
+				border-bottom: 1px solid rgba(210,207,200,.9);
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom: 0px;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active p{
+				color: #3893D9;
+			}
+			
+			/* 右侧视图 */
+			.mui-control-content{
+				height: calc(100vh - 55px );
+				padding:20px 0 0 15px;
+			}
+			
+			/* 左侧视图 */
+			.mui-segmented-control-tab.mui-segmented-control-inverted-tab{
+				border-right: 1px solid rgba(210,207,200,.9);
+				height: calc(100vh - 45px);
+			}
+			.line{
+				background-color: #3893D9;
+				margin-bottom: 0.3125rem;
+				height: 0.125rem;
+			}
+			
+			/* 栅格 宽度修改 */
+			.mui-col-sm-1 {
+			    width: 10.33333333% !important;
+			}
+			
+			.mui-col-sm-11 {
+			    width: 89.66666667% !important;
+			}
+			
+			
+			/* 身份证照片框样式 */
+			.card-img{
+				border: 1px solid rgba(210,207,200,.9);
+				width:171px;
+				height: 240px;
+			}
+			.card-text{
+				display: block;
+				margin: 63% 27% 0;
+				width: 80px;
+				font-size: 15px;
+				color: grey;
+			}
+			/* 读证样式 */
+			.scan{
+				border: 2px solid #C0726C;
+				border-radius: 50%;
+				padding:24px 17px;
+				width: 75px;
+				height: 75px;
+				color:#C0726C;font-size:1.125rem;
+				font-weight: 600;
+				margin:15px 0 0 25%;
+			}
+			
+			/* 输入框样式和间距修改 */
+			.mui-input-row label{
+				font-size: 16px;
+				width: 28%;
+				font-weight: 600;
+				text-align: right;
+			}
+			.mui-input-row .span-icon{
+				    vertical-align: middle;
+				    margin: 12px 0px 0px -22px;
+				    position: absolute;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+				border: 1px solid rgba(210,207,200,.8);
+				width: 72%;
+				float: left;
+			}
+			/* 输入框样式和间距修改 被访人信息栏*/
+			.mui-input-row-bottom label{
+				width: 24%;
+				font-weight: 600;
+				text-align: right;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-bottom label~input, .mui-input-row-bottom label~select, .mui-input-row-bottom label~textarea{
+				border: 1px solid rgba(210,207,200,.8);
+				width: 68%;
+				float: left;
+			}
+			.mui-input-row-bottom-lar label{
+				width: 30%;
+				font-weight: 600;
+				text-align: right;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-bottom-lar label~input, .mui-input-row-bottom-lar label~select, .mui-input-row-bottom-lar label~textarea{
+				border: 1px solid rgba(210,207,200,.8);
+				width: 68%;
+				float: left;
+			}
+			/* 输入框样式和间距修改 弹出层信息栏*/
+			.mui-input-row-toast label{
+				width: 35%;
+				font-weight: 600;
+				text-align: left;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-toast label~input, .mui-input-row-toast label~select, .mui-input-row-toast label~textarea{
+				border: 0;
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 60%;
+				float: left;
+			}
+			.mui-input-row-toast-in label{
+				width: 35%;
+				font-weight: 600;
+				text-align: left;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-toast-in label~input, .mui-input-row-toast-in label~select, .mui-input-row-toast-in label~textarea{
+				width: 60%;
+				float: left;
+			}
+			/* 表单间距 */
+			.mui-input-row{
+				margin-top: 8px;
+			}
+			
+			/* 被访人信息 slider 样式修改 */
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+				border-bottom: 0;
+			}
+			.visitor-bottom{
+				width: 220px !important;
+				font-weight: 600;
+			}
+			.mui-input-row-bottom,.mui-input-row-bottom-lar{
+				margin-top: 8px;
+				padding-right: 3px;
+			}
+			/* 自定义按钮样式 */
+			.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+				padding: 13px 10px;
+				width: 60px;
+				height: 45px;
+			}
+			.mui-btn-outlined-lg{
+				padding: 5px 10px;
+				width: 140px;
+				margin: 0 10px;
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 2;
+			}
+			
+			/* 分页样式 */
+			.layui-laypage a, .layui-laypage span {
+			    height: 42px !important;
+				padding: 0 18px;
+			    line-height: 42px !important;
+			}
+			
+			
+			/* 表头样式 */
+			.layui-table thead tr{
+				background-color: #3893D9;
+				color: #FAFAFA;
+			}
+			th .layui-table-cell {
+				height: 30px;
+				padding: 2px 5px;
+			}
+			.layui-table-cell {
+				height: 56px;
+				padding: 16px 5px;
+			}
+			.layui-table-view .layui-table th{
+				padding:1px 0;
+			}
+			.layui-table-view .layui-table td{
+				padding:0px 0 ;
+			}
+			
+			.layui-table-view .layui-table td{
+				
+			}
+			
+			/* 弹出层 卡片样式修改 */
+			.mui-card-header.mui-h4{
+				border-top: 1px solid rgba(218,218,221,.9);
+			}
+			.mui-card-content-inner {
+			    padding: 10px;
+			}
+			.layui-layer-btn.layui-layer-btn-c{
+				background-color: #FFFFFF;
+			}
+			
+			/* 搜索栏 日期控件样式修改 */
+			
+			.layui-laydate .layui-this {
+			    background-color: #3893D9 !important;
+			    color: #fff !important;
+			}
+			
+			.layui-laydate-footer {
+			    height: 60px !important;
+			}
+			
+			.layui-laydate-footer span {
+			    height: 38px !important;
+			    line-height: 38px !important;
+			    padding: 0px 15px !important;
+			}
+			.layui-laydate-header{
+				background-color: #FAFAFA !important;
+			}
+			.laydate-theme-molv .layui-laydate-header i, .laydate-theme-molv .layui-laydate-header span{
+				color: #383838 !important;
+			}
+		</style> 
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" id="tempHead">
+			<h1 v-cloak class="mui-title" >{{headTitle}}</h1>
+			<a @click="quit()" class="mui-pull-right" style="font-size: 1rem;margin-top: 0px;">注销</a>
+		</header>
+		<div v-cloak class="mui-content" style="margin-top: 0px;background: white;" id="contentData">
+			<div class="mui-row">
+				<div class="mui-col-sm-1">
+						<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted  mui-segmented-control-tab mui-segmented-control-inverted-tab">
+							<div class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('in')" class="mui-control-item mui-active" href="#item1"><img :src="inActive?'../../img/home/ic_sign_in_active.png':'../../img/home/ic_sign_in.png'" style="width: 45px;height: 45px;"><p>来访登记</p></a></div>
+							<div class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('select')" class="mui-control-item" href="#item2"><img :src="selectActive?'../../img/home/ic_sign_query_active.png':'../../img/home/ic_sign_query.png'" style="width: 45px;height: 45px;"><p>访客查询</p></a></div>
+							<div class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('out')" class="mui-control-item" href="#item3"><img :src="outActive?'../../img/home/ic_sign_off_active.png':'../../img/home/ic_sign_off.png'" style="width: 45px;height: 45px;"><p>访客签离</p></a></div>
+						</div>
+				</div>
+				<div class="mui-col-sm-11">
+					<div>
+						<div id="item1" class="mui-control-content mui-active">
+							<h4 class="mui-h4">访客信息</h4>
+							<div class="line"></div>
+							<div class="mui-row" style="margin-top: 1rem;">
+								<div class="mui-col-sm-2">
+									<img v-if="IDCardImg" class="card-img" src="../../img/home/idcard.jpg">
+									<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
+									<div class="scan" @tap="scan()">读证</div>
+								</div>
+								<div class="mui-col-sm-10" style="margin-left: -25px;margin-top: -10px;">
+									<div class="mui-row" >
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label><span style="color: #D26A60;">*</span>姓名：</label>
+												<input type="text" placeholder="请输入姓名">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label><span style="color: #D26A60;">*</span>访问事由：</label>
+												<input type="text" placeholder="输入或选择" style="width: 57%;">
+												<button id="visitor_for" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>性别：</label>
+												<input type="text" placeholder="请选择">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>手机：</label>
+												<input type="text" placeholder="请输入手机号">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>出生日期：</label>
+												<input type="text" placeholder="请输入出生日期">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label><span style="color: #D26A60;">*</span>随行人数：</label>
+												<input type="text" placeholder="输入或选择" style="width: 57%;">
+												<button id="visitor_counter" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>证件类型：</label>
+												<input type="text" placeholder="输入或选择" style="width: 57%;">
+												<button id="certificate_type" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>随行物品：</label>
+												<input type="text" placeholder="请输入随行物品">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>证件号码：</label>
+												<input type="text" placeholder="请输入证件号码">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>来访单位：</label>
+												<input type="text" placeholder="请输入来访单位">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>地址：</label>
+												<input type="text" placeholder="请输入地址">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>车牌号：</label>
+												<input type="text" placeholder="请输入车牌号">
+											</div>
+										</div>
+										<div class="mui-col-sm-6">
+											<div class="mui-input-row">
+												<label>备注：</label>
+												<input  type="text" placeholder="请输入备注">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="margin-top: 1.5rem;"></div>
+							<h4 class="mui-h4">被访人信息</h4>
+							<div class="line"></div>
+							<div class="mui-row" style="margin-top: 1rem;">
+								<div id="slider" class="mui-slider">
+									<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted visitor-bottom">
+											<a class="mui-control-item mui-active" href="#item1mobile">教职工</a>
+											<a class="mui-control-item" href="#item2mobile">学生</a>
+									</div>
+									<div class="mui-slider-group">
+										<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+											<div class="mui-row">
+												<div class="mui-col-sm-3">
+													<div class="mui-input-row mui-input-row-bottom">
+														<label><span style="color: #D26A60;">*</span>部门：</label>
+														<input id="tec_dpt" type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+													</div>
+												</div>
+												<div class="mui-col-sm-3">
+													<div class="mui-input-row mui-input-row-bottom">
+														<label><span style="color: #D26A60;">*</span>姓名：</label>
+														<input id="tec_name" type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="item2mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-row">
+												<div class="mui-col-sm-3">
+													<div class="mui-input-row mui-input-row-bottom">
+														<label><span style="color: #D26A60;">*</span>年级：</label>
+														<input id="stu_grd" type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+													</div>
+												</div>
+												<div class="mui-col-sm-3">
+													<div class="mui-input-row mui-input-row-bottom">
+														<label><span style="color: #D26A60;">*</span>班级：</label>
+														<input id="stu_cls"  type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+													</div>
+												</div>
+												<div class="mui-col-sm-3">
+													<div class="mui-input-row mui-input-row-bottom">
+														<label><span style="color: #D26A60;">*</span>姓名：</label>
+														<input  id="stu_name"  type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+													</div>
+												</div>
+												<div class="mui-col-sm-3">
+													<div class="mui-input-row mui-input-row-bottom-lar">
+														<label><span style="color: #D26A60;">*</span>班主任：</label>
+														<input  type="text" placeholder="选择学生后展示" readonly="true">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="mui-row" style="margin-top: 2rem;text-align: center;">
+								<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-btn-outlined-lg">
+									保存
+								</button>
+								<button type="button" @tap="printPage" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">
+									保存并打印
+								</button>
+								<button type="button" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
+									取消
+								</button>
+							</div>
+						</div>
+						<div id="item2" class="mui-control-content">
+							 <div class="mui-row">
+								<div class="mui-input-row mui-input-row-bottom">
+									<label style="width: 80px;">关键字：</label>
+									<input style="width: 120px;margin-right: 5px;" v-model="visitor_name" type="text" placeholder="访客查询">
+									<label style="width: 90px;">是否离开：</label>
+									<input id="leave_flag" style="width: 120px;margin-right: 5px;" v-model="leave_flag"  type="text" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+									<label style="width: 80px;">被访人：</label>
+									<input id="interviewee_type" style="width: 120px;margin-right: 5px;" v-model="interviewee_type"  type="text" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+									<label style="width: 90px;">进入时间：</label>
+									<input id="begin_time_in" style="width: 240px;margin-right: 5px;" v-model="times" type="text" placeholder="点击选择时间范围" readonly="true"><span class="span-icon" style="margin-left: -30px;"><i class="layui-icon layui-icon-date layui-font-18"></i></span>
+									<!-- <label style="width: 40px;">至：</label>
+									<input style="width: 120px;margin-right: 5px;" type="text" placeholder="普通输入框"> -->
+									<button @tap="visitor_select()" type="button" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 14px;">查询</button>
+								</div>
+							 </div>
+							 <div class="mui-row" style="margin-right: 15px;margin-bottom: 0px;">
+							 	 <table class="layui-hide" id="queryT" lay-filter="queryTable"></table>
+								 <div id="pageQuery" style="text-align: right;margin-top: -5px"></div>
+							 </div>
+						</div>
+						<div id="item3" class="mui-control-content">
+							<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 start-->
+							<div id='layToast' class="mui-row" style="display: none;">
+								 <div class="mui-row" style="padding:3px">
+								 	<div class="mui-col-sm-8" >
+										<div class="mui-card">
+											<div class="mui-card-header mui-h4">访客信息</div>
+											<div class="line"></div>
+											<div class="mui-card-content">
+												<div class="mui-card-content-inner">
+													<div class="mui-row">
+														<div class="mui-col-sm-4">
+															<img v-if="IDCardImg" class="card-img" src="../../img/home/idcard.jpg">
+															<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
+														</div>
+														<div class="mui-col-sm-8">
+															<div class="mui-row">
+																<div class="mui-col-sm-12">
+																	<div class="mui-input-row mui-input-row-toast">
+																		<label>姓名：</label>
+																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																	</div>
+																</div>
+																<div class="mui-col-sm-12">
+																	<div class="mui-input-row mui-input-row-toast">
+																		<label>性别：</label>
+																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																	</div>
+																</div>
+																<div class="mui-col-sm-12">
+																	<div class="mui-input-row mui-input-row-toast">
+																		<label>证件类型：</label>
+																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																	</div>
+																</div>
+																<div class="mui-col-sm-12">
+																	<div class="mui-input-row mui-input-row-toast">
+																		<label>证件号码：</label>
+																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+								 	</div>
+								 	<div class="mui-col-sm-4">
+										<div class="mui-card">
+											<div class="mui-card-header mui-h4">被访人信息</div>
+											<div class="line"></div>
+											<div class="mui-card-content">
+												<div class="mui-card-content-inner">
+													<div class="mui-row">
+														<div class="mui-col-sm-12">
+															<div class="mui-input-row mui-input-row-toast">
+																<label>被访人：</label>
+																<input  type="text" placeholder="暂无信息" disabled="true">
+															</div>
+														</div>
+														<div class="mui-col-sm-12">
+															<div class="mui-input-row mui-input-row-toast">
+																<label>被访部门：</label>
+																<input  type="text" placeholder="暂无信息" disabled="true">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+								 	</div>
+									<div class="mui-col-sm-12">
+										<div class="mui-card">
+											<div class="mui-card-content" style="border-top: 1px solid rgba(218,218,221,.9);">
+												<div class="mui-card-content-inner">
+													<div class="mui-row">
+														<div class="mui-col-sm-4">
+															<div class="mui-input-row  mui-input-row-toast">
+																<label>进入时间：</label>
+																<input  type="text" disabled="true">
+															</div>
+														</div>
+														<div class="mui-col-sm-4">
+															<div class="mui-input-row  mui-input-row-toast-in">
+																<label>离开时间：</label>
+																<input id="laytoast_leavetime" type="text" placeholder="请选择离开时间" readonly="true"><span class="span-icon" style="margin-left: -30px;"><i class="layui-icon layui-icon-date layui-font-18"></i></span>
+															</div>
+														</div>
+														<div class="mui-col-sm-4">
+															<div class="mui-input-row mui-input-row-toast">
+																<label>登记时间：</label>
+																<input type="text" disabled="true">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-sm-12" style="margin-top: 2rem;text-align: center;">
+										<button type="button" @tap="layerYes()" class="mui-btn mui-btn-danger  mui-btn-outlined-lg">
+											确认签离
+										</button>
+										<button type="button" @tap="layerNo()" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
+											取消
+										</button>
+									</div>
+								 </div>
+							</div>
+							<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 end-->
+							<div class="mui-row">
+									<div class="mui-input-row mui-input-row-bottom">
+										<label style="width: 80px;">关键字：</label>
+										<input style="width: 120px;margin-right: 5px;" type="text" placeholder="访客姓名">
+										<label style="width: 80px;">被访人：</label>
+										<input id="interviewee_type_out" style="width: 120px;margin-right: 5px;" v-model="interviewee_type_out" type="text" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+										<label style="width: 90px;">进入时间：</label>
+										<input id="begin_time_ino" style="width: 240px;margin-right: 5px;" type="text" placeholder="点击选择时间范围" readonly="true"><span class="span-icon" style="margin-left: -30px;"><i class="layui-icon layui-icon-date layui-font-18"></i></span>
+										<!-- <label style="width: 40px;">至：</label>
+										<input style="width: 120px;margin-right: 5px;" type="text" placeholder="普通输入框"> -->
+										<button type="button" class="mui-btn" style="background-color: #3893D9;border: 1px solid #3893D9;font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 14px;">读卡</button>
+										<button @tap="getQRCode()" type="button" class="mui-btn mui-btn-success" style="font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 14px;">扫码</button>
+										<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 14px;">查询</button>
+									</div>
+							</div>
+							<div class="mui-row" style="margin-right: 15px;margin-bottom: 0px;">
+								<table class="layui-hide" id="queryO" lay-filter="outTable"></table>
+								<div id="pageOut" style="text-align: right;margin-top: -5px;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	 
+		<script src="../../js/utils/storageKeyName.js"></script>
+		<script src="../../js/utils/mui.min.js"></script>
+		<script src="../../js/utils/vue.js"></script>
+		<script src="../../js/utils/store.js"></script>
+		<script src="../../js/utils/events.js"></script>
+		<script src="../../js/utils/vconsole.min.js"></script>
+		<script src="../../js/utils/utils.js"></script>
+		<!-- <script src="../../js/libs/jquery.js"></script> -->
+		<script src="../../js/utils/usbPrinter.js"></script>
+		<script src="../../js/utils/qrCode.js"></script>
+		<script src="../../js/utils/pushPermission.js"></script>
+		<script src="../../js/layui/layui.js"></script>
+		<script type="text/html" id="queryBar">
+			<div class="mui-btn mui-btn-outlined" lay-event="detail" style="margin-right: 5px;margin-top: -10px;">详情</div>
+			<div class="mui-btn mui-btn-success" lay-event="print" style="margin-top: -10px">打印</div>
+		</script>
+		<script type="text/html" id="outBar">
+			<div class="mui-btn mui-btn-danger" lay-event="singOut" style="margin-top: -10px">签离</div>
+		</script>
+		<script type="text/javascript" charset="utf-8">
+			
+			
+			mui.init();
+			var personal = store.get(window.storageKeyName.PERSONALINFO);
+			
+			var tempHead = new Vue({
+				el: "#tempHead",
+				data: {
+					headTitle: '访客系统',
+				},
+				methods:{
+					quit:function(){
+						// plus.runtime.quit();
+						var btnArray = ['否', '是'];
+						mui.confirm('注销登录后将跳转至登录页面', ' ', btnArray, function(e) {
+							if (e.index == 1) {
+								quit();
+							}
+						},'div')
+					}
+				}
+			});
+			
+			var contentData = new Vue({
+				el: "#contentData",
+				data: {
+					inActive:true,//来访登记激活
+					selectActive:false,//来访查询激活
+					outActive:false,//访客签离激活
+					type:"in",//默认显示的tab类型
+					IDCardImg:'1',//身份证照片
+					layer:'',//layer 弹出层对象
+					// 访客查询 查询栏变量
+					leave_flag:'全部',//是否离开
+					interviewee_type:'全部',//访问类型
+					visitor_name:'',//访客姓名关键字
+					times:'',//进入时间 范围
+					// 访客签离 查询栏变量
+					interviewee_type_out:'全部',//访问类型
+				},
+				methods:{
+					tabClick:function(type){//tab按钮点击
+						if(this.type===type){}else{
+							this.type=type
+							this.inActive=false
+							this.selectActive=false
+							this.outActive=false
+							if(type==='in'){
+								this.inActive=true
+							}else if(type==='select'){
+								this.selectActive=true
+								getQueryData();
+							}else if(type==='out'){
+								this.outActive=true
+								getOutData();
+							}
+						}
+					},
+					printPage:function(){//访客登记  保存并打印按钮
+						var visitorID="刘帅：202166666"
+						plus.usbPrinter.printPage(function(args){
+							console.log(args);
+						},function(args){
+							console.log(args);
+						},visitorID)
+					},
+					scan:function(){//读证按钮点击
+						mui.toast("TODO 原生读卡")
+					},
+					layerYes:function(){//弹出层确定按钮
+						// layer.close(index);
+						mui.toast('TODO 协议签离')
+					},
+					layerNo:function(){//弹出层取消按钮
+						layer.close(this.index);
+					},
+					visitor_select:function(){
+						mui.toast("666："+this.times)
+					},
+					getQRCode:function(){//访客签离 获取二维码内容
+					    events.showWaiting('请稍后')
+						plus.qrCode.getQRCode(function(args){
+							console.log("args: " + JSON.stringify(args));
+							var str=args[0];
+							var json=JSON.parse(str);
+							if(json.msg){
+								var Intent = plus.android.importClass("android.content.Intent");
+								var intent = new Intent();
+								intent.setClassName("com.telpo.tps550.api", "com.telpo.tps550.api.barcode.Capture");
+								var main = plus.android.runtimeMainActivity();
+								main.startActivityForResult(intent,0x124);
+								main.onActivityResult = function(requestCode, resultCode, data) {
+									if(requestCode == 0x124) {
+										if(resultCode == 0) {
+											plus.qrCode.playBeep();
+											var qrcode = data.getStringExtra("qrCode");
+											console.log("扫描结果："+qrcode);
+											setTimeout(function(){
+												events.closeWaiting()
+											},1000)
+										}
+									}
+								}
+							}
+						},function(args){})
+					}
+				}
+			});
+			
+			mui.plusReady(function() {
+				var tempMenu = store.get(window.storageKeyName.MENULIST);
+				var personal = store.get(window.storageKeyName.PERSONALINFO);
+				mui('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0009
+				});
+				//安卓的连续点击两次退出程序
+				var backButtonPress = 0;
+				//重写返回键
+				mui.back = function(event) {
+					backButtonPress++;
+					if (backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
+				initLayuiFunc();
+			});
+			
+			//初始化layui相关的下拉菜单
+			function initLayuiFunc(){
+				var visitors=[]
+				for (var i = 1; i <= 10; i++) {
+					var vobj={
+						title:i+' 人',
+						id:i
+					}
+					visitors.push(vobj)
+				}
+				layui.use(['dropdown','laydate'], function(){
+				  // 来访登记
+				  var visitor_counter = layui.dropdown //访问人数
+				  var visitor_for = layui.dropdown //访问事由
+				  var certificate_type = layui.dropdown //证件类型
+				  var tec_dpt = layui.dropdown //部门
+				  var tec_name = layui.dropdown //教师姓名
+				  var stu_grd = layui.dropdown //年级
+				  var stu_cls = layui.dropdown //班级
+				  var stu_name = layui.dropdown //学生姓名
+				  visitor_counter.render({
+				    elem: '#visitor_counter' //可绑定在任意元素中，此处以上述按钮为例
+					// ,style:'width:28%'
+				    ,data:visitors
+				    ,id: 'visitor_counter'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  visitor_for.render({
+				    elem: '#visitor_for'//可绑定在任意元素中，此处以上述按钮为例
+				  	// ,style:'width:28%'
+				    ,data:[{title:'公务',id:'公务'},{title:'探亲',id:'探亲'},{title:'其他',id:'其他'}]
+				    ,id: 'visitor_for'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  certificate_type.render({
+				    elem: '#certificate_type'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'身份证',id:'身份证'},{title:'学生证',id:'学生证'},{title:'护照',id:'护照'}]
+				    ,id: 'certificate_type'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  tec_dpt.render({
+				    elem: '#tec_dpt'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'部门1',id:'10000'},{title:'部门2',id:'10001'},{title:'部门3',id:'10003'}]
+				    ,id: 'tec_dpt'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  tec_name.render({
+				    elem: '#tec_name'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'教师1',id:'身份证'},{title:'教师2',id:'学生证'},{title:'教师3',id:'护照'}]
+				    ,id: 'tec_name'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  stu_grd.render({
+				    elem: '#stu_grd'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'一年级',id:'10000'},{title:'二年级',id:'10001'},{title:'三年级',id:'10003'}]
+				    ,id: 'stu_grd'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  stu_cls.render({
+				    elem: '#stu_cls'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'1601班',id:'身份证'},{title:'1602班',id:'学生证'},{title:'1603班',id:'护照'}]
+				    ,id: 'stu_cls'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  stu_name.render({
+				    elem: '#stu_name'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'学生1',id:'身份证'},{title:'学生2',id:'学生证'},{title:'学生3',id:'护照'}]
+				    ,id: 'stu_name'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  
+				  // 访客查询
+				  var leave_flag = layui.dropdown //是否离开
+				  var interviewee_type = layui.dropdown //被访人
+				  var begin_time_in = layui.laydate;//进入时间
+				  leave_flag.render({
+				    elem: '#leave_flag'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'全部',id:''},{title:'未签离',id:0},{title:'已签离',id:1}]
+				    ,id: 'leave_flag'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  interviewee_type.render({
+				    elem: '#interviewee_type'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}]
+				    ,id: 'interviewee_type'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  begin_time_in.render({
+				      elem: '#begin_time_in'
+				      ,range: '至'
+					  ,theme: '#3893D9'
+					 ,done: function(value, date, endDate){
+						 contentData.times=value
+					     console.log(value); //得到日期生成的值，如：2017-08-18
+					     console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+					     console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					   }
+				    });
+				  
+				  // 访客签离
+				  var interviewee_type_out = layui.dropdown//被访人
+				  var begin_time_ino = layui.laydate;//进入时间
+				  var laytoast_leavetime=layui.laydate;//弹出层 离开时间
+				  interviewee_type_out.render({
+				    elem: '#interviewee_type_out'//可绑定在任意元素中，此处以上述按钮为例
+				    ,data:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}] 
+				    ,id: 'interviewee_type_out'
+				    ,click: function(obj){
+				      console.log(JSON.stringify(obj));
+				    }
+				  });
+				  begin_time_ino.render({
+				      elem: '#begin_time_ino'
+				       ,range: '至'
+					   ,theme: '#3893D9'
+					   ,done: function(value, date, endDate){
+					       console.log(value); //得到日期生成的值，如：2017-08-18
+					       console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+					       console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					     }
+				    });
+					
+					laytoast_leavetime.render({
+				      elem: '#laytoast_leavetime'
+				       ,type: 'datetime'
+					   ,theme: '#3893D9'
+					   ,done: function(value, date, endDate){
+					       console.log(value); //得到日期生成的值，如：2017-08-18
+					       console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+					       console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					     }
+				    });
+				});
+			}
+			
+			//获取表格数据——访客查询
+			function getQueryData(){
+				layui.use(['laypage','table'], function(){
+				  var laypage = layui.laypage;
+				  var table = layui.table;
+				  initQueryTable(table,'',[]);
+				  //执行一个laypage实例
+				  laypage.render({
+				    elem: 'pageQuery' //注意，这里的 test1 是 ID，不用加 # 号
+				    ,count: 150  //TODO
+					,limit:8
+					,theme: '#3893D9'
+					,first: '首页'
+					,last: '尾页'
+					 ,jump: function(obj, first){
+						 console.log(first); 
+					    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+					    console.log(obj.limit); //得到每页显示的条数
+						events.showWaiting()
+						//TODO 模拟请求数据
+						setTimeout(function(){
+							var da=[];
+							var datassss3=[{"id":"张三三1","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
+							var datassss2=[{"id":"张三三2","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
+							var datassss1=[{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
+							if(obj.curr==1){
+								da=datassss1
+							}
+							if(obj.curr==2){
+								da=datassss2
+							}
+							if(obj.curr==3){
+								da=datassss3
+							}
+							initQueryTable(table,'1',da);
+						},100)
+					  }
+				  });
+				});
+			}
+			//初始化表格——访客查询
+			function initQueryTable(table,ty,da){
+				var don=''
+				if(ty){//ty为空，代表初始化表格，不为空的任意字符串，代表重载表格加载数据
+					don=function(res, curr, count){
+						events.closeWaiting();
+					}
+				}
+				table.render({
+					elem: '#queryT'
+					,height: 'full-203' 
+					,cellMinWidth:110
+					,limit:8
+					,cols: [[ //表头
+					  {align: 'center',field: 'id', title: '姓名', rowspan: 2}
+					  ,{align: 'center',field: 'username', title: '随行人数',  rowspan: 2}
+					  ,{field: 'sex',width:200, title: '访问事由', rowspan: 2 }
+					  ,{align: 'center', title: '被访教职工', colspan:2}
+					  ,{align: 'center', title: '被访学生', colspan:3}
+					  ,{align: 'center',field: 'experience',width:200, title: '进入时间', rowspan: 2 }
+					  ,{align: 'center',field: 'classify',width:200, title: '签离时间', rowspan: 2}
+					  ,{fixed: 'right',align: 'center',field: 'score', title: '是否离开',  rowspan: 2}
+					  ,{fixed: 'right',align: 'center',width:140, title: '操作',  rowspan: 2,toolbar: '#queryBar'}
+					  ]
+					  ,[
+					   {align: 'center',field: 'city', title: '部门',}
+					   ,{align: 'center',field: 'sign', title: '姓名',}
+					   ,{align: 'center',field: 'experience', title: '年级班级',}
+					   ,{align: 'center',field: 'classify', title: '学生',}
+					   ,{align: 'center',field: 'wealth', title: '班主任',}
+					   ]]
+					   ,done:don
+					,data:da
+				  });
+				  table.on('tool(queryTable)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+				    var data = obj.data; //获得当前行数据
+				    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+				    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+				   
+				    if(layEvent === 'detail'){ //查看
+						utils.mOpenWithData("./queryVisitorDetail.html", {});
+				    } else if(layEvent === 'print'){ //打印
+				      layer.confirm('真的打印行么', function(index){
+				        // obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+				        // layer.close(index);
+				        //向服务端发送删除指令
+				      });
+				    }
+				  });
+			}
+			
+			//获取表格数据——访客签离
+			function getOutData(){
+				layui.use(['laypage','table'], function(){
+				  var laypage = layui.laypage;
+				  var table = layui.table;
+				  initOutTable(table,'',[]);
+				  //执行一个laypage实例
+				  laypage.render({
+				    elem: 'pageOut' //注意，这里的 test1 是 ID，不用加 # 号
+				    ,count: 150  //TODO
+					,limit:8
+					,theme: '#3893D9'
+					,first: '首页'
+					,last: '尾页'
+					 ,jump: function(obj, first){
+						 // console.log(first); 
+					  //   console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+					  //   console.log(obj.limit); //得到每页显示的条数
+						events.showWaiting()
+						//TODO 模拟请求数据
+						setTimeout(function(){
+							var da=[];
+							var datassss3=[{"id":"张三三1","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
+							var datassss2=[{"id":"张三三2","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
+							var datassss1=[{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
+							if(obj.curr==1){
+								da=datassss1
+							}
+							if(obj.curr==2){
+								da=datassss2
+							}
+							if(obj.curr==3){
+								da=datassss3
+							}
+							initOutTable(table,'1',da);
+						},100)
+					  }
+				  });
+				});
+			}
+			
+			//初始化表格——访客签离
+			function initOutTable(table,ty,da){
+				var don=''
+				if(ty){//ty为空，代表初始化表格，不为空的任意字符串，代表重载表格加载数据
+					don=function(res, curr, count){
+						events.closeWaiting();
+						}
+				}
+				table.render({
+					elem: '#queryO'
+					,height: 'full-203' 
+					,cellMinWidth:110
+					,limit:8
+					,cols: [[ //表头
+					  {align: 'center',field: 'id', title: '姓名', rowspan: 2}
+					  ,{align: 'center',field: 'username', title: '随行人数',  rowspan: 2}
+					  ,{field: 'sex',width:200, title: '访问事由', rowspan: 2 }
+					  ,{align: 'center', title: '被访教职工', colspan:2}
+					  ,{align: 'center', title: '被访学生', colspan:3}
+					  ,{align: 'center',field: 'experience',width:200, title: '进入时间', rowspan: 2 }
+					  ,{align: 'center',field: 'classify',width:200, title: '签离时间', rowspan: 2}
+					  ,{fixed: 'right',align: 'center',field: 'score', title: '是否离开',  rowspan: 2}
+					  ,{fixed: 'right',align: 'center',width:90, title: '操作',  rowspan: 2,toolbar: '#outBar'}
+					  ]
+					  ,[
+					   {align: 'center',field: 'city', title: '部门',}
+					   ,{align: 'center',field: 'sign', title: '姓名',}
+					   ,{align: 'center',field: 'experience', title: '年级班级',}
+					   ,{align: 'center',field: 'classify', title: '学生',}
+					   ,{align: 'center',field: 'wealth', title: '班主任',}
+					   ]]
+					   ,done:don
+					,data:da
+				  });
+				  table.on('tool(outTable)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+				    var data = obj.data; //获得当前行数据
+				    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+				    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+				   
+				    if(layEvent === 'singOut'){ //签离
+				      signOut();
+				    }
+				  });
+			}
+			
+			//签离信息弹出层
+			function signOut(){
+				layui.use(['jquery','layer'],function(){
+					var $=layui.$
+					contentData.index=layer.open({
+						type: 1
+						,title: false //不显示标题栏
+						,closeBtn: false
+						,area: ['1000px','550px']
+						,shade: 0.7
+						,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+						,btn: []
+						,content: $('#layToast')
+						,yes: function(index,layero){
+						   // layer.close(index); 
+						  mui.toast('TODO 协议签离')
+						}
+					  });
+				});
+			}
+			
+			//注销登录
+			function quit(){
+				store.remove(window.storageKeyName.PERSONALINFO);
+				//获取所有已打开的webview 实例————重新打开login.html————循环关闭页面
+				plus.webview.open('../../html/login/loginIndex.html', '../../html/login/loginIndex.html', {
+					statusbar: {
+						background: "#3893D9"
+					}
+				},"fade-in",10);
+				setTimeout(function(){
+					var curr = plus.webview.currentWebview();
+					var wvs = plus.webview.all();
+					try{
+						if(wvs){
+							for (var i = 0, len = wvs.length; i < len; i++) {
+								//关闭除login 页面外的其他页面
+								if (wvs[i].getURL()!=null && wvs[i].getURL()!=undefined){
+									if(wvs[i].getURL().indexOf('loginIndex.html')!=-1) {
+										continue;
+									}else{
+										plus.webview.close(wvs[i]);
+									}
+								}
+							}
+						}
+					}catch(e){
+						console.log("这有一个退出异常！！！！！！！！！！: " + JSON.stringify(e));
+					} 
+					curr.close();
+				},600)
+			}
+		</script>
+	</body>
+</html>
