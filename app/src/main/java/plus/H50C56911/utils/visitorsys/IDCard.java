@@ -49,6 +49,7 @@ public class IDCard extends StandardFeature {
     public void readIDCard(IWebview pWebview, JSONArray array) throws JSONException, JSONException {
         CallBackID = array.optString(0);
         activity = pWebview.getActivity();
+        mIdcard = new IdCard(pWebview.getContext());
         if (checkPackage("com.telpo.tps550.api")) {
 //            mThread = new Thread(new Runnable() {
 //                @Override

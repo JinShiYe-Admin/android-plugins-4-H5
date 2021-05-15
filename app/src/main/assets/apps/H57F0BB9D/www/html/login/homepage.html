@@ -686,11 +686,9 @@
 					},
 					scan:function(){//读证按钮点击
 						plus.idCard.readIDCard(function(args){
-							console.log(args);
 							var jsonObj=args[0];
 							var idcardImg=jsonObj.bitmap;
 							contentData.IDCardImg="data:image/jpeg;base64,"+idcardImg;
-							console.log("data:image/jpeg;base64,"+idcardImg);
 							plus.idCard.playBeep();
 						},function(args){
 							console.log(args);
@@ -708,6 +706,7 @@
 					},
 					getQRCode:function(){//访客签离 获取二维码内容
 					    events.showWaiting('请稍后')
+						setTimeout(function(){events.closeWaiting();},4000)
 						plus.qrCode.getQRCode(function(args){
 							console.log("args: " + JSON.stringify(args));
 							var str=args[0];
@@ -724,14 +723,11 @@
 											plus.qrCode.playBeep();
 											var qrcode = data.getStringExtra("qrCode");
 											console.log("扫描结果："+qrcode);
-											setTimeout(function(){
-												events.closeWaiting()
-											},1000)
 										}
 									}
 								}
 							}
-						},function(args){})
+						},function(args){events.closeWaiting()})
 					}
 				}
 			});
