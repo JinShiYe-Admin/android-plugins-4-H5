@@ -77,8 +77,7 @@
 <!--		<feature name="VideoPlayer" value="io.dcloud.media.MediaFeatureImpl"/>-->
 		<feature name="usbPrinterUtil" value="plus.H50C56911.utils.visitorsys.USBPrinter"/>
 		<feature name="QRCodeUtil" value="plus.H50C56911.utils.visitorsys.QRCodeUtils"/>
-
-
+		<feature name="idCardReaderUtil" value="plus.H50C56911.utils.visitorsys.IDCard"/>
 	</features>
 
 	<services>

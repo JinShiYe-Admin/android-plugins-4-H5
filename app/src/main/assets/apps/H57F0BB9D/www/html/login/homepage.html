@@ -282,7 +282,7 @@
 							<div class="line"></div>
 							<div class="mui-row" style="margin-top: 1rem;">
 								<div class="mui-col-sm-2">
-									<img v-if="IDCardImg" class="card-img" src="../../img/home/idcard.jpg">
+									<img v-if="IDCardImg" class="card-img" :src=IDCardImg>
 									<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
 									<div class="scan" @tap="scan()">读证</div>
 								</div>
@@ -607,6 +607,7 @@
 		<!-- <script src="../../js/libs/jquery.js"></script> -->
 		<script src="../../js/utils/usbPrinter.js"></script>
 		<script src="../../js/utils/qrCode.js"></script>
+		<script src="../../js/utils/idCardReader.js"></script>
 		<script src="../../js/utils/pushPermission.js"></script>
 		<script src="../../js/layui/layui.js"></script>
 		<script type="text/html" id="queryBar">
@@ -647,7 +648,7 @@
 					selectActive:false,//来访查询激活
 					outActive:false,//访客签离激活
 					type:"in",//默认显示的tab类型
-					IDCardImg:'1',//身份证照片
+					IDCardImg:'',//身份证照片
 					layer:'',//layer 弹出层对象
 					// 访客查询 查询栏变量
 					leave_flag:'全部',//是否离开
@@ -676,7 +677,7 @@
 						}
 					},
 					printPage:function(){//访客登记  保存并打印按钮
-						var visitorID="刘帅：202166666"
+						var visitorID="访问单号：202166666789102235"
 						plus.usbPrinter.printPage(function(args){
 							console.log(args);
 						},function(args){
@@ -684,7 +685,16 @@
 						},visitorID)
 					},
 					scan:function(){//读证按钮点击
-						mui.toast("TODO 原生读卡")
+						plus.idCard.readIDCard(function(args){
+							console.log(args);
+							var jsonObj=args[0];
+							var idcardImg=jsonObj.bitmap;
+							contentData.IDCardImg="data:image/jpeg;base64,"+idcardImg;
+							console.log("data:image/jpeg;base64,"+idcardImg);
+							plus.idCard.playBeep();
+						},function(args){
+							console.log(args);
+						})
 					},
 					layerYes:function(){//弹出层确定按钮
 						// layer.close(index);

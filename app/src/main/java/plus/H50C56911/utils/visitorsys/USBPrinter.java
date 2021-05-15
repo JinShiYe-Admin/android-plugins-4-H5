@@ -223,7 +223,13 @@ public class USBPrinter extends StandardFeature {
     @Override
     public void onStop() {
         super.onStop();
-        bThread.interrupt();
+        try {
+            if(bThread!=null && (bThread.isAlive())){
+                bThread.interrupt();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
