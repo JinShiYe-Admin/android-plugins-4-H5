@@ -2,17 +2,24 @@ package plus.H50C56911.utils.visitorsys;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Base64;
 import android.widget.Toast;
 
+import com.common.pos.api.util.PosUtil;
 import com.google.zxing.other.BeepManager;
+import com.telpo.tps550.api.TelpoException;
+import com.telpo.tps550.api.fingerprint.FingerPrint;
 import com.telpo.tps550.api.idcard.IdCard;
 import com.telpo.tps550.api.idcard.IdentityMsg;
+import com.telpo.tps550.api.util.ShellUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,77 +44,123 @@ import plus.H50C56911.R;
  * Modify by：
  */
 public class IDCard extends StandardFeature {
-    private Activity activity;
-    IdentityMsg info;
+    Activity activity;
     IdCard mIdcard;
-    Bitmap bitmap;
-    byte[] image;
-    private String cardInfo = "";
     String CallBackID = null;
+    Context context;
+    IWebview pWebView;
+    BeepManager mBeepManager;
     Thread mThread;
+    public void onStart(Context pContext, Bundle pSavedInstanceState, String[] pRuntimeArgs) {
+        try{
+            powerOn();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void readIDCard(IWebview pWebview, JSONArray array) throws JSONException, JSONException {
         CallBackID = array.optString(0);
         activity = pWebview.getActivity();
-        mIdcard = new IdCard(pWebview.getContext());
-        if (checkPackage("com.telpo.tps550.api")) {
-//            mThread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        info = mIdcard.checkIdCardOverseas();
-//                        try {
-//                            image = mIdcard.getIdCardImageOverseas(info);
-//                            if (image.length == 2048 || image.length == 1024) {
-//                                bitmap = mIdcard.decodeIdCardImageOverseas(image);
-//                            }
-//                            cardInfo = "姓名：" + info.getName() + "\n\n" + "性别："
-//                                    + info.getSex() + "\n\n" + "出生日期：" + info.getBorn() + "\n\n"
-//                                    + "国籍或所在地区代码：" + "有效期限："
-//                                    + info.getPeriod() + "\n\n" + "签发机关：" + info.getApartment()
-//                                    + "\n\n" + "身份证号码：" + info.getNo() + "\n\n";
-//                            JSONArray newArray = new JSONArray();
-//                            String json = "";
-//                            json = "{\"code\":0,\"msg\":" + true + "}";
-//                            newArray.put(json);
-//                            JSUtil.execCallback(pWebview, CallBackID, newArray, JSUtil.OK, false);
-//                        } catch (TelpoException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(activity, "身份证信息读取失败！", Toast.LENGTH_LONG).show();
-//                        }
-//                    } catch (TelpoException e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(activity, "身份证读取模块异常！", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//            });
-//            mThread.start();
-
-            Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.splash);
-
-            JSONArray newArray = new JSONArray();
-            JSONObject json = new JSONObject();
-            json.put("code",0);
-            json.put("msg",true);
-            json.put("bitmap",bitmapToBase64(bitmap));
-            newArray.put(json);
-            JSUtil.execCallback(pWebview, CallBackID, newArray, JSUtil.OK, false);
+        context = pWebview.getContext();
+        pWebView = pWebview;
+        boolean read=checkPackage("com.telpo.tps550.api");
+        if (read) {
+            readLoop();
         } else {
             Toast.makeText(activity, "未安装API模块，无法进行二维码/身份证识别", Toast.LENGTH_LONG).show();
         }
     }
 
-    //播放系统音乐
-    public void playBeep(IWebview pWebview, JSONArray array){
-        activity=pWebview.getActivity();
-        BeepManager mBeepManager = new BeepManager(activity, R.raw.beep);
-        mBeepManager.playBeepSoundAndVibrate();
+    Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            playBeep();
+            stopThread();
+            switch (msg.what) {
+                case 1:
+                    JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                    Toast.makeText(activity, "请重新放置身份证！", Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                    Toast.makeText(activity, "超时，请重新尝试！", Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                    Toast.makeText(activity, "读卡器未打开！", Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    try{
+                        IdentityMsg info= (IdentityMsg) msg.obj;
+                        JSONArray newArray = new JSONArray();
+                        JSONObject json = new JSONObject();
+                        json.put("name",info.getName());//姓名
+                        json.put("sex",info.getSex());//性别
+                        json.put("nation",info.getNation());//民族
+                        json.put("born",info.getBorn());//出生日期
+                        json.put("address",info.getAddress());//地址
+                        json.put("period",info.getPeriod());//有效期限
+                        json.put("apartment",info.getApartment());//签证机关
+                        json.put("country",info.getCountry());//国籍或所在地区代码
+                        json.put("no",info.getNo());//身份证号码
+                        json.put("card_type",info.getCard_type());//证件类型
+                        json.put("reserve",info.getReserve());//保留信息
+                        byte[] image =mIdcard.getIdCardImageOverseas(info);
+                        if (image.length == 2048 || image.length == 1024) {
+                            Bitmap bitmap = mIdcard.decodeIdCardImageOverseas(image);
+                            json.put("bitmap",bitmapToBase64(bitmap));
+                        }
+                        newArray.put(json);
+                        System.out.println(json.toString());
+                        playBeep();
+                        stopThread();
+                        JSUtil.execCallback(pWebView, CallBackID, newArray, JSUtil.OK, false);
+                    }catch (JSONException |TelpoException e) {
+                        Toast.makeText(activity, "请正确放置身份证！", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    public void readLoop() {
+            mIdcard = new IdCard(context);
+            mThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        IdentityMsg info = mIdcard.checkIdCardOverseas();
+                        if (info != null) {
+                            Message msg =new Message();
+                            msg.what=4;
+                            msg.obj=info;
+                            mHandler.sendMessage(msg);
+                        } else {
+                            mHandler.sendEmptyMessage(1);
+                        }
+                    } catch (TelpoException e) {
+                        e.printStackTrace();
+                        mHandler.sendEmptyMessage(1);
+                    }
+
+                }
+            });
+            mThread.start();
     }
 
-    /*
-     * bitmap转base64
-     * */
-    private static String bitmapToBase64(Bitmap bitmap) {
+    /**
+     * bitmap转为base64
+     * @param bitmap
+     * @return
+     */
+    public static String bitmapToBase64(Bitmap bitmap) {
+
         String result = null;
         ByteArrayOutputStream baos = null;
         try {
@@ -135,17 +188,23 @@ public class IDCard extends StandardFeature {
         }
         return result;
     }
+    //播放系统音乐
+    public void playBeep(){
+        mBeepManager = new BeepManager(activity, R.raw.beep);
+        mBeepManager.playBeepSoundAndVibrate();
+    }
+
+    public void stopThread(){
+        if(mThread!=null && (mThread.isAlive())){
+            mThread.interrupt();
+        }
+    }
 
     @Override
     public void onStop() {
         super.onStop();
-        try {
-            if (mThread != null && (mThread.isAlive())) {
-                mThread.interrupt();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mBeepManager.close();
+        mBeepManager = null;
     }
 
     private boolean checkPackage(String packageName) {
@@ -156,5 +215,27 @@ public class IDCard extends StandardFeature {
             return false;
         }
         return true;
+    }
+
+    private void powerOn() {
+        if (android.os.Build.MODEL.contains("TPS350")) {
+            // PosUtil.setFingerPrintPower(PosUtil.FINGERPRINT_POWER_ON);
+        } else if (android.os.Build.MODEL.contains("TPS616")) {
+            ShellUtils.execCommand("echo 3 >/sys/class/telpoio/power_status",
+                    true);// usb
+
+        } else if (android.os.Build.MODEL.contains("TPS520A")) {
+            FingerPrint.fingerPrintPower(1);
+        } else {
+            PosUtil.setIdcardPower(1);
+            FingerPrint.fingerPrintPower(1);
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 }

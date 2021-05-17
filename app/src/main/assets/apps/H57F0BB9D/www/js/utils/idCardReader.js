@@ -14,10 +14,6 @@ document.addEventListener("plusready", function() {
 			callbackID = B.callbackId(success, fail);
 			return B.exec(_BARCODE,'readIDCard', [callbackID]);
 		},
-		//播放读取音
-		playBeep: function() {
-			B.exec(_BARCODE,'playBeep', []);
-		},
 	};
 	window.plus.idCard = idCardReader;
 }, true);

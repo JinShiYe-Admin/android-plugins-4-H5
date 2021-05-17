@@ -86,5 +86,6 @@
 		<service name="Downloader" value="io.dcloud.net.DownloaderBootImpl"/>
 		<service name="Maps"   value="io.dcloud.js.map.MapInitImpl" />
 		<service name="usbPrinterUtil"   value="plus.H50C56911.utils.visitorsys.USBPrinter" />
+		<service name="idCardReaderUtil" value="plus.H50C56911.utils.visitorsys.IDCard"/>
 	</services>
 </properties>

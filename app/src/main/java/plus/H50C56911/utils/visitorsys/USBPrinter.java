@@ -224,6 +224,7 @@ public class USBPrinter extends StandardFeature {
     public void onStop() {
         super.onStop();
         try {
+            activity.unregisterReceiver(printReceive);
             if(bThread!=null && (bThread.isAlive())){
                 bThread.interrupt();
             }
@@ -247,7 +248,7 @@ public class USBPrinter extends StandardFeature {
      *            生成位图高，8的倍数
      */
 
-    public Bitmap CreateCode(String str, com.google.zxing.BarcodeFormat type, int bmpWidth, int bmpHeight)
+    public Bitmap CreateCode(String str, BarcodeFormat type, int bmpWidth, int bmpHeight)
             throws WriterException {
         Hashtable<EncodeHintType, String> mHashtable = new Hashtable<EncodeHintType, String>();
         mHashtable.put(EncodeHintType.CHARACTER_SET, "UTF-8");

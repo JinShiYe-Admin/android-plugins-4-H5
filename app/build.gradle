@@ -30,9 +30,6 @@ android {
         versionName "2.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        ndk {
-            abiFilters 'armeabi','x86','armeabi-v7a'
-        }
         signingConfig signingConfigs.release
 
         manifestPlaceholders = [
@@ -49,7 +46,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable true
+            jniDebuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            jniDebuggable true
+            testCoverageEnabled false
         }
     }
     compileOptions {

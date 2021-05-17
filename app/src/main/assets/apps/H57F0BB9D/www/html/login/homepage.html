@@ -685,13 +685,16 @@
 						},visitorID)
 					},
 					scan:function(){//读证按钮点击
+						events.showWaiting("正在读证...")
 						plus.idCard.readIDCard(function(args){
 							var jsonObj=args[0];
+							console.log(jsonObj);
 							var idcardImg=jsonObj.bitmap;
 							contentData.IDCardImg="data:image/jpeg;base64,"+idcardImg;
-							plus.idCard.playBeep();
+							events.closeWaiting()
 						},function(args){
-							console.log(args);
+							events.closeWaiting()
+							console.log("报错了。。。"+args);
 						})
 					},
 					layerYes:function(){//弹出层确定按钮
