@@ -111,7 +111,7 @@ public class IDCard extends StandardFeature {
                         byte[] image =mIdcard.getIdCardImageOverseas(info);
                         if (image.length == 2048 || image.length == 1024) {
                             Bitmap bitmap = mIdcard.decodeIdCardImageOverseas(image);
-                            json.put("bitmap",bitmapToBase64(bitmap));
+                            json.put("headPhoto",bitmapToBase64(bitmap));
                         }
                         newArray.put(json);
                         System.out.println(json.toString());
