@@ -460,7 +460,7 @@
 		<script src="../../js/utils/vue.js"></script>
 		<script src="../../js/utils/store.js"></script>
 		<script src="../../js/utils/events.js"></script>
-		<script src="../../js/utils/vconsole.min.js"></script>
+		<!-- <script src="../../js/utils/vconsole.min.js"></script> -->
 		<script src="../../js/utils/utils.js"></script>
 		<script src="../../js/libs/jquery.js"></script>
 		<script src="../../js/utils/usbPrinter.js"></script>
@@ -593,6 +593,7 @@
 					visitor_outData:{
 						IDCardImg:'',//身份证头像  url
 						visitor_typeList:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}],//访问类型 列表
+						submit:true,//是否允许提交数据
 						//表单会用到的
 						certificate_number:'',//	证件号码
 						record_code:'',//	访问单号
@@ -744,7 +745,10 @@
 						if(contentData.visitor_outData.leave_time==''){
 							mui.toast('请选择离开时间')
 						}else{
-							setLeave(contentData.visitor_outData.formData.id,contentData.visitor_outData.leave_time);
+							if(contentData.visitor_outData.submit){
+								contentData.visitor_outData.submit=false;
+								setLeave(contentData.visitor_outData.formData.id,contentData.visitor_outData.leave_time);
+							}
 						}
 					},
 					layerNo:function(){//弹出层取消按钮
@@ -827,8 +831,10 @@
 						that.visitor_inData.certificate_type='身份证';
 						that.visitor_inData.certificate_number=jsonObj.no;
 						that.visitor_inData.address=jsonObj.address;
+						plus.qrCode.playBeep();
 					},
 					TTTTTTTest2:function(){//测试用
+						plus.qrCode.playBeep();
 						checkAndOpenData('372330199807155152','');
 					}
 				}
@@ -1622,10 +1628,12 @@
 				console.log("params: " + JSON.stringify(params));
 				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/setLeave', {}, params, 2, function(da) {
 					console.log("da: " + JSON.stringify(da));
+					contentData.visitor_outData.submit=true;
 					if (da.code == 0) {
 						mui.toast('操作成功');
 						layer.close(contentData.index);
-						// deleteIDCardImg(contentData.visitor_outData.IDCardImg);
+						contentData.visitor_outData.leave_time=''
+						deleteIDCardImg(contentData.visitor_outData.IDCardImg);
 						getOutData();
 					}else{
 						mui.toast(da.msg);
@@ -1635,6 +1643,7 @@
 			
 			//根据扫码或读卡得到的 身份证号码或者访客单号查询访客详情，并打开签离弹窗
 			function checkAndOpenData(idCardNumber,visitor_code){
+				events.showWaiting();
 				const params = {
 					certificate_number:idCardNumber?idCardNumber:'',//	证件号码
 					record_code:visitor_code?visitor_code:'',//	访问单号
@@ -1651,6 +1660,7 @@
 				}
 				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/page', {}, params, 2, function(da) {
 					console.log("da: " + JSON.stringify(da));
+					events.closeWaiting();
 					if (da.code == 0) {
 						 if(da.data && da.data.list.length===1){
 							 var data=da.data.list[0];
