@@ -12,252 +12,12 @@
 		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont2.css" />
 		<link rel="stylesheet" type="text/css" href="../../fonts/system/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/homepage.css" />
 		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
 		<style>
 			[v-cloak] {
 				visibility: hidden;
 				display:none !important;
-			}
-			.mui-bar-tab .mui-tab-item.mui-active {
-				color: #3893D9;
-			}
-			a:hover {
-			    color: #FAFAFA;
-			}
-			.mui-h4, h4 {
-			    font-size: 18px;
-				color: #c3865c;
-			}
-			h1, h2, h3, h4, h5, h6 {
-			    line-height: 1;
-			    margin-top: 5px;
-			    margin-bottom: 5px;
-			}
-			/* 左侧按钮 */
-			.tab-btn-left{
-				font-size: 20px;
-				font-weight: 600;
-				padding: 30px 0 15px;
-				border-bottom: 1px solid rgba(210,207,200,.9);
-			}
-			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
-				border-bottom: 0px;
-			}
-			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active p{
-				color: #3893D9;
-			}
-			
-			/* 右侧视图 */
-			.mui-control-content{
-				height: calc(100vh - 55px );
-				padding:20px 0 0 15px;
-			}
-			
-			/* 左侧视图 */
-			.mui-segmented-control-tab.mui-segmented-control-inverted-tab{
-				border-right: 1px solid rgba(210,207,200,.9);
-				height: calc(100vh - 45px);
-			}
-			.line{
-				background-color: #3893D9;
-				margin-bottom: 0.3125rem;
-				height: 0.125rem;
-			}
-			
-			/* 栅格 宽度修改 */
-			.mui-col-sm-1 {
-			    width: 10.33333333% !important;
-			}
-			
-			.mui-col-sm-11 {
-			    width: 89.66666667% !important;
-			}
-			
-			
-			/* 身份证照片框样式 */
-			.card-img{
-				border: 1px solid rgba(210,207,200,.9);
-				width:171px;
-				height: 240px;
-			}
-			.card-text{
-				display: block;
-				margin: 63% 27% 0;
-				width: 80px;
-				font-size: 15px;
-				color: grey;
-			}
-			/* 读证样式 */
-			.scan{
-				border: 2px solid #C0726C;
-				border-radius: 50%;
-				padding:24px 17px;
-				width: 75px;
-				height: 75px;
-				color:#C0726C;font-size:1.125rem;
-				font-weight: 600;
-				margin:15px 0 0 25%;
-			}
-			
-			/* 输入框样式和间距修改 */
-			.mui-input-row label{
-				font-size: 16px;
-				width: 28%;
-				font-weight: 600;
-				text-align: right;
-			}
-			.mui-input-row .span-icon{
-				    vertical-align: middle;
-				    margin: 12px 0px 0px -22px;
-				    position: absolute;
-			}
-			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
-				border: 1px solid rgba(210,207,200,.8);
-				width: 72%;
-				float: left;
-			}
-			/* 输入框样式和间距修改 被访人信息栏*/
-			.mui-input-row-bottom label{
-				width: 24%;
-				font-weight: 600;
-				text-align: right;
-				padding: 11px 5px;
-			} 
-			.mui-input-row-bottom label~input, .mui-input-row-bottom label~select, .mui-input-row-bottom label~textarea{
-				border: 1px solid rgba(210,207,200,.8);
-				width: 68%;
-				float: left;
-			}
-			.mui-input-row-bottom-lar label{
-				width: 30%;
-				font-weight: 600;
-				text-align: right;
-				padding: 11px 5px;
-			} 
-			.mui-input-row-bottom-lar label~input, .mui-input-row-bottom-lar label~select, .mui-input-row-bottom-lar label~textarea{
-				border: 1px solid rgba(210,207,200,.8);
-				width: 68%;
-				float: left;
-			}
-			/* 输入框样式和间距修改 弹出层信息栏*/
-			.mui-input-row-toast label{
-				width: 35%;
-				font-weight: 600;
-				text-align: left;
-				padding: 11px 5px;
-			} 
-			.mui-input-row-toast label~input, .mui-input-row-toast label~select, .mui-input-row-toast label~textarea{
-				border: 0;
-				border-bottom: 0px solid rgba(210,207,200,.8);
-				width: 60%;
-				float: left;
-			}
-			.mui-input-row-toast-in label{
-				width: 35%;
-				font-weight: 600;
-				text-align: left;
-				padding: 11px 5px;
-			} 
-			.mui-input-row-toast-in label~input, .mui-input-row-toast-in label~select, .mui-input-row-toast-in label~textarea{
-				width: 60%;
-				float: left;
-			}
-			/* 表单间距 */
-			.mui-input-row{
-				margin-top: 8px;
-			}
-			
-			/* 被访人信息 slider 样式修改 */
-			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
-				border-bottom: 0;
-			}
-			.visitor-bottom{
-				width: 220px !important;
-				font-weight: 600;
-			}
-			.mui-input-row-bottom,.mui-input-row-bottom-lar{
-				margin-top: 8px;
-				padding-right: 3px;
-			}
-			/* 自定义按钮样式 */
-			.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
-				padding: 13px 10px;
-				width: 60px;
-				height: 45px;
-			}
-			.mui-btn-outlined-lg{
-				padding: 5px 10px;
-				width: 140px;
-				margin: 0 10px;
-				font-size: 18px;
-				font-weight: 600;
-				line-height: 2;
-			}
-			
-			/* 分页样式 */
-			.layui-laypage a, .layui-laypage span {
-			    height: 42px !important;
-				padding: 0 18px;
-			    line-height: 42px !important;
-			}
-			
-			
-			/* 表头样式 */
-			.layui-table thead tr{
-				background-color: #3893D9;
-				color: #FAFAFA;
-			}
-			th .layui-table-cell {
-				height: 30px;
-				padding: 2px 5px;
-			}
-			.layui-table-cell {
-				height: 56px;
-				padding: 16px 5px;
-			}
-			.layui-table-view .layui-table th{
-				padding:1px 0;
-			}
-			.layui-table-view .layui-table td{
-				padding:0px 0 ;
-			}
-			
-			.layui-table-view .layui-table td{
-				
-			}
-			
-			/* 弹出层 卡片样式修改 */
-			.mui-card-header.mui-h4{
-				border-top: 1px solid rgba(218,218,221,.9);
-			}
-			.mui-card-content-inner {
-			    padding: 10px;
-			}
-			.layui-layer-btn.layui-layer-btn-c{
-				background-color: #FFFFFF;
-			}
-			
-			/* 搜索栏 日期控件样式修改 */
-			
-			.layui-laydate .layui-this {
-			    background-color: #3893D9 !important;
-			    color: #fff !important;
-			}
-			
-			.layui-laydate-footer {
-			    height: 60px !important;
-			}
-			
-			.layui-laydate-footer span {
-			    height: 38px !important;
-			    line-height: 38px !important;
-			    padding: 0px 15px !important;
-			}
-			.layui-laydate-header{
-				background-color: #FAFAFA !important;
-			}
-			.laydate-theme-molv .layui-laydate-header i, .laydate-theme-molv .layui-laydate-header span{
-				color: #383838 !important;
 			}
 		</style> 
 	</head>
@@ -270,19 +30,19 @@
 			<div class="mui-row">
 				<div class="mui-col-sm-1">
 						<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted  mui-segmented-control-tab mui-segmented-control-inverted-tab">
-							<div class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('in')" class="mui-control-item mui-active" href="#item1"><img :src="inActive?'../../img/home/ic_sign_in_active.png':'../../img/home/ic_sign_in.png'" style="width: 45px;height: 45px;"><p>来访登记</p></a></div>
-							<div class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('select')" class="mui-control-item" href="#item2"><img :src="selectActive?'../../img/home/ic_sign_query_active.png':'../../img/home/ic_sign_query.png'" style="width: 45px;height: 45px;"><p>访客查询</p></a></div>
-							<div class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('out')" class="mui-control-item" href="#item3"><img :src="outActive?'../../img/home/ic_sign_off_active.png':'../../img/home/ic_sign_off.png'" style="width: 45px;height: 45px;"><p>访客签离</p></a></div>
+							<div v-show="visitor_in.tabShow" class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('in')" class="mui-control-item" :class="visitor_in.tabActive?'mui-active':''" href="#item1"><img :src="visitor_in.tabActive?'../../img/home/ic_sign_in_active.png':'../../img/home/ic_sign_in.png'" style="width: 45px;height: 45px;"><p>{{visitor_in.tabName}}</p></a></div>
+							<div v-show="visitor_query.tabShow" class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('select')" class="mui-control-item" :class="visitor_query.tabActive?'mui-active':''" href="#item2"><img :src="visitor_query.tabActive?'../../img/home/ic_sign_query_active.png':'../../img/home/ic_sign_query.png'" style="width: 45px;height: 45px;"><p>{{visitor_query.tabName}}</p></a></div>
+							<div v-show="visitor_out.tabShow" class="mui-col-sm-12 tab-btn-left"><a @tap="tabClick('out')" class="mui-control-item" :class="visitor_out.tabActive?'mui-active':''" href="#item3"><img :src="visitor_out.tabActive?'../../img/home/ic_sign_off_active.png':'../../img/home/ic_sign_off.png'" style="width: 45px;height: 45px;"><p>{{visitor_out.tabName}}</p></a></div>
 						</div>
 				</div>
 				<div class="mui-col-sm-11">
 					<div>
-						<div id="item1" class="mui-control-content mui-active">
+						<div id="item1" v-show="visitor_in.tabShow" class="mui-control-content" :class="visitor_in.tabActive?'mui-active':''">
 							<h4 class="mui-h4">访客信息</h4>
-							<div class="line"></div>
+							<div class="line" style="margin-top: 10px;"></div>
 							<div class="mui-row" style="margin-top: 1rem;">
 								<div class="mui-col-sm-2">
-									<img v-if="IDCardImg" class="card-img" :src=IDCardImg>
+									<img v-if="visitor_inData.headPhoto" class="card-img" :src=visitor_inData.headPhoto />
 									<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
 									<div class="scan" @tap="scan()">读证</div>
 								</div>
@@ -291,109 +51,135 @@
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>姓名：</label>
-												<input type="text" placeholder="请输入姓名">
+												<input type="text" v-model="visitor_inData.visitor_name" placeholder="请输入姓名">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>访问事由：</label>
-												<input type="text" placeholder="输入或选择" style="width: 57%;">
+												<input type="text" v-model="visitor_inData.visitor_for" placeholder="输入或选择" style="width: 57%;">
 												<button id="visitor_for" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>性别：</label>
-												<input type="text" placeholder="请选择">
+												<select class="" v-model="visitor_inData.visitor_sex">
+												   <option :value=0>女</option>
+												   <option :value=1>男</option>
+												</select> 
+												<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>手机：</label>
-												<input type="text" placeholder="请输入手机号">
+												<input type="number" v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>出生日期：</label>
-												<input type="text" placeholder="请输入出生日期">
+												<input type="text" v-model="visitor_inData.visitor_birthday" placeholder="请输入出生日期">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>随行人数：</label>
-												<input type="text" placeholder="输入或选择" style="width: 57%;">
+												<input type="text" v-model="visitor_inData.visitor_counter" placeholder="输入或选择" style="width: 57%;">
 												<button id="visitor_counter" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件类型：</label>
-												<input type="text" placeholder="输入或选择" style="width: 57%;">
+												<input type="text" v-model="visitor_inData.certificate_type" placeholder="输入或选择" style="width: 57%;">
 												<button id="certificate_type" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>随行物品：</label>
-												<input type="text" placeholder="请输入随行物品">
+												<input type="text" v-model="visitor_inData.visitor_goods"  placeholder="请输入随行物品">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件号码：</label>
-												<input type="text" placeholder="请输入证件号码">
+												<input v-model="visitor_inData.certificate_number" type="text" placeholder="请输入证件号码">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>来访单位：</label>
-												<input type="text" placeholder="请输入来访单位">
+												<input v-model="visitor_inData.unit_name" type="text" placeholder="请输入来访单位">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>地址：</label>
-												<input type="text" placeholder="请输入地址">
+												<input v-model="visitor_inData.address" type="text" placeholder="请输入地址">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>车牌号：</label>
-												<input type="text" placeholder="请输入车牌号">
+												<input v-model="visitor_inData.plate_number" type="text" placeholder="请输入车牌号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>备注：</label>
-												<input  type="text" placeholder="请输入备注">
+												<input v-model="visitor_inData.note"  type="text" placeholder="请输入备注">
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div style="margin-top: 1.5rem;"></div>
+							<div style="margin-top: 1.8rem;"></div>
 							<h4 class="mui-h4">被访人信息</h4>
-							<div class="line"></div>
+							<div class="line"  style="margin-top: 10px;"></div>
 							<div class="mui-row" style="margin-top: 1rem;">
 								<div id="slider" class="mui-slider">
 									<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted visitor-bottom">
-											<a class="mui-control-item mui-active" href="#item1mobile">教职工</a>
-											<a class="mui-control-item" href="#item2mobile">学生</a>
+											<a @tap="bottomTabClick('tec')" class="mui-control-item mui-active" href="#item1mobile">教职工</a>
+											<a @tap="bottomTabClick('stu')" class="mui-control-item" href="#item2mobile">学生</a>
 									</div>
 									<div class="mui-slider-group">
 										<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 											<div class="mui-row">
 												<div class="mui-col-sm-3">
 													<div class="mui-input-row mui-input-row-bottom">
-														<label><span style="color: #D26A60;">*</span>部门：</label>
-														<input id="tec_dpt" type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+														 <div class="layui-form-item">
+															<label><span style="color: #D26A60;">*</span>部门：</label>
+															<select class="" v-model="visitor_inData.dptSelectId" @change="dptSelectChanged">
+															  <template v-for="item in visitor_inData.dptList">
+																  <template v-if="item.id===''"> 
+																  		<option disabled="true" :value=item.id>{{item.title}}</option>
+																  </template>
+																  <template v-else> 
+																  		<option :value=item.id>{{item.title}}</option>
+																  </template>
+															  </template>
+															</select> 
+															<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+														  </div>
 													</div>
 												</div>
 												<div class="mui-col-sm-3">
 													<div class="mui-input-row mui-input-row-bottom">
 														<label><span style="color: #D26A60;">*</span>姓名：</label>
-														<input id="tec_name" type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+														<select class="" v-model="visitor_inData.dptUserSelectId" @change="dptUserSelectChanged">
+														  <template v-for="item in visitor_inData.dptUserList">
+															  <template v-if="item.id===''"> 
+															  		<option disabled="true" :value=item.id>{{item.title}}</option>
+															  </template>
+															  <template v-else> 
+															  		<option :value=item.id>{{item.title}}</option>
+															  </template>
+														  </template>
+														</select>  
+														<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 													</div>
 												</div>
 											</div>
@@ -403,25 +189,55 @@
 												<div class="mui-col-sm-3">
 													<div class="mui-input-row mui-input-row-bottom">
 														<label><span style="color: #D26A60;">*</span>年级：</label>
-														<input id="stu_grd" type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+														<select class="" v-model="visitor_inData.grdSelectId" @change="grdSelectChanged">
+														  <template v-for="item in visitor_inData.grdList">
+															  <template v-if="item.id===''"> 
+															  		<option disabled="true" :value=item.id>{{item.title}}</option>
+															  </template>
+															  <template v-else> 
+															  		<option :value=item.id>{{item.title}}</option>
+															  </template>
+														  </template>
+														</select>  
+														<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 													</div>
 												</div>
 												<div class="mui-col-sm-3">
 													<div class="mui-input-row mui-input-row-bottom">
 														<label><span style="color: #D26A60;">*</span>班级：</label>
-														<input id="stu_cls"  type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+														<select class="" v-model="visitor_inData.clsSelectId" @change="clsSelectChanged">
+														  <template v-for="item in visitor_inData.clsList">
+															  <template v-if="item.id===''"> 
+															  		<option disabled="true" :value=item.id>{{item.title}}</option>
+															  </template>
+															  <template v-else> 
+															  		<option :value=item.id>{{item.title}}</option>
+															  </template>
+														  </template>
+														</select>  
+														<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 													</div>
 												</div>
 												<div class="mui-col-sm-3">
 													<div class="mui-input-row mui-input-row-bottom">
 														<label><span style="color: #D26A60;">*</span>姓名：</label>
-														<input  id="stu_name"  type="text" placeholder="请选择" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+														<select class="" v-model="visitor_inData.stuSelectId" @change="stuSelectChanged">
+														  <template v-for="item in visitor_inData.stuList">
+															  <template v-if="item.id===''"> 
+															  		<option disabled="true" :value=item.id>{{item.title}}</option>
+															  </template>
+															  <template v-else> 
+															  		<option :value=item.id>{{item.title}}</option>
+															  </template>
+														  </template>
+														</select>  
+														<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 													</div>
 												</div>
 												<div class="mui-col-sm-3">
 													<div class="mui-input-row mui-input-row-bottom-lar">
 														<label><span style="color: #D26A60;">*</span>班主任：</label>
-														<input  type="text" placeholder="选择学生后展示" readonly="true">
+														<input :value="visitor_inData.masterObj?visitor_inData.masterObj.user_name:''" type="text" placeholder="选择学生后展示" readonly="true">
 													</div>
 												</div>
 											</div>
@@ -429,32 +245,45 @@
 									</div>
 								</div>
 							</div>
-							<div class="mui-row" style="margin-top: 2rem;text-align: center;">
-								<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-btn-outlined-lg">
+							<div class="mui-row" style="margin-top: 1rem;text-align: center;">
+								<button type="button"  @tap="saveData(0)"  class="mui-btn mui-btn-primary mui-btn-outlined mui-btn-outlined-lg">
 									保存
 								</button>
-								<button type="button" @tap="printPage" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">
+								<button type="button" @tap="saveData(1)" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">
 									保存并打印
 								</button>
-								<button type="button" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
+								<button type="button" @tap="resetData" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
 									取消
+								</button>
+								
+								<button type="button" @tap="TTTTTTTest" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
+									假证
 								</button>
 							</div>
 						</div>
-						<div id="item2" class="mui-control-content">
+						<div id="item2" v-show="visitor_query.tabShow" class="mui-control-content" :class="visitor_query.tabActive?'mui-active':''">
 							 <div class="mui-row">
 								<div class="mui-input-row mui-input-row-bottom">
 									<label style="width: 80px;">关键字：</label>
-									<input style="width: 120px;margin-right: 5px;" v-model="visitor_name" type="text" placeholder="访客查询">
-									<label style="width: 90px;">是否离开：</label>
-									<input id="leave_flag" style="width: 120px;margin-right: 5px;" v-model="leave_flag"  type="text" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+									<input style="width: 120px;margin-right: 5px;" v-model="visitor_queryData.visitor_name" type="text" placeholder="访客姓名">
+									<label style="width: 90px;">是否签离：</label>
+									<select style="width: 120px;margin-right: 5px;"  v-model="visitor_queryData.leave_flagSelectId">
+									  <template v-for="item in visitor_queryData.leave_flagList">
+										  <option :value=item.id>{{item.title}}</option>
+									  </template>
+									</select>  
+									<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 									<label style="width: 80px;">被访人：</label>
-									<input id="interviewee_type" style="width: 120px;margin-right: 5px;" v-model="interviewee_type"  type="text" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+									<select style="width: 120px;margin-right: 5px;"  v-model="visitor_queryData.visitor_typeSelectId">
+									  <template v-for="item in visitor_queryData.visitor_typeList">
+										 <option :value=item.id>{{item.title}}</option>
+									  </template>
+									</select>  
+									<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 									<label style="width: 90px;">进入时间：</label>
-									<input id="begin_time_in" style="width: 240px;margin-right: 5px;" v-model="times" type="text" placeholder="点击选择时间范围" readonly="true"><span class="span-icon" style="margin-left: -30px;"><i class="layui-icon layui-icon-date layui-font-18"></i></span>
-									<!-- <label style="width: 40px;">至：</label>
-									<input style="width: 120px;margin-right: 5px;" type="text" placeholder="普通输入框"> -->
-									<button @tap="visitor_select()" type="button" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 14px;">查询</button>
+									<input id="begin_time_in" style="width: 220px;margin-right: 5px;" v-model="visitor_queryData.times" type="text" placeholder="点击选择时间范围" readonly="true"><span class="span-icon" style="margin-left: -30px;"><i class="layui-icon layui-icon-date layui-font-18"></i></span>
+									<button @tap="visitor_select_reset()" type="button" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 7px;">重置</button>
+									<button @tap="visitor_select()" type="button" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 7px;">查询</button>
 								</div>
 							 </div>
 							 <div class="mui-row" style="margin-right: 15px;margin-bottom: 0px;">
@@ -462,19 +291,18 @@
 								 <div id="pageQuery" style="text-align: right;margin-top: -5px"></div>
 							 </div>
 						</div>
-						<div id="item3" class="mui-control-content">
+						<div id="item3" v-show="visitor_out.tabShow" class="mui-control-content" :class="visitor_out.tabActive?'mui-active':''">
 							<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 start-->
 							<div id='layToast' class="mui-row" style="display: none;">
-								 <div class="mui-row" style="padding:3px">
-								 	<div class="mui-col-sm-8" >
-										<div class="mui-card">
+								 <div class="mui-row" style="padding-top: 15px;">
+								 	<div class="mui-col-sm-8" style="padding:0px 3px 0;">
 											<div class="mui-card-header mui-h4">访客信息</div>
 											<div class="line"></div>
 											<div class="mui-card-content">
 												<div class="mui-card-content-inner">
 													<div class="mui-row">
 														<div class="mui-col-sm-4">
-															<img v-if="IDCardImg" class="card-img" src="../../img/home/idcard.jpg">
+															<img v-if="visitor_outData.IDCardImg" class="card-img" :src=visitor_outData.IDCardImg>
 															<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
 														</div>
 														<div class="mui-col-sm-8">
@@ -482,25 +310,25 @@
 																<div class="mui-col-sm-12">
 																	<div class="mui-input-row mui-input-row-toast">
 																		<label>姓名：</label>
-																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																		<input :value="visitor_outData.formData.visitor_name" type="text" placeholder=""  disabled="true">
 																	</div>
 																</div>
-																<div class="mui-col-sm-12">
+																<div class="mui-col-sm-12" style="margin-top: 10px;">
 																	<div class="mui-input-row mui-input-row-toast">
 																		<label>性别：</label>
-																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																		<input :value="visitor_outData.formData.sex_name" type="text" placeholder=""  disabled="true">
 																	</div>
 																</div>
-																<div class="mui-col-sm-12">
+																<div class="mui-col-sm-12" style="margin-top: 10px;">
 																	<div class="mui-input-row mui-input-row-toast">
 																		<label>证件类型：</label>
-																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																		<input :value="visitor_outData.formData.certificate_type" type="text" placeholder=""  disabled="true">
 																	</div>
 																</div>
-																<div class="mui-col-sm-12">
+																<div class="mui-col-sm-12" style="margin-top: 10px;">
 																	<div class="mui-input-row mui-input-row-toast">
 																		<label>证件号码：</label>
-																		<input  type="text" placeholder="暂无信息"  disabled="true">
+																		<input :value="visitor_outData.formData.certificate_number" type="text" placeholder=""  disabled="true">
 																	</div>
 																</div>
 															</div>
@@ -508,41 +336,67 @@
 													</div>
 												</div>
 											</div>
-										</div>
 								 	</div>
-								 	<div class="mui-col-sm-4">
-										<div class="mui-card">
+								 	<div class="mui-col-sm-4" style="padding:0px 3px 0;">
 											<div class="mui-card-header mui-h4">被访人信息</div>
 											<div class="line"></div>
 											<div class="mui-card-content">
 												<div class="mui-card-content-inner">
-													<div class="mui-row">
-														<div class="mui-col-sm-12">
-															<div class="mui-input-row mui-input-row-toast">
-																<label>被访人：</label>
-																<input  type="text" placeholder="暂无信息" disabled="true">
+													<template v-if="visitor_outData.formData.interviewee_type==0">
+														<div class="mui-row">
+															<div class="mui-col-sm-12">
+																<div class="mui-input-row mui-input-row-toast">
+																	<label>部门：</label>
+																	<input :value="visitor_outData.formData.dpt_name" type="text" placeholder="" disabled="true">
+																</div>
+															</div>
+															<div class="mui-col-sm-12" style="margin-top: 10px;">
+																<div class="mui-input-row mui-input-row-toast">
+																	<label>姓名：</label>
+																	<input :value="visitor_outData.formData.teacher_name" type="text" placeholder="" disabled="true">
+																</div>
 															</div>
 														</div>
-														<div class="mui-col-sm-12">
-															<div class="mui-input-row mui-input-row-toast">
-																<label>被访部门：</label>
-																<input  type="text" placeholder="暂无信息" disabled="true">
+													</template>
+													<template v-else>
+														<div class="mui-row">
+															<div class="mui-col-sm-12">
+																<div class="mui-input-row mui-input-row-toast">
+																	<label>年级：</label>
+																	<input v-cloak :value="visitor_outData.formData.grd_name" type="text" placeholder="" disabled="true">
+																</div>
+															</div>
+															<div class="mui-col-sm-12" style="margin-top: 10px;">
+																<div class="mui-input-row mui-input-row-toast">
+																	<label>班级：</label>
+																	<input v-cloak :value="visitor_outData.formData.cls_name" type="text" placeholder="" disabled="true">
+																</div>
+															</div>
+															<div class="mui-col-sm-12" style="margin-top: 10px;">
+																<div class="mui-input-row mui-input-row-toast">
+																	<label>姓名：</label>
+																	<input v-cloak :value="visitor_outData.formData.stu_name" type="text" placeholder="" disabled="true">
+																</div>
+															</div>
+															<div class="mui-col-sm-12" style="margin-top: 10px;">
+																<div class="mui-input-row mui-input-row-toast">
+																	<label>班主任：</label>
+																	<input v-cloak :value="visitor_outData.formData.head_teacher_name" type="text" placeholder="" disabled="true">
+																</div>
 															</div>
 														</div>
-													</div>
+													</template>
 												</div>
 											</div>
-										</div>
 								 	</div>
 									<div class="mui-col-sm-12">
-										<div class="mui-card">
 											<div class="mui-card-content" style="border-top: 1px solid rgba(218,218,221,.9);">
 												<div class="mui-card-content-inner">
 													<div class="mui-row">
 														<div class="mui-col-sm-4">
 															<div class="mui-input-row  mui-input-row-toast">
 																<label>进入时间：</label>
-																<input  type="text" disabled="true">
+																<input :value="visitor_outData.formData.in_time"  type="text" disabled="true">
 															</div>
 														</div>
 														<div class="mui-col-sm-4">
@@ -554,13 +408,12 @@
 														<div class="mui-col-sm-4">
 															<div class="mui-input-row mui-input-row-toast">
 																<label>登记时间：</label>
-																<input type="text" disabled="true">
+																<input :value="visitor_outData.formData.create_time" type="text" disabled="true">
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-										</div>
 									</div>
 									<div class="mui-col-sm-12" style="margin-top: 2rem;text-align: center;">
 										<button type="button" @tap="layerYes()" class="mui-btn mui-btn-danger  mui-btn-outlined-lg">
@@ -578,14 +431,19 @@
 										<label style="width: 80px;">关键字：</label>
 										<input style="width: 120px;margin-right: 5px;" type="text" placeholder="访客姓名">
 										<label style="width: 80px;">被访人：</label>
-										<input id="interviewee_type_out" style="width: 120px;margin-right: 5px;" v-model="interviewee_type_out" type="text" readonly="true"><span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
+										<select style="width: 120px;margin-right: 5px;"  v-model="visitor_outData.visitor_typeSelectId">
+										  <template v-for="item in visitor_outData.visitor_typeList">
+											 <option :value=item.id>{{item.title}}</option>
+										  </template>
+										</select>  
+										<span class="span-icon"><i class="layui-icon layui-icon-down layui-font-12"></i></span>
 										<label style="width: 90px;">进入时间：</label>
 										<input id="begin_time_ino" style="width: 240px;margin-right: 5px;" type="text" placeholder="点击选择时间范围" readonly="true"><span class="span-icon" style="margin-left: -30px;"><i class="layui-icon layui-icon-date layui-font-18"></i></span>
-										<!-- <label style="width: 40px;">至：</label>
-										<input style="width: 120px;margin-right: 5px;" type="text" placeholder="普通输入框"> -->
-										<button type="button" class="mui-btn" style="background-color: #3893D9;border: 1px solid #3893D9;font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 14px;">读卡</button>
-										<button @tap="getQRCode()" type="button" class="mui-btn mui-btn-success" style="font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 14px;">扫码</button>
-										<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 14px;">查询</button>
+										<button type="button" @tap="out_readIdCard" class="mui-btn" style="background-color: #3893D9;border: 1px solid #3893D9;font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 7px;">读卡</button>
+										<button type="button" @tap="out_getQRCode" class="mui-btn mui-btn-success" style="font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 7px;">扫码</button>
+										<button type="button" @tap="out_select_reset" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 28px;">重置</button>
+										<button type="button" @tap="out_select" class="mui-btn mui-btn-outlined" style="font-size: 15px;color: #3893D9;width: 80px;margin-right: 7px;">查询</button>
+										<button type="button" @tap="TTTTTTTest2" class="mui-btn" style="background-color: #3893D9;border: 1px solid #3893D9;font-size: 15px;color: #FAFAFA;width: 80px;margin-right: 7px;">假证</button>
 									</div>
 							</div>
 							<div class="mui-row" style="margin-right: 15px;margin-bottom: 0px;">
@@ -604,11 +462,21 @@
 		<script src="../../js/utils/events.js"></script>
 		<script src="../../js/utils/vconsole.min.js"></script>
 		<script src="../../js/utils/utils.js"></script>
-		<!-- <script src="../../js/libs/jquery.js"></script> -->
+		<script src="../../js/libs/jquery.js"></script>
 		<script src="../../js/utils/usbPrinter.js"></script>
 		<script src="../../js/utils/qrCode.js"></script>
 		<script src="../../js/utils/idCardReader.js"></script>
-		<script src="../../js/utils/pushPermission.js"></script>
+		<script src="../../js/utils/publicProtocol.js"></script>
+		<script src="../../js/qiniu/qiniu.js"></script>
+		<script src="../../js/utils/cryption.js"></script>
+		<script src="../../js/cloud/load.js"></script>
+		<script src="../../js/cloud/CloudFileUtil.js"></script>
+		<script src="../../js/picVideoAudio/UploadHeadImage.js"></script>
+		<script src="../../js/utils/utils.js"></script>
+		<script src='../../js/libs/crypto-js/require.js'></script>
+		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
+		<script src='../../js/libs/encryption/sortSign.js'></script>
+		
 		<script src="../../js/layui/layui.js"></script>
 		<script type="text/html" id="queryBar">
 			<div class="mui-btn mui-btn-outlined" lay-event="detail" style="margin-right: 5px;margin-top: -10px;">详情</div>
@@ -619,9 +487,15 @@
 		</script>
 		<script type="text/javascript" charset="utf-8">
 			
-			
 			mui.init();
 			var personal = store.get(window.storageKeyName.PERSONALINFO);
+			var visitor_counter //访问人数
+			var visitor_for //访问事由
+			var certificate_type //证件类型
+			var tec_name //教师姓名
+			var stu_grd //年级
+			var stu_cls //班级
+			var stu_name //学生姓名
 			
 			var tempHead = new Vue({
 				el: "#tempHead",
@@ -630,7 +504,6 @@
 				},
 				methods:{
 					quit:function(){
-						// plus.runtime.quit();
 						var btnArray = ['否', '是'];
 						mui.confirm('注销登录后将跳转至登录页面', ' ', btnArray, function(e) {
 							if (e.index == 1) {
@@ -644,53 +517,222 @@
 			var contentData = new Vue({
 				el: "#contentData",
 				data: {
-					inActive:true,//来访登记激活
-					selectActive:false,//来访查询激活
-					outActive:false,//访客签离激活
-					type:"in",//默认显示的tab类型
-					IDCardImg:'',//身份证照片
+					visitor_in:{//来访登记
+						tabName:'',//tab Name
+						tabShow:false,//tab是否显示
+						tabActive:false,//激活tab
+						access:'',//权限符
+					},
+					visitor_query:{//访客查询
+						tabName:'',//tab Name
+						tabShow:false,//tab是否显示
+						tabActive:false,//激活tab
+						access:'',//权限符
+					},
+					visitor_out:{//访客签离
+						tabName:'',//tab Name
+						tabShow:false,//tab是否显示
+						tabActive:false,//激活tab
+						access:'',//权限符
+					},
+					defaultTab:"",//默认显示的tab类型
 					layer:'',//layer 弹出层对象
-					// 访客查询 查询栏变量
-					leave_flag:'全部',//是否离开
-					interviewee_type:'全部',//访问类型
-					visitor_name:'',//访客姓名关键字
-					times:'',//进入时间 范围
-					// 访客签离 查询栏变量
-					interviewee_type_out:'全部',//访问类型
+					index:'',//layer inde 弹出层id
+					//以上变量为页面控制使用，一般不用改
+					//访客登记
+					visitor_inData:{
+						dptList:[{title:'请选择部门',id:''}],//部门列表
+						dptSelectId:'',//选择的部门ID
+						dptUserList:[{title:'请选择部门人员',id:''}],//部门人员列表 
+						dptUserSelectId:'',//选择的部门人员ID
+						grdList:[{title:'请选择年级',id:''}],//年级列表
+						grdSelectId:'',//选择的年级ID
+						clsList:[{title:'请选择班级',id:''}],//班级列表 
+						clsSelectId:'',//选择的班级ID
+						stuList:[{title:'请选择学生',id:''}],//学生列表
+						stuSelectId:'',//选择的学生ID
+						submit:true,//是否允许提交数据
+						//表单会用到的
+						headPhoto:'',//身份证头像  base64
+						dptSelectObj:'',//选择的部门对象
+						dptUserSelectObj:'',//选择的部门人员对象
+						grdSelectObj:'',//选择的年级对象
+						clsSelectObj:'',//选择的班级对象
+						stuSelectObj:'',//选择的学生对象
+						masterObj:'',//选择的班级对应的班主任对象
+						visitor_name:'',//	访客姓名
+						visitor_for:'',//	访问事由
+						visitor_sex:0,//	访客性别
+						visitor_phone:'',//	访客手机
+						visitor_birthday:'',//	访客出生日期
+						visitor_counter:'',//	随行人数
+						visitor_goods:'',//	随行物品
+						certificate_type:'',//	证件类型
+						certificate_number:'',//	证件号码
+						img_url:'',//	访客照片
+						unit_name:'',//	访客单位
+						address:'',//	访客地址
+						plate_number:'',//	访客车牌号
+						note:'',//	备注
+						interviewee_type:0,//	被访人类型
+					},
+					//访客查询
+					visitor_queryData:{ 
+						total_count:'',//查询返回的数据总条数 设置分页用
+						leave_flagList:[{title:'全部',id:''},{title:'未签离',id:0},{title:'已签离',id:1}],//是否离开 列表
+						visitor_typeList:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}],//访问类型 列表
+						//表单会用到的
+						visitor_name:'',//访客姓名关键字
+						leave_flagSelectId:'',//是否离开  选择的id
+						visitor_typeSelectId:'',//访问类型  选择的id
+						times:'',//	进入开始时间-结束时间  范围
+						page_number:1,//	当前页数
+						page_size:8,//	每页记录数
+					},
+					//访客签离
+					visitor_outData:{
+						IDCardImg:'',//身份证头像  url
+						visitor_typeList:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}],//访问类型 列表
+						//表单会用到的
+						certificate_number:'',//	证件号码
+						record_code:'',//	访问单号
+						visitor_name:'',//访客姓名关键字
+						visitor_typeSelectId:'',//访问类型  选择的id
+						times:'',//	进入开始时间-结束时间  范围
+						page_number:1,//	当前页数
+						page_size:8,//	每页记录数
+						
+						//弹出层 用到
+						formData:{},//行数据
+						leave_time:'',//离开时间
+					},
 				},
 				methods:{
-					tabClick:function(type){//tab按钮点击
-						if(this.type===type){}else{
-							this.type=type
-							this.inActive=false
-							this.selectActive=false
-							this.outActive=false
-							if(type==='in'){
-								this.inActive=true
-							}else if(type==='select'){
-								this.selectActive=true
+					tabClick:function(tab){//tab按钮点击
+						if(this.defaultTab===tab){}else{
+							this.defaultTab=tab
+							this.visitor_in.tabActive=false
+							this.visitor_query.tabActive=false
+							this.visitor_out.tabActive=false
+							if(tab==='in'){
+								this.visitor_in.tabActive=true
+							}else if(tab==='select'){
+								this.visitor_query.tabActive=true
 								getQueryData();
-							}else if(type==='out'){
-								this.outActive=true
+							}else if(tab==='out'){
+								this.visitor_out.tabActive=true
 								getOutData();
 							}
 						}
 					},
-					printPage:function(){//访客登记  保存并打印按钮
-						var visitorID="访问单号：202166666789102235"
-						plus.usbPrinter.printPage(function(args){
-							console.log(args);
-						},function(args){
-							console.log(args);
-						},visitorID)
+					bottomTabClick:function(type){//底部tab栏切换到学生时，获取年级
+						if(type=='tec'){//被访人类型 教师
+							this.visitor_inData.interviewee_type=0
+						}else{//被访人类型 学生
+							this.visitor_inData.interviewee_type=1
+							if(this.visitor_inData.grdList.length===1){
+								getGrdList();
+							}
+						}
+					},
+					dptSelectChanged:function(event){//访客登记 部门选择变动监听
+						var dptId=this.visitor_inData.dptSelectId
+						var dptList =this.visitor_inData.dptList
+						for (var i = 0; i < dptList.length; i++) {
+							if(dptId===dptList[i].id){
+								this.visitor_inData.dptSelectObj=dptList[i]
+							}
+						}
+						getDptUser(dptId);
+					},
+					dptUserSelectChanged:function(event){//访客登记 部门人员选择变动监听
+						var dptUserId=this.visitor_inData.dptUserSelectId
+						var dptUserList =this.visitor_inData.dptUserList
+						for (var i = 0; i < dptUserList.length; i++) {
+							if(dptUserId===dptUserList[i].id){
+								this.visitor_inData.dptUserSelectObj=dptUserList[i]
+							}
+						}
+					},
+					grdSelectChanged:function(event){//访客登记 年级选择变动监听
+						var grdId=this.visitor_inData.grdSelectId
+						var grdList =this.visitor_inData.grdList
+						for (var i = 0; i < grdList.length; i++) {
+							if(grdId===grdList[i].id){
+								this.visitor_inData.grdSelectObj=grdList[i]
+							}
+						}
+						this.visitor_inData.masterObj=''
+						getClsList(grdId);
+					},
+					clsSelectChanged:function(event){//访客登记 班级选择变动监听
+						var clsId=this.visitor_inData.clsSelectId
+						var clsList =this.visitor_inData.clsList
+						for (var i = 0; i < clsList.length; i++) {
+							if(clsId===clsList[i].id){
+								this.visitor_inData.clsSelectObj=clsList[i]
+							}
+						}
+						this.visitor_inData.masterObj=''
+						getStuList(this.visitor_inData.grdSelectObj.id,clsId);
+						getClsMaster(this.visitor_inData.grdSelectObj.id,clsId);
+					},
+					stuSelectChanged:function(event){//访客登记 学生选择变动监听
+						var stuId=this.visitor_inData.stuSelectId
+						var stuList =this.visitor_inData.stuList
+						for (var i = 0; i < stuList.length; i++) {
+							if(stuId===stuList[i].id){
+								this.visitor_inData.stuSelectObj=stuList[i]
+							}
+						}
+					},
+					saveData:function(type){//访客登记  保存按钮
+						if(contentData.visitor_inData.visitor_name==''){
+							mui.toast('请填写姓名')
+						}else if(contentData.visitor_inData.visitor_for==''){
+							mui.toast('请填写访问事由')
+						}else if(contentData.visitor_inData.visitor_counter==''){
+							mui.toast('请填写随行人数')
+						}else if(contentData.visitor_inData.interviewee_type==0 && contentData.visitor_inData.dptUserSelectObj==''){
+							mui.toast('请选择部门人员姓名')
+						}else if(contentData.visitor_inData.interviewee_type==1 && contentData.visitor_inData.stuSelectObj==''){
+							mui.toast('请选择学生')
+						}else{
+							if(this.visitor_inData.submit){
+								this.visitor_inData.submit=false;
+								events.showWaiting();
+								if(contentData.visitor_inData.headPhoto){
+									upLoadIDCardImg(contentData.visitor_inData.headPhoto.split(",")[1],function(img_url){
+										saveData(img_url,type)
+									},function(){
+										contentData.visitor_inData.submit=true;
+										events.closeWaiting();
+									});
+								}else{
+									saveData(null,type)
+								}
+							}
+						}
+					},
+					resetData:function(){//访客登记  取消按钮
+						resetData()
 					},
 					scan:function(){//读证按钮点击
 						events.showWaiting("正在读证...")
+						var that=this
 						plus.idCard.readIDCard(function(args){
 							var jsonObj=args[0];
 							console.log(jsonObj);
-							var idcardImg=jsonObj.bitmap;
-							contentData.IDCardImg="data:image/jpeg;base64,"+idcardImg;
+							resetData();
+							var hdPhoth=jsonObj.headPhoto;
+							var newHeadPhoto="data:image/jpg;base64,"+hdPhoth
+							that.visitor_inData.headPhoto=newHeadPhoto;
+							that.visitor_inData.visitor_name=jsonObj.name.replace(/\s*/g,"");
+							that.visitor_inData.visitor_sex=jsonObj.sex.indexOf('男')==-1?0:1;
+							that.visitor_inData.visitor_birthday=jsonObj.born;
+							that.visitor_inData.certificate_type='身份证';
+							that.visitor_inData.certificate_number=jsonObj.no;
+							that.visitor_inData.address=jsonObj.address;
 							events.closeWaiting()
 						},function(args){
 							events.closeWaiting()
@@ -699,17 +741,44 @@
 					},
 					layerYes:function(){//弹出层确定按钮
 						// layer.close(index);
-						mui.toast('TODO 协议签离')
+						if(contentData.visitor_outData.leave_time==''){
+							mui.toast('请选择离开时间')
+						}else{
+							setLeave(contentData.visitor_outData.formData.id,contentData.visitor_outData.leave_time);
+						}
 					},
 					layerNo:function(){//弹出层取消按钮
 						layer.close(this.index);
 					},
-					visitor_select:function(){
-						mui.toast("666："+this.times)
+					visitor_select:function(){//访客查询 
+						getQueryData();
 					},
-					getQRCode:function(){//访客签离 获取二维码内容
+					visitor_select_reset:function(){//访客查询 重置
+						this.visitor_queryData.total_count=''
+						this.visitor_queryData.visitor_name=''
+						this.visitor_queryData.leave_flagSelectId=''
+						this.visitor_queryData.visitor_typeSelectId=''
+						this.visitor_queryData.times=''
+						this.visitor_queryData.page_number=1
+						getQueryData();
+					},
+					out_readIdCard:function(){//访客签离  读卡
+						events.showWaiting("正在读证...")
+						plus.idCard.readIDCard(function(args){
+							var jsonObj=args[0];
+							console.log(jsonObj);
+							var idCardNumber=jsonObj.no;
+							checkAndOpenData(idCardNumber,'');
+							events.closeWaiting()
+						},function(args){
+							events.closeWaiting()
+							console.log("报错了。。。"+args);
+						})
+					},
+					out_getQRCode:function(){//访客签离 获取二维码内容
 					    events.showWaiting('请稍后')
 						setTimeout(function(){events.closeWaiting();},4000)
+						var that =this;
 						plus.qrCode.getQRCode(function(args){
 							console.log("args: " + JSON.stringify(args));
 							var str=args[0];
@@ -725,18 +794,47 @@
 										if(resultCode == 0) {
 											plus.qrCode.playBeep();
 											var qrcode = data.getStringExtra("qrCode");
-											console.log("扫描结果："+qrcode);
+											checkAndOpenData('',qrcode);
 										}
 									}
 								}
 							}
 						},function(args){events.closeWaiting()})
+					},
+					out_select:function(){//访客签离 查询按钮
+						getOutData();
+					},
+					out_select_reset:function(){//访客签离 重置按钮
+						this.visitor_outData.IDCardImg=''
+						this.visitor_outData.certificate_number=''
+						this.visitor_outData.record_code=''
+						this.visitor_outData.visitor_name=''
+						this.visitor_outData.visitor_typeSelectId=''
+						this.visitor_outData.times=''
+						this.visitor_outData.page_number=1
+						getOutData();
+					},
+					
+					TTTTTTTest:function(){//测试用
+						var that=this
+						resetData();
+						var jsonObj=  {name:"青晴",sex:"女 \/ M",nation:"汉",born:"1998.07.15",address:"山东省济南市天桥区铜元局前街1号金冠商务中心309",period:"2020.06.22 - 2040.06.22",apartment:"邹平县公安局",country:"112",no:"372330199807155152",card_type:" ",reserve:" ",headPhoto:"/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wAARCAcdBQADASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECA//EACcQAQEBAAEDAwUAAwEBAAAAAAABETECIUFRYYEScZHB8KGx0fHh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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"}
+						var newHeadPhoto="data:image/jpg;base64,"+jsonObj.headPhoto
+						that.visitor_inData.headPhoto=newHeadPhoto;
+						that.visitor_inData.visitor_name=jsonObj.name.replace(/\s*/g,"");
+						that.visitor_inData.visitor_sex=jsonObj.sex.indexOf('男')==-1?0:1;
+						that.visitor_inData.visitor_birthday=jsonObj.born;
+						that.visitor_inData.certificate_type='身份证';
+						that.visitor_inData.certificate_number=jsonObj.no;
+						that.visitor_inData.address=jsonObj.address;
+					},
+					TTTTTTTest2:function(){//测试用
+						checkAndOpenData('372330199807155152','');
 					}
 				}
 			});
 			
 			mui.plusReady(function() {
-				var tempMenu = store.get(window.storageKeyName.MENULIST);
 				var personal = store.get(window.storageKeyName.PERSONALINFO);
 				mui('.mui-scroll-wrapper').scroll({
 					bounce: false,
@@ -758,45 +856,427 @@
 					}, 1000);
 					return false;
 				};
+				//初始化菜单
+				setMenus();
+				//初始化下拉
 				initLayuiFunc();
-			});
+			}); 
+			
+			//初始化菜单
+			function setMenus(){
+				var menus=store.get(window.storageKeyName.MENULIST);
+				//根据服务器传回来的菜单，设置要显示的菜单，名称和权限符， 这里的menus已经在loginIndex里进行了匹配和筛选，如果没有菜单，不允许登录，如果能走到这里，说明至少有一个菜单项
+				for (var i = 0; i < menus[0].childList.length; i++) {
+					var child=menus[0].childList[i]
+					if(child.url==="schapp_Visitor_In"){
+						contentData.visitor_in.tabName=child.name
+						contentData.visitor_in.tabShow=true
+						contentData.visitor_in.access=child.access
+					}else if(child.url==="schapp_Visitor_Query"){
+						contentData.visitor_query.tabName=child.name
+						contentData.visitor_query.tabShow=true
+						contentData.visitor_query.access=child.access
+					}else if(child.url==="schapp_Visitor_Out"){
+						contentData.visitor_out.tabName=child.name
+						contentData.visitor_out.tabShow=true
+						contentData.visitor_out.access=child.access
+					} 
+				}
+				//判断默认要显示的第一个tab
+				var firstMenu=menus[0].childList[0];
+				if(firstMenu.url==="schapp_Visitor_In"){
+					contentData.defaultTab='in' 
+					contentData.visitor_in.tabActive=true
+					getDpt(); 
+				}else if(firstMenu.url==="schapp_Visitor_Query"){
+					contentData.defaultTab='select'
+					contentData.visitor_query.tabActive=true
+					getQueryData();
+				}else if(firstMenu.url==="schapp_Visitor_Out"){
+					contentData.defaultTab='out'
+					contentData.visitor_out.tabActive=true
+					getOutData();
+				} 
+				
+				document.getElementById('slider').addEventListener('slide', function(e) {
+					if(e.detail.slideNumber === 0){
+						contentData.visitor_inData.interviewee_type=0
+					}
+					if (e.detail.slideNumber === 1 && contentData.visitor_inData.grdList.length===1) {
+						contentData.visitor_inData.interviewee_type=1
+						getGrdList();
+					} 
+				});
+			}
+			
+			//访客登记 提交数据
+			function saveData(url,type){
+				const params = {
+					visitor_name:contentData.visitor_inData.visitor_name,//	访客姓名
+					visitor_for:contentData.visitor_inData.visitor_for,//	访问事由
+					visitor_sex:contentData.visitor_inData.visitor_sex,//	访客性别
+					visitor_phone:contentData.visitor_inData.visitor_phone,//	访客手机
+					visitor_birthday:contentData.visitor_inData.visitor_birthday,//	访客出生日期
+					visitor_counter:contentData.visitor_inData.visitor_counter,//	随行人数
+					visitor_goods:contentData.visitor_inData.visitor_goods,//	随行物品
+					certificate_type:contentData.visitor_inData.certificate_type,//	证件类型
+					certificate_number:contentData.visitor_inData.certificate_number,//	证件号码
+					img_url:url?url:'',//	访客照片
+					unit_name:contentData.visitor_inData.unit_name,//	访客单位
+					address:contentData.visitor_inData.address,//	访客地址
+					plate_number:contentData.visitor_inData.plate_number,//	访客车牌号
+					note:contentData.visitor_inData.note,//	备注
+					interviewee_type:contentData.visitor_inData.interviewee_type,//	被访人类型
+					teacher_code:'',//	教师代码
+					teacher_name:'',//	教师姓名
+					dpt_code:'',//	部门代码
+					dpt_name:'',//	部门名称
+					stu_code:'',//	学生代码
+					stu_name:'',//	学生名称
+					grd_code:'',//	年级代码
+					grd_name:'',//	年级名称
+					cls_code:'',//	班级代码
+					cls_name:'',//	班级名称
+					head_teacher_code:'',//	班主任代码
+					head_teacher_name:'',//	班主任名称
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				if(contentData.visitor_inData.interviewee_type==0){
+					params.teacher_code=contentData.visitor_inData.dptUserSelectObj.id//	教师代码
+					params.teacher_name=contentData.visitor_inData.dptUserSelectObj.title//	教师姓名
+					params.dpt_code=contentData.visitor_inData.dptSelectObj.id//	部门代码
+					params.dpt_name=contentData.visitor_inData.dptSelectObj.title//	部门名称
+				}else if(contentData.visitor_inData.interviewee_type==1){
+					params.stu_code=contentData.visitor_inData.stuSelectObj.id//	学生代码
+					params.stu_name=contentData.visitor_inData.stuSelectObj.title//	学生名称
+					params.grd_code=contentData.visitor_inData.grdSelectObj.id//	年级代码
+					params.grd_name=contentData.visitor_inData.grdSelectObj.title//	年级名称
+					params.cls_code=contentData.visitor_inData.clsSelectObj.id//	班级代码
+					params.cls_name=contentData.visitor_inData.clsSelectObj.title//	班级名称
+					params.head_teacher_code=contentData.visitor_inData.masterObj.user_code//	班主任代码
+					params.head_teacher_name=contentData.visitor_inData.masterObj.user_name//	班主任名称
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/addRecord', {}, params, 2, function(data) {
+					console.log("data: " + JSON.stringify(data));
+					if (data.code == 0) {
+						 if(type){
+							mui.toast("正在打印凭条");
+							var record_code=data.msg
+						 	printData(record_code);
+						 }else{
+							mui.toast("数据保存成功");
+						 }
+						 resetData();
+					}else{
+						mui.toast(data.msg);
+					}
+					contentData.visitor_inData.submit=true;
+					events.closeWaiting();
+				});
+			}
+			//访客登记 查询 打印数据
+			function printData(record_code){
+				plus.usbPrinter.printPage(function(args){
+					console.log(args);
+				},function(args){
+					console.log(args);
+				},record_code)
+			}
+			
+			//访客登记 重置表单数据
+			function resetData(){
+				contentData.visitor_inData.dptSelectId=''//选择的部门ID
+				contentData.visitor_inData.dptUserList=[{title:'请选择部门人员',id:''}]//部门人员列表 
+				contentData.visitor_inData.dptUserSelectId=''//选择的部门人员ID
+				contentData.visitor_inData.grdSelectId=''//选择的年级ID
+				contentData.visitor_inData.clsList=[{title:'请选择班级',id:''}]//班级列表 
+				contentData.visitor_inData.clsSelectId=''//选择的班级ID
+				contentData.visitor_inData.stuList=[{title:'请选择学生',id:''}]//学生列表
+				contentData.visitor_inData.stuSelectId=''//选择的学生ID
+				contentData.visitor_inData.headPhoto=''//身份证头像  base64
+				contentData.visitor_inData.dptSelectObj=''//选择的部门对象
+				contentData.visitor_inData.dptUserSelectObj=''//选择的部门人员对象
+				contentData.visitor_inData.grdSelectObj=''//选择的年级对象
+				contentData.visitor_inData.clsSelectObj=''//选择的班级对象
+				contentData.visitor_inData.stuSelectObj=''//选择的学生对象
+				contentData.visitor_inData.masterObj=''//选择的班级对应的班主任对象
+				contentData.visitor_inData.visitor_name=''//	访客姓名
+				contentData.visitor_inData.visitor_for=''//	访问事由
+				contentData.visitor_inData.visitor_sex=0//	访客性别
+				contentData.visitor_inData.visitor_phone=''//	访客手机
+				contentData.visitor_inData.visitor_birthday=''//	访客出生日期
+				contentData.visitor_inData.visitor_counter=''//	随行人数
+				contentData.visitor_inData.visitor_goods=''//	随行物品
+				contentData.visitor_inData.certificate_type=''//	证件类型
+				contentData.visitor_inData.certificate_number=''//	证件号码
+				contentData.visitor_inData.img_url=''//	访客照片
+				contentData.visitor_inData.unit_name=''//	访客单位
+				contentData.visitor_inData.address=''//	访客地址
+				contentData.visitor_inData.plate_number=''//	访客车牌号
+				contentData.visitor_inData.note=''//	备注
+			}
+			
+			// 上传身份证头像
+			function upLoadIDCardImg(base64Str,callback,ecallback){
+				var wd =events.showWaiting();
+				var fileName='IDcardHeadPhoto'+new Date().getTime(); 
+				UploadHeadImage.uploadIDCardHeadImge(wd,1,fileName,base64Str,function(domain){
+					console.log("domain: " + JSON.stringify(domain));
+					callback(domain)
+				},function(){
+					ecallback();
+					wd.close();
+				})
+			}
+			
+			//获取私有空间的身份证头像
+			function getIDCardImg(domain,callback){
+				var wd =events.showWaiting();
+				var getDownToken = {
+					appId: window.storageKeyName.QN_APPID, //int 必填 项目id
+					appKey: window.storageKeyName.QN_APPKEY,
+					urls: [domain] //array 必填 需要获取下载token文件的路径
+				}
+				var getDownTokenUrl = window.storageKeyName.QNGETDOWNTOKENFILE;
+				CloudFileUtil.getQNDownToken(getDownTokenUrl, getDownToken, function(data) {
+					var urlStr = encodeURI(data.Data[0].Value)
+					callback(urlStr);
+					wd.close();
+				}, function(xhr, type, errorThrown) {
+					mui.toast('获取文件失败 ' + type); 
+					wd.close();
+				});
+			}
+			
+			//删除私有空间的身份证头像
+			function deleteIDCardImg(domain){
+				console.log("开始删除进程咯");
+				var wd =events.showWaiting();
+				var data = {
+					appId: window.storageKeyName.QN_APPID,  
+					appKey: window.storageKeyName.QN_APPKEY,
+					urls: [domain]  
+				}
+				CloudFileUtil.BatchDelete(window.storageKeyName.QNGETTOKENDELETE,data,function(da){
+					console.log("da:"+JSON.stringify(da))
+					console.log("删除成功咯");
+					wd.close();
+				},function(xhr, type, errorThrown){
+					mui.toast("文件删除失败！")
+					wd.close();
+				})
+			}
+			
+			//访客登记——获取部门 1.13.学校部门
+			function getDpt() {
+				events.showWaiting();
+				const params = {
+					sch_code:personal.sch_code,
+					page_size:'999',
+					page_number:'1',
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'dpt', {}, params, 2, function(data) {
+					if (data.code == 0) {
+						 var dpts = data.data.list;
+						 for (var i = 0; i < dpts.length; i++) {
+						 	var tempM = dpts[i];
+						 	tempM.id = tempM.dpt_code;
+						 	tempM.title = tempM.dpt_name;
+						 }
+						 contentData.visitor_inData.dptList=[{title:'请选择部门',id:''}].concat(dpts)
+						 contentData.visitor_inData.dptSelectId='';
+					}else{
+						mui.toast(data.msg);
+					}
+					events.closeWaiting();
+				});
+			}
+			
+			//访客登记——获取部门用户 1.14.学校部门用户
+			function getDptUser(dptId) {
+				events.showWaiting();
+				const params = {
+					dpt_codes:dptId,
+					page_size:'999',
+					page_number:'1',
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'dptUser', {}, params, 2, function(data) {
+					console.log(JSON.stringify(data))
+					if (data.code == 0) {
+						var users = data.data.list;
+						if(users.length>0 ){
+							for (var i = 0; i < users.length; i++) {
+								var tempM = users[i];
+								tempM.id = tempM.user_code;
+								tempM.title = tempM.user_name;
+							}
+							contentData.visitor_inData.dptUserList=[{title:'请选择部门人员',id:''}].concat(users)
+							contentData.visitor_inData.dptUserSelectId='';
+						}else{
+							mui.toast('当前部门没有人员');
+						}
+					}else{
+						mui.toast(data.msg);
+					}
+					events.closeWaiting();
+				});
+			}
+			
+			// 访客登记——获取数据范围授权：年级 1.15
+			function getGrdList() { 
+				events.showWaiting();
+				comData = {
+					op_code:'index',
+					get_grd:true,
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'acl/dataRange', {}, comData, 2, function(data) {
+					console.log(JSON.stringify(data))
+					events.closeWaiting();
+					if (data.code == 0) {
+						var grds = data.data.grd_list;
+						var grdList=[];
+						grds.map(function(currentValue) {
+							var obj = {};
+							obj.id = currentValue.value;
+							obj.title = currentValue.name;
+							grdList.push(obj)
+						})
+						if(grdList.length>0 ){
+							contentData.visitor_inData.grdList=[{title:'请选择年级',id:''}].concat(grdList)
+							contentData.visitor_inData.grdSelectId='';
+						}else{
+							mui.toast('无数据授权 无法获取年级');
+						}
+					} else {
+						mui.toast(data.msg);
+					}
+				});
+			}
+			//访客登记——获取数据范围授权：班级 1.15
+			function getClsList(grd_id) {
+				events.showWaiting();
+				const params = {
+					op_code:'index',
+					grd_code:grd_id,
+					get_cls:true,
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'acl/dataRange', {}, params, 2, function(data) {
+					console.log(JSON.stringify(data))
+					events.closeWaiting();
+					if (data.code == 0) {
+						var clss = data.data.cls_list;
+						var clssList=[];
+						clss.map(function(currentValue) {
+							var obj = {};
+							obj.id = currentValue.value;
+							obj.title = currentValue.name;
+							clssList.push(obj)
+						})
+						if(clssList.length>0 ){
+							contentData.visitor_inData.clsList=[{title:'请选择班级',id:''}].concat(clssList)
+							contentData.visitor_inData.clsSelectId='';
+						}else{
+							mui.toast('年级下无班级！');
+						}
+					}else{
+						mui.toast(data.msg);
+					}
+				});
+			}
+			//访客登记——获取数据范围授权：学生 1.15
+			function getStuList(grd_id,cls_id) {
+				events.showWaiting();
+				const params = {
+					op_code:'index',
+					grd_code: grd_id,
+					cls_code: cls_id,
+					get_stu:true,
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'acl/dataRange', {}, params, 2, function(data) {
+					console.log(JSON.stringify(data))
+					events.closeWaiting();
+					if (data.code == 0) {
+						var stu = data.data.stu_list;
+						var stuList=[];
+						stu.map(function(currentValue) {
+							var obj = {};
+							obj.id = currentValue.value;
+							obj.title = currentValue.name;
+							stuList.push(obj)
+						})
+						if(stuList.length>0 ){
+							contentData.visitor_inData.stuList=[{title:'请选择学生',id:''}].concat(stuList)
+							contentData.visitor_inData.stuSelectId='';
+						}else{
+							mui.toast('班级下无学生');
+						}
+					}else{
+						mui.toast(data.msg);
+					}
+				});
+			}
+			
+			// 访客登记——获取班主任 1.6
+			function getClsMaster(grd_code,cls_code) { 
+				comData = {
+					grd_codes:grd_code,
+					cls_codes:cls_code,
+					index_code: contentData.visitor_in.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_HR_SUB + 'clsTec', {}, comData, 2, function(data) {
+					if (data.code == 0) {
+						 var tList=data.data.list
+						 var master='';
+						 for (var i = 0; i < tList.length; i++) {
+							if(tList[i].is_master==1){
+								master=tList[i]
+							}
+						 }
+						contentData.visitor_inData.masterObj=master
+					} else {
+						mui.toast(data.msg);
+					}
+				});
+			}
 			
 			//初始化layui相关的下拉菜单
 			function initLayuiFunc(){
-				var visitors=[]
-				for (var i = 1; i <= 10; i++) {
-					var vobj={
-						title:i+' 人',
-						id:i
-					}
-					visitors.push(vobj)
-				}
 				layui.use(['dropdown','laydate'], function(){
 				  // 来访登记
-				  var visitor_counter = layui.dropdown //访问人数
-				  var visitor_for = layui.dropdown //访问事由
-				  var certificate_type = layui.dropdown //证件类型
-				  var tec_dpt = layui.dropdown //部门
-				  var tec_name = layui.dropdown //教师姓名
-				  var stu_grd = layui.dropdown //年级
-				  var stu_cls = layui.dropdown //班级
-				  var stu_name = layui.dropdown //学生姓名
+				  visitor_counter = layui.dropdown //访问人数
+				  visitor_for = layui.dropdown //访问事由
+				  certificate_type = layui.dropdown //证件类型
+				  var visitors=[]
+				  for (var i = 1; i <= 10; i++) {
+				  	var vobj={
+				  		title:i+' 人',
+				  		id:i
+				  	}
+				  	visitors.push(vobj)
+				  }
 				  visitor_counter.render({
 				    elem: '#visitor_counter' //可绑定在任意元素中，此处以上述按钮为例
 					// ,style:'width:28%'
 				    ,data:visitors
 				    ,id: 'visitor_counter'
 				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
+				      // console.log(JSON.stringify(obj));
+					  contentData.visitor_inData.visitor_counter=obj.id
 				    }
 				  });
+				  
 				  visitor_for.render({
 				    elem: '#visitor_for'//可绑定在任意元素中，此处以上述按钮为例
 				  	// ,style:'width:28%'
 				    ,data:[{title:'公务',id:'公务'},{title:'探亲',id:'探亲'},{title:'其他',id:'其他'}]
 				    ,id: 'visitor_for'
 				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
+					  contentData.visitor_inData.visitor_for=obj.id
 				    }
 				  });
 				  certificate_type.render({
@@ -804,102 +1284,41 @@
 				    ,data:[{title:'身份证',id:'身份证'},{title:'学生证',id:'学生证'},{title:'护照',id:'护照'}]
 				    ,id: 'certificate_type'
 				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
+					  contentData.visitor_inData.certificate_type=obj.id
 				    }
 				  });
-				  tec_dpt.render({
-				    elem: '#tec_dpt'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'部门1',id:'10000'},{title:'部门2',id:'10001'},{title:'部门3',id:'10003'}]
-				    ,id: 'tec_dpt'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
-				  tec_name.render({
-				    elem: '#tec_name'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'教师1',id:'身份证'},{title:'教师2',id:'学生证'},{title:'教师3',id:'护照'}]
-				    ,id: 'tec_name'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
-				  stu_grd.render({
-				    elem: '#stu_grd'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'一年级',id:'10000'},{title:'二年级',id:'10001'},{title:'三年级',id:'10003'}]
-				    ,id: 'stu_grd'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
-				  stu_cls.render({
-				    elem: '#stu_cls'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'1601班',id:'身份证'},{title:'1602班',id:'学生证'},{title:'1603班',id:'护照'}]
-				    ,id: 'stu_cls'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
-				  stu_name.render({
-				    elem: '#stu_name'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'学生1',id:'身份证'},{title:'学生2',id:'学生证'},{title:'学生3',id:'护照'}]
-				    ,id: 'stu_name'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
+				   
 				  
 				  // 访客查询
-				  var leave_flag = layui.dropdown //是否离开
-				  var interviewee_type = layui.dropdown //被访人
 				  var begin_time_in = layui.laydate;//进入时间
-				  leave_flag.render({
-				    elem: '#leave_flag'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'全部',id:''},{title:'未签离',id:0},{title:'已签离',id:1}]
-				    ,id: 'leave_flag'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
-				  interviewee_type.render({
-				    elem: '#interviewee_type'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}]
-				    ,id: 'interviewee_type'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
 				  begin_time_in.render({
 				      elem: '#begin_time_in'
 				      ,range: '至'
+					  ,max: 0 //0天后
 					  ,theme: '#3893D9'
 					 ,done: function(value, date, endDate){
-						 contentData.times=value
-					     console.log(value); //得到日期生成的值，如：2017-08-18
-					     console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-					     console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					     // console.log(value); //得到日期生成的值，如：2017-08-18
+					     // console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+					     // console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+						 contentData.visitor_queryData.times=value
 					   }
 				    });
 				  
+				  
+				  
 				  // 访客签离
-				  var interviewee_type_out = layui.dropdown//被访人
 				  var begin_time_ino = layui.laydate;//进入时间
 				  var laytoast_leavetime=layui.laydate;//弹出层 离开时间
-				  interviewee_type_out.render({
-				    elem: '#interviewee_type_out'//可绑定在任意元素中，此处以上述按钮为例
-				    ,data:[{title:'全部',id:''},{title:'教职工',id:0},{title:'学生',id:1}] 
-				    ,id: 'interviewee_type_out'
-				    ,click: function(obj){
-				      console.log(JSON.stringify(obj));
-				    }
-				  });
 				  begin_time_ino.render({
 				      elem: '#begin_time_ino'
 				       ,range: '至'
 					   ,theme: '#3893D9'
+					   ,max: 0 //0天后
 					   ,done: function(value, date, endDate){
-					       console.log(value); //得到日期生成的值，如：2017-08-18
-					       console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-					       console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					       // console.log(value); //得到日期生成的值，如：2017-08-18
+					       // console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+					       // console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+						   contentData.visitor_outData.times=value
 					     }
 				    });
 					
@@ -908,9 +1327,10 @@
 				       ,type: 'datetime'
 					   ,theme: '#3893D9'
 					   ,done: function(value, date, endDate){
-					       console.log(value); //得到日期生成的值，如：2017-08-18
-					       console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-					       console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+					       // console.log(value); //得到日期生成的值，如：2017-08-18
+					       // console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+					       // console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+						   contentData.visitor_outData.leave_time=value
 					     }
 				    });
 				});
@@ -918,166 +1338,235 @@
 			
 			//获取表格数据——访客查询
 			function getQueryData(){
-				layui.use(['laypage','table'], function(){
+				events.showWaiting();
+				var times=contentData.visitor_queryData.times
+				var beginTime='';
+				var endTime='';
+				if(times){
+					beginTime=times.split("至")[0];
+					endTime=times.split("至")[1];
+				}
+				const params = {
+					certificate_number:'',//	证件号码
+					record_code:'',//	访问单号
+					visitor_name:contentData.visitor_queryData.visitor_name,//	访问者姓名
+					leave_flag:contentData.visitor_queryData.leave_flagSelectId,//	是否离开
+					interviewee_type:contentData.visitor_queryData.visitor_typeSelectId,//	访问类型
+					begin_in_time:beginTime,//	进入开始时间
+					end_in_time:endTime,//	进入结束时间
+					begin_leave_time:'',//	离开开始时间
+					end_leave_time:'',//	离开结束时间
+					page_number:contentData.visitor_queryData.page_number,//	当前页数
+					page_size:contentData.visitor_queryData.page_size,//	每页记录数
+					index_code: contentData.visitor_query.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/page', {}, params, 2, function(da) {
+					console.log("da: " + JSON.stringify(da));
+					if (da.code == 0) {
+						if(contentData.visitor_queryData.total_count!=da.data.total_row){
+							contentData.visitor_queryData.total_count=da.data.total_row
+							initQueryPage(da.data.total_row);
+						}
+						layui.use('table', function(){
+							var table = layui.table;
+							var list=da.data.list
+							for (var i = 0; i < list.length; i++) {
+								var item=list[i]
+								item.grdcls='';
+								if(item.grd_name && item.cls_name){
+									item.grdcls=item.grd_name+item.cls_name
+								}
+								item.leave_flag_name='未签离'
+								if(item.leave_flag){
+									item.leave_flag_name='已签离'
+								}
+							}
+							initQueryTable(table,list);
+						})
+					}else{
+						mui.toast(da.msg);
+					}
+				});
+			}
+			
+			//初始化分页——访客查询
+			function initQueryPage(_count){
+				layui.use('laypage', function(){
 				  var laypage = layui.laypage;
-				  var table = layui.table;
-				  initQueryTable(table,'',[]);
 				  //执行一个laypage实例
 				  laypage.render({
 				    elem: 'pageQuery' //注意，这里的 test1 是 ID，不用加 # 号
-				    ,count: 150  //TODO
-					,limit:8
+				    ,count: _count 
+					,limit:contentData.visitor_queryData.page_size
 					,theme: '#3893D9'
 					,first: '首页'
 					,last: '尾页'
 					 ,jump: function(obj, first){
-						 console.log(first); 
+						console.log(first); 
 					    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
 					    console.log(obj.limit); //得到每页显示的条数
-						events.showWaiting()
-						//TODO 模拟请求数据
-						setTimeout(function(){
-							var da=[];
-							var datassss3=[{"id":"张三三1","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
-							var datassss2=[{"id":"张三三2","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
-							var datassss1=[{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
-							if(obj.curr==1){
-								da=datassss1
-							}
-							if(obj.curr==2){
-								da=datassss2
-							}
-							if(obj.curr==3){
-								da=datassss3
-							}
-							initQueryTable(table,'1',da);
-						},100)
+						if(!first){
+							events.showWaiting()
+							contentData.visitor_queryData.page_number=obj.curr
+							getQueryData();
+						}
 					  }
 				  });
 				});
 			}
+			
 			//初始化表格——访客查询
-			function initQueryTable(table,ty,da){
-				var don=''
-				if(ty){//ty为空，代表初始化表格，不为空的任意字符串，代表重载表格加载数据
-					don=function(res, curr, count){
-						events.closeWaiting();
-					}
-				}
+			function initQueryTable(table,da){
+				var	don=function(res, curr, count){events.closeWaiting();}
 				table.render({
 					elem: '#queryT'
 					,height: 'full-203' 
 					,cellMinWidth:110
-					,limit:8
+					,limit:contentData.visitor_queryData.page_size
 					,cols: [[ //表头
-					  {align: 'center',field: 'id', title: '姓名', rowspan: 2}
-					  ,{align: 'center',field: 'username', title: '随行人数',  rowspan: 2}
-					  ,{field: 'sex',width:200, title: '访问事由', rowspan: 2 }
+					  {align: 'center',field: 'visitor_name', title: '姓名', rowspan: 2}
+					  ,{align: 'center',field: 'visitor_counter', title: '随行人数',  rowspan: 2}
+					  ,{field: 'sex',width:200,field: 'visitor_for',title: '访问事由', rowspan: 2 }
 					  ,{align: 'center', title: '被访教职工', colspan:2}
 					  ,{align: 'center', title: '被访学生', colspan:3}
-					  ,{align: 'center',field: 'experience',width:200, title: '进入时间', rowspan: 2 }
-					  ,{align: 'center',field: 'classify',width:200, title: '签离时间', rowspan: 2}
-					  ,{fixed: 'right',align: 'center',field: 'score', title: '是否离开',  rowspan: 2}
+					  ,{align: 'center',field: 'in_time',width:200, title: '进入时间', rowspan: 2 }
+					  ,{align: 'center',field: 'leave_time',width:200, title: '签离时间', rowspan: 2}
+					  ,{fixed: 'right',align: 'center',field: 'leave_flag_name', title: '是否离开',  rowspan: 2}
 					  ,{fixed: 'right',align: 'center',width:140, title: '操作',  rowspan: 2,toolbar: '#queryBar'}
 					  ]
 					  ,[
-					   {align: 'center',field: 'city', title: '部门',}
-					   ,{align: 'center',field: 'sign', title: '姓名',}
-					   ,{align: 'center',field: 'experience', title: '年级班级',}
-					   ,{align: 'center',field: 'classify', title: '学生',}
-					   ,{align: 'center',field: 'wealth', title: '班主任',}
+					   {align: 'center',field: 'dpt_name', title: '部门',}
+					   ,{align: 'center',field: 'teacher_name', title: '姓名',}
+					   ,{align: 'center',field: 'grdcls', title: '年级班级',}
+					   ,{align: 'center',field: 'stu_name', title: '学生',}
+					   ,{align: 'center',field: 'head_teacher_name', title: '班主任',}
 					   ]]
 					   ,done:don
 					,data:da
 				  });
 				  table.on('tool(queryTable)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 				    var data = obj.data; //获得当前行数据
-				    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-				    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-				   
+				    var layEvent = obj.event; 
+				    var tr = obj.tr; 
 				    if(layEvent === 'detail'){ //查看
-						utils.mOpenWithData("./queryVisitorDetail.html", {});
+						data.access=contentData.visitor_query.access
+						utils.mOpenWithData("./queryVisitorDetail.html", data);
 				    } else if(layEvent === 'print'){ //打印
-				      layer.confirm('真的打印行么', function(index){
-				        // obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-				        // layer.close(index);
-				        //向服务端发送删除指令
-				      });
+						console.log("data: " + JSON.stringify(data));
+						if(data.leave_flag==1){
+							mui.toast('该访客已签离，无法打印凭条')
+						}else{
+							printData(data.record_code)
+						}
 				    }
 				  });
 			}
 			
 			//获取表格数据——访客签离
 			function getOutData(){
-				layui.use(['laypage','table'], function(){
+				events.showWaiting();
+				var times=contentData.visitor_outData.times
+				var beginTime='';
+				var endTime='';
+				if(times){
+					beginTime=times.split(" 至 ")[0];
+					endTime=times.split(" 至 ")[1];
+				}
+				const params = {
+					certificate_number:contentData.visitor_outData.certificate_number,//	证件号码
+					record_code:contentData.visitor_outData.record_code,//	访问单号
+					visitor_name:contentData.visitor_outData.visitor_name,//	访问者姓名
+					leave_flag:0,//	是否离开
+					interviewee_type:contentData.visitor_outData.visitor_typeSelectId,//	访问类型
+					begin_in_time:beginTime,//	进入开始时间
+					end_in_time:endTime,//	进入结束时间
+					begin_leave_time:'',//	离开开始时间
+					end_leave_time:'',//	离开结束时间
+					page_number:contentData.visitor_outData.page_number,//	当前页数
+					page_size:contentData.visitor_outData.page_size,//	每页记录数
+					index_code: contentData.visitor_out.access.split('#')[1],
+				}
+				console.log("params: " + JSON.stringify(params));
+				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/page', {}, params, 2, function(da) {
+					console.log("da: " + JSON.stringify(da));
+					if (da.code == 0) {
+						if(contentData.visitor_queryData.total_count!=da.data.total_row){
+							contentData.visitor_queryData.total_count=da.data.total_row
+							initOutPage(da.data.total_row);
+						}
+						layui.use('table', function(){
+							var table = layui.table;
+							var list=da.data.list
+							for (var i = 0; i < list.length; i++) {
+								var item=list[i]
+								item.grdcls='';
+								if(item.grd_name && item.cls_name){
+									item.grdcls=item.grd_name+item.cls_name
+								}
+								item.leave_flag_name='未签离'
+								if(item.leave_flag){
+									item.leave_flag_name='已签离'
+								}
+							}
+							initOutTable(table,list);
+						})
+					}else{
+						mui.toast(da.msg);
+					}
+				});
+			}
+			
+			//初始化分页——访客签离
+			function initOutPage(_count){
+				layui.use('laypage', function(){
 				  var laypage = layui.laypage;
-				  var table = layui.table;
-				  initOutTable(table,'',[]);
 				  //执行一个laypage实例
 				  laypage.render({
 				    elem: 'pageOut' //注意，这里的 test1 是 ID，不用加 # 号
-				    ,count: 150  //TODO
-					,limit:8
+				    ,count: _count 
+					,limit:contentData.visitor_outData.page_size
 					,theme: '#3893D9'
 					,first: '首页'
 					,last: '尾页'
 					 ,jump: function(obj, first){
-						 // console.log(first); 
-					  //   console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-					  //   console.log(obj.limit); //得到每页显示的条数
-						events.showWaiting()
-						//TODO 模拟请求数据
-						setTimeout(function(){
-							var da=[];
-							var datassss3=[{"id":"张三三1","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
-							var datassss2=[{"id":"张三三2","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
-							var datassss1=[{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57},{"id":"张三三3","username":"66","sex":"女","city":"城市-0","sign":"签名-0","experience":'2021年5月10日 15:40:06',"logins":24,"wealth":82830700,"classify":"2021年5月10日 15:40:21","score":57}]
-							if(obj.curr==1){
-								da=datassss1
-							}
-							if(obj.curr==2){
-								da=datassss2
-							}
-							if(obj.curr==3){
-								da=datassss3
-							}
-							initOutTable(table,'1',da);
-						},100)
+						console.log(first); 
+					    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+					    console.log(obj.limit); //得到每页显示的条数
+						if(!first){
+							events.showWaiting()
+							contentData.visitor_outData.page_number=obj.curr
+							getOutData();
+						}
 					  }
 				  });
 				});
 			}
 			
 			//初始化表格——访客签离
-			function initOutTable(table,ty,da){
-				var don=''
-				if(ty){//ty为空，代表初始化表格，不为空的任意字符串，代表重载表格加载数据
-					don=function(res, curr, count){
-						events.closeWaiting();
-						}
-				}
+			function initOutTable(table,da){
+				var	don=function(res, curr, count){events.closeWaiting();}
 				table.render({
 					elem: '#queryO'
 					,height: 'full-203' 
 					,cellMinWidth:110
-					,limit:8
+					,limit:contentData.visitor_outData.page_size
 					,cols: [[ //表头
-					  {align: 'center',field: 'id', title: '姓名', rowspan: 2}
-					  ,{align: 'center',field: 'username', title: '随行人数',  rowspan: 2}
-					  ,{field: 'sex',width:200, title: '访问事由', rowspan: 2 }
+					  {align: 'center',field: 'visitor_name', title: '姓名', rowspan: 2}
+					  ,{align: 'center',field: 'visitor_counter', title: '随行人数',  rowspan: 2}
+					  ,{field: 'sex',width:200,field: 'visitor_for',title: '访问事由', rowspan: 2 }
 					  ,{align: 'center', title: '被访教职工', colspan:2}
 					  ,{align: 'center', title: '被访学生', colspan:3}
-					  ,{align: 'center',field: 'experience',width:200, title: '进入时间', rowspan: 2 }
-					  ,{align: 'center',field: 'classify',width:200, title: '签离时间', rowspan: 2}
-					  ,{fixed: 'right',align: 'center',field: 'score', title: '是否离开',  rowspan: 2}
-					  ,{fixed: 'right',align: 'center',width:90, title: '操作',  rowspan: 2,toolbar: '#outBar'}
+					  ,{align: 'center',field: 'in_time',width:200, title: '进入时间', rowspan: 2 }
+					  ,{align: 'center',field: 'leave_time',width:200, title: '签离时间', rowspan: 2}
+					  ,{fixed: 'right',align: 'center',field: 'leave_flag_name', title: '是否离开',  rowspan: 2}
+					  ,{fixed: 'right',align: 'center',width:140, title: '操作',  rowspan: 2,toolbar: '#outBar'}
 					  ]
 					  ,[
-					   {align: 'center',field: 'city', title: '部门',}
-					   ,{align: 'center',field: 'sign', title: '姓名',}
-					   ,{align: 'center',field: 'experience', title: '年级班级',}
-					   ,{align: 'center',field: 'classify', title: '学生',}
-					   ,{align: 'center',field: 'wealth', title: '班主任',}
+					   {align: 'center',field: 'dpt_name', title: '部门',}
+					   ,{align: 'center',field: 'teacher_name', title: '姓名',}
+					   ,{align: 'center',field: 'grdcls', title: '年级班级',}
+					   ,{align: 'center',field: 'stu_name', title: '学生',}
+					   ,{align: 'center',field: 'head_teacher_name', title: '班主任',}
 					   ]]
 					   ,done:don
 					,data:da
@@ -1086,9 +1575,19 @@
 				    var data = obj.data; //获得当前行数据
 				    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 				    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-				   
 				    if(layEvent === 'singOut'){ //签离
-				      signOut();
+						contentData.visitor_outData.IDCardImg='';
+						contentData.visitor_outData.formData={}
+						data.sex_name=data.visitor_sex?'男':'女'
+						contentData.visitor_outData.formData=data
+						if(data.img_url){
+							getIDCardImg(data.img_url,function(urlStr){
+								contentData.visitor_outData.IDCardImg=urlStr;
+								signOut();
+							});
+						}else{
+							signOut();
+						}
 				    }
 				  });
 			}
@@ -1101,16 +1600,80 @@
 						type: 1
 						,title: false //不显示标题栏
 						,closeBtn: false
-						,area: ['1000px','550px']
+						,area: ['900px','500px']
 						,shade: 0.7
 						,id: 'LAY_layuipro' //设定一个id，防止重复弹出
 						,btn: []
 						,content: $('#layToast')
 						,yes: function(index,layero){
 						   // layer.close(index); 
-						  mui.toast('TODO 协议签离')
 						}
 					  });
+				});
+			}
+			
+			//访客签离——设置签离
+			function setLeave(_id,_time){
+				const params = {
+					id:_id,//	记录id
+					leave_time:_time,//	离开时间
+					index_code: contentData.visitor_out.access.split('#')[1],
+				}
+				console.log("params: " + JSON.stringify(params));
+				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/setLeave', {}, params, 2, function(da) {
+					console.log("da: " + JSON.stringify(da));
+					if (da.code == 0) {
+						mui.toast('操作成功');
+						layer.close(contentData.index);
+						// deleteIDCardImg(contentData.visitor_outData.IDCardImg);
+						getOutData();
+					}else{
+						mui.toast(da.msg);
+					}
+				});
+			}
+			
+			//根据扫码或读卡得到的 身份证号码或者访客单号查询访客详情，并打开签离弹窗
+			function checkAndOpenData(idCardNumber,visitor_code){
+				const params = {
+					certificate_number:idCardNumber?idCardNumber:'',//	证件号码
+					record_code:visitor_code?visitor_code:'',//	访问单号
+					visitor_name:'',//	访问者姓名
+					leave_flag:0,//	是否离开
+					interviewee_type:'',//	访问类型
+					begin_in_time:'',//	进入开始时间
+					end_in_time:'',//	进入结束时间
+					begin_leave_time:'',//	离开开始时间
+					end_leave_time:'',//	离开结束时间
+					page_number:1,//	当前页数
+					page_size:99,//	每页记录数
+					index_code: contentData.visitor_out.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/page', {}, params, 2, function(da) {
+					console.log("da: " + JSON.stringify(da));
+					if (da.code == 0) {
+						 if(da.data && da.data.list.length===1){
+							 var data=da.data.list[0];
+							 contentData.visitor_outData.IDCardImg='';
+							 contentData.visitor_outData.formData={}
+							 data.sex_name=data.visitor_sex?'男':'女'
+							 contentData.visitor_outData.formData=data
+							 if(data.img_url){
+							 	getIDCardImg(data.img_url,function(urlStr){
+							 		contentData.visitor_outData.IDCardImg=urlStr;
+							 		signOut();
+							 	});
+							 }else{
+							 	signOut();
+							 }
+						 }else if(da.data && da.data.list.length>0){
+							mui.toast('查询到多个人员，请从列表查询并签离')
+						 }else{
+							mui.toast('无法查询到指定人员，请确认当前人员是否已签离')
+						 }
+					}else{
+						mui.toast(da.msg);
+					}
 				});
 			}
 			

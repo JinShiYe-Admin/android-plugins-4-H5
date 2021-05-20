@@ -1,0 +1,246 @@
+.mui-bar-tab .mui-tab-item.mui-active {
+				color: #3893D9;
+			}
+			a:hover {
+			    color: #FAFAFA;
+			}
+			.mui-h4, h4 {
+			    font-size: 18px;
+				color: #c3865c;
+			}
+			h1, h2, h3, h4, h5, h6 {
+			    line-height: 1;
+			    margin-top: 5px;
+			    margin-bottom: 5px;
+			}
+			/* 左侧按钮 */
+			.tab-btn-left{
+				font-size: 20px;
+				font-weight: 600;
+				padding: 30px 0 15px;
+				border-bottom: 1px solid rgba(210,207,200,.9);
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom: 0px;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active p{
+				color: #3893D9;
+			}
+			
+			/* 右侧视图 */
+			.mui-control-content{
+				height: calc(100vh - 55px );
+				padding:20px 0 0 15px;
+			}
+			
+			/* 左侧视图 */
+			.mui-segmented-control-tab.mui-segmented-control-inverted-tab{
+				border-right: 1px solid rgba(210,207,200,.9);
+				height: calc(100vh - 45px);
+			}
+			.line{
+				background-color: #3893D9 !important;
+				margin-bottom: 0.3125rem !important;
+				height: 0.125rem !important;
+			}
+			
+			/* 栅格 宽度修改 */
+			.mui-col-sm-1 {
+			    width: 10.33333333% !important;
+			}
+			
+			.mui-col-sm-11 {
+			    width: 89.66666667% !important;
+			}
+			
+			
+			/* 身份证照片框样式 */
+			.card-img{
+				border: 1px solid rgba(210,207,200,.9);
+				width:171px;
+				height: 240px;
+			}
+			.card-text{
+				display: block;
+				margin: 63% 27% 0;
+				width: 80px;
+				font-size: 15px;
+				color: grey;
+			}
+			/* 读证样式 */
+			.scan{
+				border: 2px solid #C0726C;
+				border-radius: 50%;
+				padding:24px 17px;
+				width: 75px;
+				height: 75px;
+				color:#C0726C;font-size:1.125rem;
+				font-weight: 600;
+				margin:15px 0 0 25%;
+			}
+			
+			/* 输入框样式和间距修改 */
+			.mui-input-row label{
+				font-size: 16px;
+				width: 28%;
+				font-weight: 600;
+				text-align: right;
+			}
+			.mui-input-row .span-icon{
+				vertical-align: middle;
+				margin: 12px 0px 0px -22px;
+				position: absolute;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+				border: 1px solid rgba(210,207,200,.8) !important;
+				width: 72%;
+				float: left;
+				font-size: 15px !important;
+			}
+			/* 输入框样式和间距修改 被访人信息栏*/
+			.mui-input-row-bottom label{
+				width: 24% ;
+				font-weight: 600 ;
+				text-align: right ;
+				padding: 11px 5px ;
+			} 
+			.mui-input-row-bottom label~input, .mui-input-row-bottom label~select, .mui-input-row-bottom label~textarea{
+				border: 1px solid rgba(210,207,200,.8) !important;
+				width: 68% ;
+				float: left ;
+				font-size: 15px !important;
+			}
+			.mui-input-row-bottom-lar label{
+				width: 30%;
+				font-weight: 600;
+				text-align: right;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-bottom-lar label~input, .mui-input-row-bottom-lar label~select, .mui-input-row-bottom-lar label~textarea{
+				border: 1px solid rgba(210,207,200,.8);
+				width: 68%;
+				float: left;
+				font-size: 15px !important;
+			}
+			/* 输入框样式和间距修改 弹出层信息栏*/
+			.mui-input-row-toast label{
+				width: 35%;
+				font-weight: 600;
+				text-align: left;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-toast label~input, .mui-input-row-toast label~select, .mui-input-row-toast label~textarea{
+				border: 0 !important;
+				border-bottom: 0px solid rgba(210,207,200,.8);
+				width: 60%;
+				float: left;
+				font-size: 15px !important;
+			}
+			.mui-input-row-toast-in label{
+				width: 35%;
+				font-weight: 600;
+				text-align: left;
+				padding: 11px 5px;
+			} 
+			.mui-input-row-toast-in label~input, .mui-input-row-toast-in label~select, .mui-input-row-toast-in label~textarea{
+				width: 60%;
+				float: left;
+				font-size: 15px !important;
+			}
+			/* 表单间距 */
+			.mui-input-row{
+				margin-top: 8px;
+			}
+			
+			/* 被访人信息 slider 样式修改 */
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+				border-bottom: 0;
+			}
+			.visitor-bottom{
+				width: 220px !important;
+				font-weight: 600;
+			}
+			.mui-input-row-bottom,.mui-input-row-bottom-lar{
+				margin-top: 8px;
+				padding-right: 3px;
+			}
+			/* 自定义按钮样式 */
+			.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+				padding: 13px 10px;
+				width: 60px;
+				height: 45px;
+			}
+			.mui-btn-outlined-lg{
+				padding: 5px 10px;
+				width: 140px;
+				margin: 0 10px;
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 2;
+			}
+			
+			/* 分页样式 */
+			.layui-laypage a, .layui-laypage span {
+			    height: 42px !important;
+				padding: 0 18px;
+			    line-height: 42px !important;
+			}
+			
+			
+			/* 表头样式 */
+			.layui-table thead tr{
+				background-color: #3893D9 !important;
+				color: #FAFAFA !important;
+			}
+			th .layui-table-cell {
+				height: 30px !important;
+				padding: 2px 5px !important;
+			}
+			.layui-table-cell {
+				height: 56px !important;
+				padding: 16px 5px !important;
+			}
+			.layui-table-view .layui-table th{
+				padding:1px 0 !important;
+			}
+			.layui-table-view .layui-table td{
+				padding:0px 0 !important;
+			}
+			
+			.layui-table-view .layui-table td{
+				
+			}
+			
+			/* 弹出层 卡片样式修改 */
+			.mui-card-header.mui-h4{
+				border-top: 0px solid rgba(218,218,221,.9);
+			}
+			.mui-card-content-inner {
+			    padding: 10px;
+			}
+			.layui-layer-btn.layui-layer-btn-c{
+				background-color: #FFFFFF;
+			}
+			
+			/* 搜索栏 日期控件样式修改 */
+			
+			.layui-laydate .layui-this {
+			    background-color: #3893D9 !important;
+			    color: #fff !important;
+			}
+			
+			.layui-laydate-footer {
+			    height: 60px !important;
+			}
+			
+			.layui-laydate-footer span {
+			    height: 38px !important;
+			    line-height: 38px !important;
+			    padding: 0px 15px !important;
+			}
+			.layui-laydate-header{
+				background-color: #FAFAFA !important;
+			}
+			.laydate-theme-molv .layui-laydate-header i, .laydate-theme-molv .layui-laydate-header span{
+				color: #383838 !important;
+			}

@@ -158,7 +158,7 @@
 			}
 		</style>
 	</head>
-
+ 
 	<body>
 		<header class="mui-bar mui-bar-nav" id="tempVue">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -172,69 +172,69 @@
 						<div class="mui-card-content" style="padding: 10px;">
 							 <div class="mui-row">
 							 	<div class="mui-col-sm-2">
-							 		<img v-if="IDCardImg" class="card-img" src="../../img/home/idcard.jpg">
-							 		<div v-else class="card-img" ><span class="card-text">身份证照片</span></div>
+							 		<img v-cloak v-if="IDCardImg" class="card-img" :src=IDCardImg>
+							 		<div v-cloak v-else class="card-img" ><span class="card-text">身份证照片</span></div>
 							 	</div>
 							 	<div class="mui-col-sm-10">
 							 		<div class="mui-row" style="margin-left:2rem;">
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>姓名：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.visitor_name" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>访客单号：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.record_code"  type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>性别：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.sex_name" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>访问事由：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.visitor_for" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>出生日期：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.visitor_birthday" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>手机：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.visitor_phone" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件类型：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.certificate_type" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>随行人数：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.visitor_counter" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件号码：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.certificate_number" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>随身物品：</label>
-												<input  type="text" placeholder="暂无信息"  disabled="true">
+												<input v-cloak :value="formData.visitor_goods" type="text" placeholder=""  disabled="true">
 											</div>
 										</div>
 							 		</div>
@@ -244,43 +244,43 @@
 								 <div class="mui-col-sm-8">
 								 	<div class="mui-input-row mui-input-row-bottom-8">
 								 		<label>来访单位：</label>
-								 		<input value="山东金视野教育科技股份有限公司开发部" type="text" placeholder="暂无信息"  disabled="true">
+								 		<input v-cloak :value="formData.unit_name" type="text" placeholder=""  disabled="true">
 								 	</div>
 								 </div>
 								 <div class="mui-col-sm-4">
 								 	<div class="mui-input-row mui-input-row-bottom-4">
 								 		<label>车牌号：</label>
-								 		<input  type="text" placeholder="暂无信息"  disabled="true">
+								 		<input v-cloak :value="formData.plate_number" type="text" placeholder=""  disabled="true">
 								 	</div>
 								 </div>
 							 	<div class="mui-col-sm-12">
 							 		<div class="mui-input-row mui-input-row-bottom-12">
 							 			<label>地址：</label>
-							 			<input value="山东省济南市天桥区铜元局前街1号金冠商务中心309室"  type="text" placeholder="暂无信息"  disabled="true">
+							 			<input v-cloak :value="formData.address" type="text" placeholder=""  disabled="true">
 							 		</div>
 							 	</div>
 							 	<div class="mui-col-sm-4">
 							 		<div class="mui-input-row mui-input-row-bottom-4">
 							 			<label>进入时间：</label>
-							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 			<input v-cloak :value="formData.in_time" type="text" placeholder=""  disabled="true">
 							 		</div>
 							 	</div>
 							 	<div class="mui-col-sm-4">
 							 		<div class="mui-input-row mui-input-row-bottom-4">
 							 			<label>是否离开：</label>
-							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 			<input v-cloak :value="formData.leave_flag_name" type="text" placeholder=""  disabled="true">
 							 		</div>
 							 	</div>
 							 	<div class="mui-col-sm-4">
 							 		<div class="mui-input-row mui-input-row-bottom-4">
 							 			<label>离开时间：</label>
-							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 			<input v-cloak :value="formData.leave_time" type="text" placeholder=""  disabled="true">
 							 		</div>
 							 	</div>
 							 	<div class="mui-col-sm-12">
 							 		<div class="mui-input-row mui-input-row-bottom-12">
 							 			<label>备注：</label>
-							 			<input  type="text" placeholder="暂无信息"  disabled="true">
+							 			<input v-cloak :value="formData.note" type="text" placeholder=""  disabled="true">
 							 		</div>
 							 	</div>
 							 </div>
@@ -291,32 +291,50 @@
 					<div class="mui-card">
 						<div class="mui-card-header mui-h4">被访人信息</div>
 						<div class="mui-card-content" style="padding: 10px">
-							<div class="mui-row">
-								<div class="mui-col-sm-12">
-									<div class="mui-input-row mui-input-row-right">
-										<label>年级：</label>
-										<input  type="text" placeholder="暂无信息" disabled="true">
+							<template v-if="formData.interviewee_type==0">
+								<div class="mui-row">
+									<div class="mui-col-sm-12">
+										<div class="mui-input-row mui-input-row-right">
+											<label>部门：</label>
+											<input v-cloak :value="formData.dpt_name" type="text" placeholder="" disabled="true">
+										</div>
+									</div>
+									<div class="mui-col-sm-12">
+										<div class="mui-input-row mui-input-row-right">
+											<label>姓名：</label>
+											<input v-cloak :value="formData.teacher_name" type="text" placeholder="" disabled="true">
+										</div>
 									</div>
 								</div>
-								<div class="mui-col-sm-12">
-									<div class="mui-input-row mui-input-row-right">
-										<label>班级：</label>
-										<input  type="text" placeholder="暂无信息" disabled="true">
+							</template>
+							<template v-else>
+								<div class="mui-row">
+									<div class="mui-col-sm-12">
+										<div class="mui-input-row mui-input-row-right">
+											<label>年级：</label>
+											<input v-cloak :value="formData.grd_name" type="text" placeholder="" disabled="true">
+										</div>
+									</div>
+									<div class="mui-col-sm-12">
+										<div class="mui-input-row mui-input-row-right">
+											<label>班级：</label>
+											<input v-cloak :value="formData.cls_name" type="text" placeholder="" disabled="true">
+										</div>
+									</div>
+									<div class="mui-col-sm-12">
+										<div class="mui-input-row mui-input-row-right">
+											<label>姓名：</label>
+											<input v-cloak :value="formData.stu_name" type="text" placeholder="" disabled="true">
+										</div>
+									</div>
+									<div class="mui-col-sm-12">
+										<div class="mui-input-row mui-input-row-right">
+											<label>班主任：</label>
+											<input v-cloak :value="formData.head_teacher_name" type="text" placeholder="" disabled="true">
+										</div>
 									</div>
 								</div>
-								<div class="mui-col-sm-12">
-									<div class="mui-input-row mui-input-row-right">
-										<label>姓名：</label>
-										<input  type="text" placeholder="暂无信息" disabled="true">
-									</div>
-								</div>
-								<div class="mui-col-sm-12">
-									<div class="mui-input-row mui-input-row-right">
-										<label>班主任：</label>
-										<input  type="text" placeholder="暂无信息" disabled="true">
-									</div>
-								</div>
-							</div>
+							</template>
 						</div>
 					</div>
 					<div style="margin-top: 1rem;"></div>
@@ -327,13 +345,13 @@
 								<div class="mui-col-sm-12">
 									<div class="mui-input-row mui-input-row-right">
 										<label>姓名：</label>
-										<input  type="text" placeholder="暂无信息"  disabled="true">
+										<input v-cloak :value="formData.create_user_name" type="text" placeholder=""  disabled="true">
 									</div>
 								</div>
 								<div class="mui-col-sm-12">
 									<div class="mui-input-row mui-input-row-right">
 										<label>登记时间：</label>
-										<input  type="text" placeholder="暂无信息"  disabled="true">
+										<input v-cloak :value="formData.create_time" type="text" placeholder=""  disabled="true">
 									</div>
 								</div>
 							</div>
@@ -342,30 +360,32 @@
 				</div>
 			</div>
 			<div class="mui-row" style="margin-top: 2rem;text-align: center;">
-				<button type="button" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">
-					打印
-				</button>
-				<button type="button" @tap="back()" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">
-					取消
-				</button>
+				<button type="button" @tap="printData()" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">打印</button>
+				<button type="button" @tap="back()" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">取消</button>
 			</div>
 		</div>
 		<script src="../../js/utils/mui.min.js"></script>
 		<script src="../../js/utils/storageKeyName.js"></script>
-		<script src="../../js/utils/vconsole.min.js"></script>
+		<!-- <script src="../../js/utils/vconsole.min.js"></script> -->
 		<script src="../../js/utils/vue.js"></script>
 		<script src="../../js/utils/publicProtocol.js"></script>
+		<script src="../../js/utils/usbPrinter.js"></script>
 		<script src="../../js/utils/store.js"></script>
 		<script src="../../js/utils/utils.js"></script>
 		<script src="../../js/utils/events.js"></script>
 		<!--加密-->
+		<script src="../../js/cloud/CloudFileUtil.js"></script>
+		<script src="../../js/picVideoAudio/UploadHeadImage.js"></script>
 		<script src="../../js/libs/RSA/Barrett.js"></script>
 		<script src="../../js/libs/RSA/BigInt.js"></script>
 		<script src="../../js/libs/RSA/RSA.js"></script>
 		<script src="../../js/libs/encryption/RSAEncrypt.js"></script>
+		<script src='../../js/libs/jquery.js'></script>
+		<script src="../../js/qiniu/qiniu.js"></script>
+		<script src="../../js/utils/cryption.js"></script>
+		<script src="../../js/cloud/load.js"></script>
 		<script src='../../js/libs/crypto-js/require.js'></script>
 		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
-		<script src='../../js/libs/jquery.js'></script>
 		<script src='../../js/libs/encryption/sortSign.js'></script>
 		<script type="text/javascript">
 			var $M = mui.init();
@@ -382,12 +402,25 @@
 			var datasource = new Vue({
 				el: "#datasource",
 				data: {
-					IDCardImg:'1',//身份证照片
+					formData:{},//
+					IDCardImg:'',//身份证照片
 				},
 				methods:{
 					back:function(){
 						mui.back();
-					}
+					},
+					printData:function(){
+						console.log(this.formData.leave_flag);
+						if(this.formData.leave_flag==1){
+							mui.toast('该访客已签离，无法打印凭条')
+						}else{
+							// plus.usbPrinter.printPage(function(args){
+							// 	console.log(args);
+							// },function(args){
+							// 	console.log(args);
+							// },this.formData.record_code)
+						}
+					},
 				}
 			});
 
@@ -395,9 +428,56 @@
 				curPage = utils.getDataFromUrl(window.location.href);
 				console.log(JSON.stringify(curPage));
 				tempVue.titleName = '访客信息详情';
-				datasource.formData=curPage;
+				getVisitorDetail(curPage.id)
+				if(curPage.img_url!=''){
+					getIDCardImg(curPage.img_url)
+				}
 			});
 			
+			//根据访客单号获取访客记录详情
+			function getVisitorDetail(record_code){
+				const params = {
+					id:record_code, 
+					index_code: curPage.access.split('#')[1],
+				}
+				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/getById', {}, params, 2, function(da) {
+					console.log("da: " + JSON.stringify(da));
+					if (da.code == 0) {
+							var datr=da.data
+							datr.visitor_counter=datr.visitor_counter+' 人'
+							datr.sex_name='女';
+							if(datr.visitor_sex){
+								datr.sex_name='男';
+							}
+							datr.leave_flag_name='未签离'
+							if(datr.leave_flag){
+								datr.leave_flag_name='已签离'
+							}
+						 datasource.formData=datr
+					}else{
+						mui.toast(da.msg);
+					}
+				});
+			}
+			
+			//获取私有空间的身份证头像
+			function getIDCardImg(domain){
+				var wd =events.showWaiting();
+				var getDownToken = {
+					appId: window.storageKeyName.QN_APPID, //int 必填 项目id
+					appKey: window.storageKeyName.QN_APPKEY,
+					urls: [domain] //array 必填 需要获取下载token文件的路径
+				}
+				var getDownTokenUrl = window.storageKeyName.QNGETDOWNTOKENFILE;
+				CloudFileUtil.getQNDownToken(getDownTokenUrl, getDownToken, function(data) {
+					var urlStr = encodeURI(data.Data[0].Value)
+					datasource.IDCardImg=urlStr;
+					wd.close();
+				}, function(xhr, type, errorThrown) {
+					mui.toast('获取文件失败 ' + type); 
+					wd.close();
+				});
+			}
 		</script>
 	</body>
 

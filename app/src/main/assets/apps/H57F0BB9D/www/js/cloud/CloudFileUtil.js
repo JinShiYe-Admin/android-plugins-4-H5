@@ -315,8 +315,8 @@ var CloudFileUtil = (function($, mod) {
 				Pops: ops,
 				NotifyUrl: ''
 			}
-			//console.log("参数数据：" + JSON.stringify(param));
-
+			// console.log(desKey+"参数数据：" + JSON.stringify(param));
+			
 			configure.options = {
 				AppID: appId,
 				Param: encryptByDES(desKey, JSON.stringify(param))
@@ -518,9 +518,9 @@ var CloudFileUtil = (function($, mod) {
 	 * @param {Object} successCallBack 上传任务创建成功监听的回调
 	 */
 	mod.upload = function(fPath, token, key, uploadCompletedCallBack, onStateChangedCallBack, successCallBack) {
-		// console.log('upload fPath: ' + fPath);
-		// console.log('upload token: ' + token);
-		// console.log('upload key: ' + key);
+		console.log('upload fPath: ' + fPath);
+		console.log('upload token: ' + token);
+		console.log('upload key: ' + key);
 		var task = plus.uploader.createUpload("https://upload.qiniu.com/", {
 				method: "POST"
 			},
@@ -670,7 +670,7 @@ var CloudFileUtil = (function($, mod) {
 					AppID: appId,
 					Param: encryptByDES(desKey, JSON.stringify(urls))
 				}
-				//console.log("参数数据：" + JSON.stringify(configure.options));
+				console.log("参数数据：" + JSON.stringify(configure.options));
 				mui.ajax(url, {
 					async: false,
 					data: configure.options,
@@ -679,10 +679,13 @@ var CloudFileUtil = (function($, mod) {
 					timeout: 60000, //超时时间设置为60秒
 					success: function(data) {
 						//服务器返回响应
-						////console.log(JSON.stringify(data));
+						console.log(JSON.stringify(data));
 						successCB(data);
-					},
+					}, 
 					error: function(xhr, type, errorThrown) {
+						console.log(JSON.stringify(xhr))
+						console.log(JSON.stringify(type))
+						console.log(JSON.stringify(errorThrown))
 						//异常处理
 						errorCB(xhr, type, errorThrown);
 					}

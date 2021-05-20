@@ -75,7 +75,7 @@ public class USBPrinter extends StandardFeature {
     public void printPage(IWebview pWebview, JSONArray array){
         activity=pWebview.getActivity();
         String visitorID =array.optString(1);
-        if(visitorID.isEmpty()){
+        if(visitorID.isEmpty() || visitorID==null){
             Toast.makeText(activity, "无效的访问单号！", Toast.LENGTH_LONG).show();
             return;
         }
@@ -196,7 +196,7 @@ public class USBPrinter extends StandardFeature {
                     mUsbThermalPrinter.printLogo(bitmap, true);
                 }
 //                mUsbThermalPrinter.setGray(1);
-                mUsbThermalPrinter.addString(visitorID);
+                mUsbThermalPrinter.addString("访客单号： "+visitorID);
                 mUsbThermalPrinter.printString();
                 mUsbThermalPrinter.walkPaper(20);
             } catch (Exception e) {

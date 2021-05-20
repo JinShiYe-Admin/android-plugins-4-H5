@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" src="../../js/utils/mui.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
 		<link rel="stylesheet" href="../../js/loginIndex/bootstrap-4.2.1.css">
 		<link rel="stylesheet" href="../../js/loginIndex/style.default.css" id="theme-stylesheet">
 		<style type="text/css">
@@ -50,7 +49,7 @@
 			        <!-- Form Panel    -->
 			        <div class="col-lg-7 bg-white">
 			          <div class="form d-flex align-items-center">
-			            <div class="content">
+			            <div class="content" style="margin-top: 80px;text-align: center;">
 			                <div class="form-group">
 			                  <input id='account' type="text" name="userName" required="" data-msg="请输入用户名" placeholder="用户名" class="input-material">
 			                </div>
@@ -150,26 +149,6 @@
 		
 		function checkUpdate(){
 			getInfo()
-			//检查更新 start
-			// var CHECKUPDATE = store.get(window.storageKeyName.CHECKUPDATE);
-			// if('CHECK'==CHECKUPDATE || null==CHECKUPDATE){
-				// events.showWaiting(" ");
-				// appUpdate.updateApp(function(type){
-				// 	//wgt安装成功 回调
-				// 	events.closeWaiting();
-				// 	//登录
-				// 	getInfo()
-				// },function(){ 
-				// 	//取消更新/取消安装/wgt安装失败 回调
-				// 	// store.set(window.storageKeyName.CHECKUPDATE,'UNCHECK');
-				// 	events.closeWaiting();
-				// 	//登录
-				// 	getInfo()
-				// });
-			// }else if('UNCHECK'==CHECKUPDATE){
-			// 	getInfo()
-			// }
-			//检查更新 end 
 		}
 		
 		function getInfo() {
@@ -233,18 +212,6 @@
 			loginFlag = 1;
 		});
 
-		/**
-		 * 获取本地推送标识信息
-		 */
-		// function getPushInfo() {
-		// 	var info = plus.push.getClientInfo();
-		// 	outSet("获取客户端推送标识信息：");
-		// 	outLine("id: " + info.id);
-		// 	outLine("token: " + info.token);
-		// 	outLine("clientid: " + info.clientid);
-		// 	outLine("appid: " + info.appid);
-		// 	outLine("appkey: " + info.appkey);
-		// }
 
 		//获取秘钥
 		var getEncryptKeyLogin = function(tempName, tempPW) {
@@ -421,6 +388,61 @@
 				}
 			});
 		}
+		
+		//验证菜单权限
+		function checkMenu(menuList){
+			var pageArray=[{
+				name: "visitor",//访客机
+				url: 'schapp_Visitor',
+				childList: [{
+						name:'访客登记',
+						url:'schapp_Visitor_In'//访客登记
+					},{
+						name:'访客查询',
+						url:'schapp_Visitor_Query'//访客查询
+					},
+					{
+						name:'访客签离',
+						url:'schapp_Visitor_Out'//访客签离
+				}]
+			}]
+			var tempMenu = menuList;
+			var tempA = []; 
+			for (var i = 0; i < tempMenu.list[0].childList.length; i++) {//一级菜单循环
+				var web_first_item = tempMenu.list[0].childList[i];
+				for (var a = 0; a < pageArray.length; a++) {
+					var local_first_item = pageArray[a];
+					if (local_first_item.url == web_first_item.url) {
+						local_first_item.name = web_first_item.name;
+						local_first_item.access=web_first_item.access;
+						var childList=[]
+						for (var b = 0; b < web_first_item.childList.length; b++) {//二级菜单循环
+							var web_second_item = web_first_item.childList[b];
+							for (var c = 0; c < local_first_item.childList.length; c++) {
+								var local_second_item = local_first_item.childList[c];
+								if (local_second_item.url == web_second_item.url) {
+									local_second_item.access = web_second_item.access;
+									local_second_item.childList = web_second_item.childList;
+									local_second_item.name = web_second_item.name;
+									childList.push(local_second_item)
+								}
+							}
+						}
+						local_first_item.childList=childList
+						tempA.push(local_first_item);
+					} 
+				}
+			}
+			if(tempA.length>0){
+				store.set(window.storageKeyName.MENULIST, tempA);
+				return 1;
+			}else{
+				login=true;
+				store.set(window.storageKeyName.MENULIST, []);
+				store.set(window.storageKeyName.PERSONALINFO, {});
+				return 0;
+			}
+		}
 
 		//对象数组按指定字段进行排序
 		function compare(property) {
@@ -475,7 +497,7 @@
 			delete tempData['user'];
 			console.log('new tempData:' + JSON.stringify(tempData));
 			store.set(window.storageKeyName.PERSONALINFO, tempData);
-			if (tempPW == '123456***') {
+			if (tempPW == '123456***???') {
 				var tempModel = {
 					flag: 1 //0是主动修改密码，1是判断是默认密码，自动让修改
 				}
@@ -485,7 +507,12 @@
 					// utils.hrefSessionStorage('../../html/login/index.html', {});
 					mui.toast('应用系统无权限，请联系管理员');
 				} else {
-					utils.hrefSessionStorage('../../html/login/homepage.html', {});
+					var result=checkMenu(store.get(window.storageKeyName.MENULIST));
+					if(result){
+						utils.hrefSessionStorage('../../html/login/homepage.html', {});
+					}else{
+						mui.toast('登录用户无访客系统权限，请联系管理员');
+					}
 				}
 			}
 		}
@@ -498,54 +525,6 @@
 				return item;
 			}, []);
 		}
-
-		// var gotoIndex = function() {
-		// 	var tempData = store.get(window.storageKeyName.PERSONALINFO);
-		// 	//将personal 中的key更改为指定的值
-		// 	tempData.unit_code = tempData.user.unit_code;
-		// 	tempData.unit_name = tempData.user.unit_name;
-		// 	tempData.img_url = tempData.user.img_url;
-		// 	tempData.user_name = tempData.user.user_name;
-		// 	tempData.user_code = tempData.user.id;
-		// 	tempData.login_name = tempData.user.login_name;
-		// 	tempData.app_code = tempData.user.app_code;
-		// 	if (tempData.masterclss == null) {
-		// 		tempData.masterclss = [];
-		// 	}
-		// 	if (tempData.dpts == null) {
-		// 		tempData.dpts = [];
-		// 	}
-		// 	if (tempData.subs == null) {
-		// 		tempData.subs = [];
-		// 	}
-		// 	if (tempData.clss == null) {
-		// 		tempData.clss = [];
-		// 	}
-		// 	if (tempData.grds == null) {
-		// 		tempData.grds = [];
-		// 	}
-		// 	delete tempData['user'];
-		// 	console.log('new tempData:' + JSON.stringify(tempData));
-		// 	store.set(window.storageKeyName.PERSONALINFO, tempData);
-		// 	if (tempPW == '123456***') {
-		// 		var tempModel = {
-		// 			flag: 1 //0是主动修改密码，1是判断是默认密码，自动让修改
-		// 		}
-		// 		utils.mOpenWithData("../../html/mine/modifyPassword.html", tempModel);
-		// 	} else {
-		// 		plus.webview.open('../../html/login/homepage.html', {
-		// 			statusbar: {
-		// 				background: "#3893D9"
-		// 			}
-		// 		});
-		// 		var wvs = plus.webview.all();
-		// 		for (var i = 0, len = wvs.length; i < len; i++) {
-		// 			plus.webview.close(wvs[i]);
-		// 		}
-		// 		var curr = plus.webview.currentWebview();
-		// 		curr.close();
-		// 	}
-		// }
 
 		//更换personal 对象的key 值
 		var repalceKey = function(obj, oldKey, newKey) {
