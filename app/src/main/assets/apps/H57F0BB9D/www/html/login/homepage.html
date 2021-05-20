@@ -51,14 +51,14 @@
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>姓名：</label>
-												<input type="text" v-model="visitor_inData.visitor_name" placeholder="请输入姓名">
+												<input type="text" maxlength="15" v-model="visitor_inData.visitor_name" placeholder="请输入姓名">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>访问事由：</label>
 												<input type="text" v-model="visitor_inData.visitor_for" placeholder="输入或选择" style="width: 57%;">
-												<button id="visitor_for" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
+												<button id="visitor_for" maxlength="30" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
@@ -74,63 +74,63 @@
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>手机：</label>
-												<input type="number" v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
+												<input type="number" maxlength="11"  v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>出生日期：</label>
-												<input type="text" v-model="visitor_inData.visitor_birthday" placeholder="请输入出生日期">
+												<input type="text" maxlength="10"  v-model="visitor_inData.visitor_birthday" placeholder="请输入出生日期">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>随行人数：</label>
-												<input type="text" v-model="visitor_inData.visitor_counter" placeholder="输入或选择" style="width: 57%;">
+												<input maxlength="2" type="number" v-model="visitor_inData.visitor_counter" placeholder="输入或选择" style="width: 57%;">
 												<button id="visitor_counter" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件类型：</label>
-												<input type="text" v-model="visitor_inData.certificate_type" placeholder="输入或选择" style="width: 57%;">
+												<input maxlength="10" type="text" v-model="visitor_inData.certificate_type" placeholder="输入或选择" style="width: 57%;">
 												<button id="certificate_type" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>随行物品：</label>
-												<input type="text" v-model="visitor_inData.visitor_goods"  placeholder="请输入随行物品">
+												<input maxlength="30" type="text" v-model="visitor_inData.visitor_goods"  placeholder="请输入随行物品">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件号码：</label>
-												<input v-model="visitor_inData.certificate_number" type="text" placeholder="请输入证件号码">
+												<input maxlength="20" v-model="visitor_inData.certificate_number" type="text" placeholder="请输入证件号码">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>来访单位：</label>
-												<input v-model="visitor_inData.unit_name" type="text" placeholder="请输入来访单位">
+												<input maxlength="30" v-model="visitor_inData.unit_name" type="text" placeholder="请输入来访单位">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>地址：</label>
-												<input v-model="visitor_inData.address" type="text" placeholder="请输入地址">
+												<input maxlength="30" v-model="visitor_inData.address" type="text" placeholder="请输入地址">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>车牌号：</label>
-												<input v-model="visitor_inData.plate_number" type="text" placeholder="请输入车牌号">
+												<input maxlength="10" v-model="visitor_inData.plate_number" type="text" placeholder="请输入车牌号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>备注：</label>
-												<input v-model="visitor_inData.note"  type="text" placeholder="请输入备注">
+												<input maxlength="30" v-model="visitor_inData.note"  type="text" placeholder="请输入备注">
 											</div>
 										</div>
 									</div>
@@ -460,7 +460,7 @@
 		<script src="../../js/utils/vue.js"></script>
 		<script src="../../js/utils/store.js"></script>
 		<script src="../../js/utils/events.js"></script>
-		<!-- <script src="../../js/utils/vconsole.min.js"></script> -->
+		<script src="../../js/utils/vconsole.min.js"></script>
 		<script src="../../js/utils/utils.js"></script>
 		<script src="../../js/libs/jquery.js"></script>
 		<script src="../../js/utils/usbPrinter.js"></script>
@@ -1586,7 +1586,7 @@
 						contentData.visitor_outData.formData={}
 						data.sex_name=data.visitor_sex?'男':'女'
 						contentData.visitor_outData.formData=data
-						if(data.img_url){
+						if(data.img_url !='' && data.img_url !=null){
 							getIDCardImg(data.img_url,function(urlStr){
 								contentData.visitor_outData.IDCardImg=urlStr;
 								signOut();
@@ -1668,7 +1668,7 @@
 							 contentData.visitor_outData.formData={}
 							 data.sex_name=data.visitor_sex?'男':'女'
 							 contentData.visitor_outData.formData=data
-							 if(data.img_url){
+							 if(data.img_url!='' && data.img_url !=null){
 							 	getIDCardImg(data.img_url,function(urlStr){
 							 		contentData.visitor_outData.IDCardImg=urlStr;
 							 		signOut();

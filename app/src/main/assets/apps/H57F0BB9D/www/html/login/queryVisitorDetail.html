@@ -429,7 +429,7 @@
 				console.log(JSON.stringify(curPage));
 				tempVue.titleName = '访客信息详情';
 				getVisitorDetail(curPage.id)
-				if(curPage.img_url!=''){
+				if(curPage.img_url!='' && curPage.img_url!=null){
 					getIDCardImg(curPage.img_url)
 				}
 			});
@@ -470,6 +470,7 @@
 				}
 				var getDownTokenUrl = window.storageKeyName.QNGETDOWNTOKENFILE;
 				CloudFileUtil.getQNDownToken(getDownTokenUrl, getDownToken, function(data) {
+					console.log("data: " + JSON.stringify(data));
 					var urlStr = encodeURI(data.Data[0].Value)
 					datasource.IDCardImg=urlStr;
 					wd.close();
