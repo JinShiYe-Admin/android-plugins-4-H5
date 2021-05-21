@@ -179,6 +179,15 @@
 				line-height: 2;
 			}
 			
+			.mui-btn-outlined-print-lg{
+				padding: 5px 10px;
+				width: 100px;
+				margin: 0 10px;
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 2;
+			}
+			
 			/* 分页样式 */
 			.layui-laypage a, .layui-laypage span {
 			    height: 42px !important;

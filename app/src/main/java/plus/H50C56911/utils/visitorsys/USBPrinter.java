@@ -28,6 +28,8 @@ import com.telpo.tps550.api.util.StringUtil;
 import com.telpo.tps550.api.util.SystemUtil;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Hashtable;
 
@@ -59,7 +61,7 @@ public class USBPrinter extends StandardFeature {
     private final int OVERHEAT = 12;
     private ProgressDialog progressDialog;
     UsbThermalPrinter mUsbThermalPrinter = null;
-    private final int PRINTGRAY=1;
+    private final int PRINTGRAY=5;
     private String Result;
     private BarcodePrintThread bThread=null;
     public void onStart(Context pContext, Bundle pSavedInstanceState, String[] pRuntimeArgs) {
@@ -74,17 +76,21 @@ public class USBPrinter extends StandardFeature {
     //打印凭条
     public void printPage(IWebview pWebview, JSONArray array){
         activity=pWebview.getActivity();
-        String visitorID =array.optString(1);
-        if(visitorID.isEmpty() || visitorID==null){
-            Toast.makeText(activity, "无效的访问单号！", Toast.LENGTH_LONG).show();
-            return;
+        JSONObject visitor = array.optJSONObject(1);
+        try {
+            if(visitor.getString("record_code").isEmpty() || visitor.getString("record_code")==null){
+                Toast.makeText(activity, "无效的访问单号！", Toast.LENGTH_LONG).show();
+                return;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         Context context = pWebview.getContext();
         activity=pWebview.getActivity();
         mUsbThermalPrinter=new UsbThermalPrinter(activity);
         preference = activity.getSharedPreferences("TPS390PRINTER", context.MODE_PRIVATE);
         editor = preference.edit();
-        handler.sendMessage(handler.obtainMessage(PRINTBARCODE, 0, 0, visitorID));
+        handler.sendMessage(handler.obtainMessage(PRINTBARCODE, 0, 0, visitor));
     }
 
     //注册广播接收
@@ -145,7 +151,7 @@ public class USBPrinter extends StandardFeature {
                 case PRINTBARCODE:
                     if(!LowBattery){
                         if(!nopaper){
-                          bThread = new BarcodePrintThread(""+msg.obj);
+                          bThread = new BarcodePrintThread((JSONObject) msg.obj);
                           bThread.start();
                         }else{
                             noPaperDlg();
@@ -171,10 +177,10 @@ public class USBPrinter extends StandardFeature {
     }
 
     private class BarcodePrintThread extends Thread {
-        private  String  visitorID="";
+        private  JSONObject  visitor;
 
-        public BarcodePrintThread(String visitorID) {
-            this.visitorID=visitorID;
+        public BarcodePrintThread(JSONObject visitor) {
+            this.visitor=visitor;
         }
 
         @Override
@@ -188,15 +194,40 @@ public class USBPrinter extends StandardFeature {
                     mUsbThermalPrinter.start(0);
                 }
                 mUsbThermalPrinter.reset();
-                mUsbThermalPrinter.setGray(PRINTGRAY);
-                Bitmap bitmap = CreateCode(visitorID, BarcodeFormat.QR_CODE, 260, 260);
                 mUsbThermalPrinter.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE);
+                mUsbThermalPrinter.setTextSize(35);
+                mUsbThermalPrinter.setLineSpace(5);
+                mUsbThermalPrinter.setGray(PRINTGRAY);
+                mUsbThermalPrinter.addString("访客单");
+                mUsbThermalPrinter.printString();
+
+                mUsbThermalPrinter.setAlgin(UsbThermalPrinter.ALGIN_LEFT);
+                mUsbThermalPrinter.setLeftIndent(10);
+                mUsbThermalPrinter.setTextSize(20);
+                String str="\n 姓名：\r"+visitor.getString("visitor_name")
+                        +"\n 性别：\r"+(visitor.getInt("visitor_sex")==0?"女":"男")
+                        +"\n 来访单位：\r"+((visitor.getString("unit_name")=="null" || visitor.getString("unit_name")=="")?"无": visitor.getString("unit_name"))
+                        +"\n 访问事由：\r"+visitor.getString("visitor_for");
+                if(visitor.getInt("interviewee_type")==1){//教职工
+                    str+="\n 被访人：\r"+visitor.getString("stu_name")
+                            +"\n 年级：\r"+visitor.getString("grd_name")
+                            +"\n 班级：\r"+visitor.getString("cls_name")
+                            +"\n 班主任：\r"+visitor.getString("head_teacher_name");
+                }else{//学生
+                    str+= "\n 被访人：\r"+visitor.getString("teacher_name")
+                            +"\n 部门：\r"+visitor.getString("dpt_name");
+                }
+                str+="\n 进入时间：\r"+visitor.getString("in_time")
+                        +"\n 登记人：\r"+visitor.getString("create_user_name");
+                mUsbThermalPrinter.addString(str);
+                mUsbThermalPrinter.printString();
+                mUsbThermalPrinter.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE);
+                Bitmap bitmap = CreateCode(visitor.getString("record_code"), BarcodeFormat.QR_CODE, 260, 260);
                 if (bitmap != null) {
-//                    mUsbThermalPrinter.setLeftIndent(50);
                     mUsbThermalPrinter.printLogo(bitmap, true);
                 }
-//                mUsbThermalPrinter.setGray(1);
-                mUsbThermalPrinter.addString("访客单号： "+visitorID);
+                mUsbThermalPrinter.setTextSize(20);
+                mUsbThermalPrinter.addString(visitor.getString("record_code")+"\n 注：离开请交回值班室");
                 mUsbThermalPrinter.printString();
                 mUsbThermalPrinter.walkPaper(20);
             } catch (Exception e) {

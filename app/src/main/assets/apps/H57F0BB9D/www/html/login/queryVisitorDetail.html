@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../js/layui/css/layui.css" rel="stylesheet" />
 		<style>
 			[v-cloak] {
 				visibility: hidden;
@@ -156,6 +157,15 @@
 			.layui-layer-btn.layui-layer-btn-c{
 				background-color: #FFFFFF;
 			}
+			
+			.mui-btn-outlined-print-lg{
+				padding: 5px 10px;
+				width: 100px;
+				margin: 0 10px;
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 2;
+			}
 		</style>
 	</head>
  
@@ -238,7 +248,7 @@
 											</div>
 										</div>
 							 		</div>
-							 	</div>
+							 	</div> 
 							 </div>
 							 <div class="mui-row">
 								 <div class="mui-col-sm-8">
@@ -363,6 +373,43 @@
 				<button type="button" @tap="printData()" class="mui-btn mui-btn-success mui-btn-outlined mui-btn-outlined-lg">打印</button>
 				<button type="button" @tap="back()" class="mui-btn mui-btn-outlined mui-btn-outlined-lg">取消</button>
 			</div>
+			
+			<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 start-->
+			<div id='layPrint' class="mui-row" style="display: none;">
+				 <div class="mui-row" style="padding-top: 15px;">
+					<div class="mui-col-sm-12" style="text-align: center;font-weight: 600;font-size: 22px;">访客单</div>
+					<div class="mui-col-sm-12" style="text-align: left;padding-left: 50px;line-height: 2;">
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">姓名：{{formData.visitor_name}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">性别：{{formData.visitor_sex==1?'男':'女'}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">来访单位：{{formData.unit_name?formData.unit_name:'无'}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">访问事由：{{formData.visitor_for}}</p>
+						<template v-if="formData.interviewee_type==0">
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">被访人：{{formData.teacher_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">部门：{{formData.dpt_name}}</p>
+						</template>
+						<template v-else>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">被访人：{{formData.stu_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">年级：{{formData.grd_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">班级：{{formData.cls_name}}</p>
+						</template> 
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">进入时间：{{formData.in_time}}</p>
+					</div>
+					<div class="mui-col-sm-12" style="text-align: center;">
+						<img src="../../img/home/qrcode.png" >
+						<p style="color: #000000;font-size: 15px;;">{{formData.record_code}}</p>
+						<p style="color: #000000;font-size: 15px;">注：离开请交回值班室</p>
+					</div>
+					<div class="mui-col-sm-12" style="margin-top: 2rem;text-align: center;">
+						<button type="button" @tap="printYes()" class="mui-btn mui-btn-outlined-print-lg">
+							确认打印
+						</button>
+						<button type="button" @tap="printNo()" class="mui-btn mui-btn-outlined mui-btn-outlined-print-lg">
+							取消
+						</button>
+					</div>
+				 </div> 
+			</div>
+			<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 end--> 
 		</div>
 		<script src="../../js/utils/mui.min.js"></script>
 		<script src="../../js/utils/storageKeyName.js"></script>
@@ -387,6 +434,7 @@
 		<script src='../../js/libs/crypto-js/require.js'></script>
 		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
 		<script src='../../js/libs/encryption/sortSign.js'></script>
+		<script src="../../js/layui/layui.js"></script>
 		<script type="text/javascript">
 			var $M = mui.init();
 			//获取个人信息
@@ -404,22 +452,40 @@
 				data: {
 					formData:{},//
 					IDCardImg:'',//身份证照片
+					layer:'',//layer 弹出层对象
+					pIndex:'',//layer 打印 弹出层id
 				},
 				methods:{
 					back:function(){
 						mui.back();
 					},
 					printData:function(){
-						console.log(this.formData.leave_flag);
-						if(this.formData.leave_flag==1){
-							mui.toast('该访客已签离，无法打印凭条')
-						}else{
-							// plus.usbPrinter.printPage(function(args){
-							// 	console.log(args);
-							// },function(args){
-							// 	console.log(args);
-							// },this.formData.record_code)
-						}
+						 layui.use(['jquery','layer'],function(){
+							var $=layui.$
+							datasource.pIndex=layer.open({
+								type: 1
+								,title: false //不显示标题栏
+								,closeBtn: false
+								,area: ['350px','580px']
+								,shade: 0.7
+								,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+								,btn: []
+								,content: $('#layPrint')
+								,yes: function(index,layero){}
+							  });
+						 });
+					},
+					printYes:function(){//确认打印
+						mui.toast("正在打印凭条");
+						plus.usbPrinter.printPage(function(args){
+							console.log(args);
+						},function(args){
+							console.log(args);
+						},this.formData)
+						layer.close(this.pIndex);
+					},
+					printNo:function(){//取消打印
+						layer.close(this.pIndex);
 					},
 				}
 			});

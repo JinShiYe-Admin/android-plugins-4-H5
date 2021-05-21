@@ -51,14 +51,14 @@
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>姓名：</label>
-												<input type="text" maxlength="15" v-model="visitor_inData.visitor_name" placeholder="请输入姓名">
+												<input type="text" oninput="if(value.length>10)value=value.slice(0,10)"  v-model="visitor_inData.visitor_name" placeholder="请输入姓名">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>访问事由：</label>
-												<input type="text" v-model="visitor_inData.visitor_for" placeholder="输入或选择" style="width: 57%;">
-												<button id="visitor_for" maxlength="30" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
+												<input type="text" oninput="if(value.length>20)value=value.slice(0,20)"  v-model="visitor_inData.visitor_for" placeholder="输入或选择" style="width: 57%;">
+												<button id="visitor_for" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
@@ -74,63 +74,63 @@
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>手机：</label>
-												<input type="number" maxlength="11"  v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
+												<input type="number" oninput="if(value.length>20)value=value.slice(0,20)"  v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>出生日期：</label>
-												<input type="text" maxlength="10"  v-model="visitor_inData.visitor_birthday" placeholder="请输入出生日期">
+												<input type="text" oninput="if(value.length>20)value=value.slice(0,20)"  v-model="visitor_inData.visitor_birthday" placeholder="请输入出生日期">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label><span style="color: #D26A60;">*</span>随行人数：</label>
-												<input maxlength="2" type="number" v-model="visitor_inData.visitor_counter" placeholder="输入或选择" style="width: 57%;">
+												<input oninput="if(value.length>20)value=value.slice(0,20)" type="number" v-model="visitor_inData.visitor_counter" placeholder="输入或选择" style="width: 57%;">
 												<button id="visitor_counter" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件类型：</label>
-												<input maxlength="10" type="text" v-model="visitor_inData.certificate_type" placeholder="输入或选择" style="width: 57%;">
+												<input oninput="if(value.length>20)value=value.slice(0,20)" type="text" v-model="visitor_inData.certificate_type" placeholder="输入或选择" style="width: 57%;">
 												<button id="certificate_type" class="mui-btn mui-btn-outlined" style="font-size: 18px;color: #3893D9;width: 15%;height: 40px;"><span class="mui-icon mui-icon-arrowdown"></span></button>
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>随行物品：</label>
-												<input maxlength="30" type="text" v-model="visitor_inData.visitor_goods"  placeholder="请输入随行物品">
+												<input oninput="if(value.length>30)value=value.slice(0,30)" type="text" v-model="visitor_inData.visitor_goods"  placeholder="请输入随行物品">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>证件号码：</label>
-												<input maxlength="20" v-model="visitor_inData.certificate_number" type="text" placeholder="请输入证件号码">
+												<input oninput="if(value.length>20)value=value.slice(0,20)" v-model="visitor_inData.certificate_number" type="text" placeholder="请输入证件号码">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>来访单位：</label>
-												<input maxlength="30" v-model="visitor_inData.unit_name" type="text" placeholder="请输入来访单位">
+												<input oninput="if(value.length>30)value=value.slice(0,30)" v-model="visitor_inData.unit_name" type="text" placeholder="请输入来访单位">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>地址：</label>
-												<input maxlength="30" v-model="visitor_inData.address" type="text" placeholder="请输入地址">
+												<input oninput="if(value.length>30)value=value.slice(0,30)" v-model="visitor_inData.address" type="text" placeholder="请输入地址">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>车牌号：</label>
-												<input maxlength="10" v-model="visitor_inData.plate_number" type="text" placeholder="请输入车牌号">
+												<input oninput="if(value.length>20)value=value.slice(0,20)" v-model="visitor_inData.plate_number" type="text" placeholder="请输入车牌号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>备注：</label>
-												<input maxlength="30" v-model="visitor_inData.note"  type="text" placeholder="请输入备注">
+												<input oninput="if(value.length>30)value=value.slice(0,30)" v-model="visitor_inData.note"  type="text" placeholder="请输入备注">
 											</div>
 										</div>
 									</div>
@@ -454,7 +454,43 @@
 					</div>
 				</div>
 			</div>
-		</div>	 
+			<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 start-->
+			<div id='layPrint' class="mui-row" style="display: none;">
+				 <div class="mui-row" style="padding-top: 15px;">
+					<div class="mui-col-sm-12" style="text-align: center;font-weight: 600;font-size: 22px;">访客单</div>
+					<div class="mui-col-sm-12" style="text-align: left;padding-left: 50px;line-height: 2;">
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">姓名：{{printRecord.visitor_name}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">性别：{{printRecord.visitor_sex==1?'男':'女'}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">来访单位：{{printRecord.unit_name?printRecord.unit_name:'无'}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">访问事由：{{printRecord.visitor_for}}</p>
+						<template v-if="printRecord.interviewee_type==0">
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">被访人：{{printRecord.teacher_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">部门：{{printRecord.dpt_name}}</p>
+						</template>
+						<template v-else>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">被访人：{{printRecord.stu_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">年级：{{printRecord.grd_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;">班级：{{printRecord.cls_name}}</p>
+						</template> 
+						<p style="color: #000000;font-size: 16px;font-weight: 600;">进入时间：{{printRecord.in_time}}</p>
+					</div>
+					<div class="mui-col-sm-12" style="text-align: center;">
+						<img src="../../img/home/qrcode.png" >
+						<p style="color: #000000;font-size: 15px;;">{{printRecord.record_code}}</p>
+						<p style="color: #000000;font-size: 15px;">注：离开请交回值班室</p>
+					</div>
+					<div class="mui-col-sm-12" style="margin-top: 2rem;text-align: center;">
+						<button type="button" @tap="printYes()" class="mui-btn mui-btn-outlined-print-lg">
+							确认打印
+						</button>
+						<button type="button" @tap="printNo()" class="mui-btn mui-btn-outlined mui-btn-outlined-print-lg">
+							取消
+						</button>
+					</div>
+				 </div> 
+			</div>
+			<!-- 该区域在页面上不显示，点击签离按钮后在弹出层内显示，但需要一起渲染 end--> 
+		</div> 
 		<script src="../../js/utils/storageKeyName.js"></script>
 		<script src="../../js/utils/mui.min.js"></script>
 		<script src="../../js/utils/vue.js"></script>
@@ -472,7 +508,7 @@
 		<script src="../../js/cloud/load.js"></script>
 		<script src="../../js/cloud/CloudFileUtil.js"></script>
 		<script src="../../js/picVideoAudio/UploadHeadImage.js"></script>
-		<script src="../../js/utils/utils.js"></script>
+		<script src="../../js/utils/moment.min.js"></script>
 		<script src='../../js/libs/crypto-js/require.js'></script>
 		<script src='../../js/libs/encryption/signHmacSHA1.js'></script>
 		<script src='../../js/libs/encryption/sortSign.js'></script>
@@ -537,7 +573,9 @@
 					},
 					defaultTab:"",//默认显示的tab类型
 					layer:'',//layer 弹出层对象
-					index:'',//layer inde 弹出层id
+					index:'',//layer index 弹出层id
+					pIndex:'',//layer 打印 弹出层id
+					printRecord:'',//要打印的对象
 					//以上变量为页面控制使用，一般不用改
 					//访客登记
 					visitor_inData:{
@@ -754,6 +792,18 @@
 					layerNo:function(){//弹出层取消按钮
 						layer.close(this.index);
 					},
+					printYes:function(){//确认打印
+						mui.toast("正在打印凭条");
+						plus.usbPrinter.printPage(function(args){
+							console.log(args);
+						},function(args){
+							console.log(args);
+						},this.printRecord)
+						layer.close(this.pIndex);
+					},
+					printNo:function(){//取消打印
+						layer.close(this.pIndex);
+					},
 					visitor_select:function(){//访客查询 
 						getQueryData();
 					},
@@ -966,9 +1016,11 @@
 					console.log("data: " + JSON.stringify(data));
 					if (data.code == 0) {
 						 if(type){
-							mui.toast("正在打印凭条");
 							var record_code=data.msg
-						 	printData(record_code);
+							params.record_code=record_code
+							params.in_time=moment().format("YYYY-MM-DD HH:mm:ss");
+							params.create_user_name=personal.user_name;
+						 	printData(params);
 						 }else{
 							mui.toast("数据保存成功");
 						 }
@@ -981,12 +1033,22 @@
 				});
 			}
 			//访客登记 查询 打印数据
-			function printData(record_code){
-				plus.usbPrinter.printPage(function(args){
-					console.log(args);
-				},function(args){
-					console.log(args);
-				},record_code)
+			function printData(record){
+				contentData.printRecord=record;
+				layui.use(['jquery','layer'],function(){
+					var $=layui.$
+					contentData.pIndex=layer.open({
+						type: 1
+						,title: false //不显示标题栏
+						,closeBtn: false
+						,area: ['350px','570px']
+						,shade: 0.7
+						,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+						,btn: []
+						,content: $('#layPrint')
+						,yes: function(index,layero){}
+					  });
+				});
 			}
 			
 			//访客登记 重置表单数据
@@ -1462,7 +1524,7 @@
 						if(data.leave_flag==1){
 							mui.toast('该访客已签离，无法打印凭条')
 						}else{
-							printData(data.record_code)
+							printData(data)
 						}
 				    }
 				  });
@@ -1620,6 +1682,7 @@
 			
 			//访客签离——设置签离
 			function setLeave(_id,_time){
+				events.showWaiting()
 				const params = {
 					id:_id,//	记录id
 					leave_time:_time,//	离开时间
@@ -1628,6 +1691,7 @@
 				console.log("params: " + JSON.stringify(params));
 				postDataEncry(window.storageKeyName.INTERFACE_VISITOR + 'visitor/setLeave', {}, params, 2, function(da) {
 					console.log("da: " + JSON.stringify(da));
+					events.closeWaiting()
 					contentData.visitor_outData.submit=true;
 					if (da.code == 0) {
 						mui.toast('操作成功');

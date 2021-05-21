@@ -4,7 +4,7 @@ document.addEventListener("plusready", function() {
 	
 	var usbPrinter = {
 		//打印凭条
-		printPage: function(successCallback, errorCallback,visitorID) {
+		printPage: function(successCallback, errorCallback,visitorObj) {
 			var success = typeof successCallback !== 'function' ? null : function(args) {
 					successCallback(args);
 				},
@@ -12,7 +12,7 @@ document.addEventListener("plusready", function() {
 					errorCallback(code);
 				};
 			callbackID = B.callbackId(success, fail);
-			return B.exec(_BARCODE,'printPage', [callbackID,visitorID]);
+			return B.exec(_BARCODE,'printPage', [callbackID,visitorObj]);
 		},
 	};
 	window.plus.usbPrinter = usbPrinter;
