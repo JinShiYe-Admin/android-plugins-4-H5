@@ -74,7 +74,7 @@
 										<div class="mui-col-sm-6">
 											<div class="mui-input-row">
 												<label>手机：</label>
-												<input type="number" oninput="if(value.length>20)value=value.slice(0,20)"  v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
+												<input type="number" oninput="if(value.length>11)value=value.slice(0,11)"  v-model="visitor_inData.visitor_phone" placeholder="请输入手机号">
 											</div>
 										</div>
 										<div class="mui-col-sm-6">
@@ -728,11 +728,11 @@
 						}
 					},
 					saveData:function(type){//访客登记  保存按钮
-						if(contentData.visitor_inData.visitor_name==''){
+						if(contentData.visitor_inData.visitor_name.trim()==''){
 							mui.toast('请填写姓名')
-						}else if(contentData.visitor_inData.visitor_for==''){
+						}else if(contentData.visitor_inData.visitor_for.trim()==''){
 							mui.toast('请填写访问事由')
-						}else if(contentData.visitor_inData.visitor_counter==''){
+						}else if(contentData.visitor_inData.visitor_counter.trim()==''){
 							mui.toast('请填写随行人数')
 						}else if(contentData.visitor_inData.interviewee_type==0 && contentData.visitor_inData.dptUserSelectObj==''){
 							mui.toast('请选择部门人员姓名')
@@ -1029,7 +1029,13 @@
 						 }
 						 resetData();
 					}else{
-						mui.toast(data.msg);
+						if(data.msg){
+							if( data.msg.indexOf("数据异常")!=-1){
+								mui.toast('请输入正确数据');
+							}else{
+								mui.toast(data.msg);
+							}
+						}
 					}
 					contentData.visitor_inData.submit=true;
 					events.closeWaiting();
@@ -1044,6 +1050,7 @@
 						type: 1
 						,title: false //不显示标题栏
 						,closeBtn: false
+						,offset:  ['50px','480px']
 						,area: ['340px','620px']
 						,shade: 0.7
 						,id: 'LAY_layuipro' //设定一个id，防止重复弹出
@@ -1702,7 +1709,7 @@
 						mui.toast('操作成功');
 						layer.close(contentData.index);
 						contentData.visitor_outData.leave_time=''
-						deleteIDCardImg(contentData.visitor_outData.IDCardImg);
+						// deleteIDCardImg(contentData.visitor_outData.IDCardImg);
 						getOutData();
 					}else{
 						mui.toast(da.msg);

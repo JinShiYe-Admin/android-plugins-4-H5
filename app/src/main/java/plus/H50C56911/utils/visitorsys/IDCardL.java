@@ -65,18 +65,20 @@ public class IDCardL extends StandardFeature {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             playBeep();
-            stopThread();
             switch (msg.what) {
                 case 1:
                     JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                    stopThread();
                     Toast.makeText(activity, "读取身份证信息失败！", Toast.LENGTH_LONG).show();
                     break;
                 case 2:
                     JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                    stopThread();
                     Toast.makeText(activity, "超时，请重新尝试！", Toast.LENGTH_LONG).show();
                     break;
                 case 3:
                     JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                    stopThread();
                     Toast.makeText(activity, "读卡器未打开！", Toast.LENGTH_LONG).show();
                     break;
                 case 4:
@@ -101,12 +103,11 @@ public class IDCardL extends StandardFeature {
                             json.put("headPhoto",bitmapToBase64(bitmap));
                         }
                         newArray.put(json);
-                        System.out.println(json.toString());
-                        playBeep();
                         stopThread();
                         JSUtil.execCallback(pWebView, CallBackID, newArray, JSUtil.OK, false);
                     }catch (JSONException |TelpoException e) {
                         JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);
+                        stopThread();
                         Toast.makeText(activity, "请正确放置身份证！", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
@@ -194,6 +195,9 @@ public class IDCardL extends StandardFeature {
     public void stopThread(){
         if(mThread!=null && (mThread.isAlive())){
             mThread.interrupt();
+            IdCard.close();
+            mBeepManager.close();
+            mBeepManager = null;
         }
     }
 
