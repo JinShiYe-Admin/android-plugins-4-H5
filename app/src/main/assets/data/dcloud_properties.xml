@@ -77,7 +77,7 @@
 <!--		<feature name="VideoPlayer" value="io.dcloud.media.MediaFeatureImpl"/>-->
 		<feature name="usbPrinterUtil" value="plus.H50C56911.utils.visitorsys.USBPrinter"/>
 		<feature name="QRCodeUtil" value="plus.H50C56911.utils.visitorsys.QRCodeUtils"/>
-		<feature name="idCardReaderUtil" value="plus.H50C56911.utils.visitorsys.IDCard"/>
+		<feature name="idCardReaderUtil" value="plus.H50C56911.utils.visitorsys.IDCardL"/>
 	</features>
 
 	<services>
@@ -86,6 +86,6 @@
 		<service name="Downloader" value="io.dcloud.net.DownloaderBootImpl"/>
 		<service name="Maps"   value="io.dcloud.js.map.MapInitImpl" />
 		<service name="usbPrinterUtil"   value="plus.H50C56911.utils.visitorsys.USBPrinter" />
-		<service name="idCardReaderUtil" value="plus.H50C56911.utils.visitorsys.IDCard"/>
+		<service name="idCardReaderUtil" value="plus.H50C56911.utils.visitorsys.IDCardL"/>
 	</services>
 </properties>

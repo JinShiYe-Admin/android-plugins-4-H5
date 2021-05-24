@@ -66,11 +66,22 @@ android {
         ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
     }
 
-//    sourceSets {
-//        main {
-//            jniLibs.srcDirs = ['libs']
-//        }
-//    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -95,7 +106,6 @@ dependencies {
     //universalimageloader
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //播放器
-    implementation project(path: ':jcvideoplayer-lib')
     //华为推送
     implementation 'com.huawei.hms:push:5.0.2.300'
 }
