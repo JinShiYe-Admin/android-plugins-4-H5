@@ -78,7 +78,7 @@ public class USBPrinter extends StandardFeature {
         activity=pWebview.getActivity();
         JSONObject visitor = array.optJSONObject(1);
         try {
-            if(visitor.getString("record_code").isEmpty() || visitor.getString("record_code")==null){
+            if(visitor.getString("record_code").isEmpty() || visitor.getString("record_code")==null || visitor.getString("record_code")=="null"){
                 Toast.makeText(activity, "无效的访问单号！", Toast.LENGTH_LONG).show();
                 return;
             }
