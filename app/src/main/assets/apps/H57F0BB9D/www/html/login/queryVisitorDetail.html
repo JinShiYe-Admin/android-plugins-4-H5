@@ -378,13 +378,13 @@
 			<div id='layPrint' class="mui-row" style="display: none;">
 				 <div class="mui-row" style="padding-top: 15px;">
 					<div class="mui-col-sm-12" style="text-align: center;font-weight: 600;font-size: 22px;">访客单</div>
-					<div class="mui-col-sm-12" style="text-align: left;padding-left: 50px;line-height: 2;">
+					<div class="mui-col-sm-12" style="margin-top: 15px;text-align: left;padding-left: 20px;line-height: 2;">
 						<p style="color: #000000;font-size: 16px;font-weight: 600;">姓名：{{formData.visitor_name}}</p>
 						<p style="color: #000000;font-size: 16px;font-weight: 600;">性别：{{formData.visitor_sex==1?'男':'女'}}</p>
-						<p style="color: #000000;font-size: 16px;font-weight: 600;">来访单位：{{formData.unit_name?formData.unit_name:'无'}}</p>
-						<p style="color: #000000;font-size: 16px;font-weight: 600;">访问事由：{{formData.visitor_for}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;word-wrap: break-word;word-break: break-all;">来访单位：{{formData.unit_name?formData.unit_name:'无'}}</p>
+						<p style="color: #000000;font-size: 16px;font-weight: 600;word-wrap: break-word;word-break: break-all;">访问事由：{{formData.visitor_for}}</p>
 						<template v-if="formData.interviewee_type==0">
-							<p style="color: #000000;font-size: 16px;font-weight: 600;">被访人：{{formData.teacher_name}}</p>
+							<p style="color: #000000;font-size: 16px;font-weight: 600;word-wrap: break-word;word-break: break-all;">被访人：{{formData.teacher_name}}</p>
 							<p style="color: #000000;font-size: 16px;font-weight: 600;">部门：{{formData.dpt_name}}</p>
 						</template>
 						<template v-else>
@@ -399,7 +399,7 @@
 						<p style="color: #000000;font-size: 15px;;">{{formData.record_code}}</p>
 						<p style="color: #000000;font-size: 15px;">注：离开请交回值班室</p>
 					</div>
-					<div class="mui-col-sm-12" style="margin-top: 2rem;text-align: center;">
+					<div class="mui-col-sm-12" style="margin-top: 2.5rem;text-align: center;">
 						<button type="button" @tap="printYes()" class="mui-btn mui-btn-outlined-print-lg">
 							确认打印
 						</button>
@@ -460,20 +460,24 @@
 						mui.back();
 					},
 					printData:function(){
-						 layui.use(['jquery','layer'],function(){
-							var $=layui.$
-							datasource.pIndex=layer.open({
-								type: 1
-								,title: false //不显示标题栏
-								,closeBtn: false
-								,area: ['350px','580px']
-								,shade: 0.7
-								,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-								,btn: []
-								,content: $('#layPrint')
-								,yes: function(index,layero){}
-							  });
-						 });
+							if(this.formData.leave_flag==0){
+								layui.use(['jquery','layer'],function(){
+									var $=layui.$
+									datasource.pIndex=layer.open({
+										type: 1
+										,title: false //不显示标题栏
+										,closeBtn: false
+										,area: ['340px','620px']
+										,shade: 0.7
+										,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+										,btn: []
+										,content: $('#layPrint')
+										,yes: function(index,layero){}
+									  });
+								});
+							}else{
+								mui.toast('该访客已签离，无法打印凭条')
+							}
 					},
 					printYes:function(){//确认打印
 						mui.toast("正在打印凭条");
