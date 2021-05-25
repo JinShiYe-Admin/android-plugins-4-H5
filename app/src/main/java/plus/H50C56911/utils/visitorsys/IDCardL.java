@@ -98,12 +98,12 @@ public class IDCardL extends StandardFeature {
                         json.put("card_type",info.getCard_type());//证件类型
                         json.put("reserve",info.getReserve());//保留信息
                         byte[] image = IdCard.getIdCardImage();
-                        if (image.length == 2048 || image.length == 1024) {
-                            Bitmap bitmap = IdCard.decodeIdCardImage(image);
-                            json.put("headPhoto",bitmapToBase64(bitmap));
-                        }
+                        System.out.println(image.length);
+                        Bitmap bitmap = IdCard.decodeIdCardImage(image);
+                        json.put("headPhoto",bitmapToBase64(bitmap));
                         newArray.put(json);
                         stopThread();
+                        System.out.println(newArray.toString());
                         JSUtil.execCallback(pWebView, CallBackID, newArray, JSUtil.OK, false);
                     }catch (JSONException |TelpoException e) {
                         JSUtil.execCallback(pWebView, CallBackID, new JSONArray(), JSUtil.ERROR, false);

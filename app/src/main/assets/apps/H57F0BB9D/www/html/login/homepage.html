@@ -728,11 +728,12 @@
 						}
 					},
 					saveData:function(type){//访客登记  保存按钮
-						if(contentData.visitor_inData.visitor_name.trim()==''){
+					console.log(contentData.visitor_inData.visitor_counter)
+						if((contentData.visitor_inData.visitor_name+'').trim()==''){
 							mui.toast('请填写姓名')
-						}else if(contentData.visitor_inData.visitor_for.trim()==''){
+						}else if((contentData.visitor_inData.visitor_for+'').trim()==''){
 							mui.toast('请填写访问事由')
-						}else if(contentData.visitor_inData.visitor_counter.trim()==''){
+						}else if((contentData.visitor_inData.visitor_counter+'').trim()==''){
 							mui.toast('请填写随行人数')
 						}else if(contentData.visitor_inData.interviewee_type==0 && contentData.visitor_inData.dptUserSelectObj==''){
 							mui.toast('请选择部门人员姓名')
